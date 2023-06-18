@@ -8,12 +8,6 @@ data class User(
     val phoneNumber: String,
     val address: String,
     val userTypeId: Int,
-    val userType: UserType, // Reference to the UserType
+    val userType: Int, // Reference to the UserType
     val reviews: List<Review>
 )
-
-
-data class UserType(
-    val userTypeId: Int
-)
-

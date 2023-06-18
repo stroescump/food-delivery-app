@@ -14,10 +14,6 @@ data class User(
 
 
 data class UserType(
-    val userTypeId: Int, val userType: USERTYPE
+    val userTypeId: Int
 )
-
-enum class USERTYPE {
-    ADMIN, DRIVER, CUSTOMER
-}
 

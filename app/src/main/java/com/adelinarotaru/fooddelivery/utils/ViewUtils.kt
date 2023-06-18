@@ -1,5 +1,6 @@
 package com.adelinarotaru.fooddelivery.utils
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Outline
@@ -13,6 +14,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * ViewUtils - provides a facade to all the boilerplate leveraging KT Extension Functions
@@ -85,3 +87,20 @@ fun AppCompatEditText.value() = text?.let {
 } ?: throw IllegalArgumentException("Please fill in $hint")
 
 fun String.toEditable() = Editable.Factory.getInstance().newEditable(this)
+
+fun showMessage(context: Context, message: String) {
+    val alertDialogBuilder = AlertDialog.Builder(context)
+    alertDialogBuilder.setMessage(message)
+    alertDialogBuilder.setPositiveButton("OK") { dialog, _ ->
+        dialog.dismiss()
+    }
+    val alertDialog = alertDialogBuilder.create()
+    alertDialog.show()
+}
+
+fun showPermanentMessage(view: View, message: String): Snackbar {
+    return Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE).run {
+        show()
+        this
+    }
+}

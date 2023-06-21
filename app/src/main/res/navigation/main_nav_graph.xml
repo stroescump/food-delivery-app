@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/landingFragment">
 
 
     <fragment
@@ -45,5 +45,14 @@
     <include app:graph="@navigation/admin_nav_graph" />
     <include app:graph="@navigation/customer_nav_graph" />
     <include app:graph="@navigation/driver_nav_graph" />
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="com.adelinarotaru.fooddelivery.shared.landing.ui.LandingFragment"
+        android:label="LandingFragment"
+        tools:layout="@layout/fragment_landing">
+        <action
+            android:id="@+id/goToLogin"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
 </navigation>

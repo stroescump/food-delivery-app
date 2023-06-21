@@ -4,4 +4,15 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="error_no_internet">No internet! Check your settings.</string>
+    <string name="login_text">Login</string>
+    <string name="createAnAccount">Create an Account</string>
+    <string name="landingMotto">Discover the best foods from over 1.000 restaurants and fast delivery to your doorstep</string>
+    <string name="foodDeliveryAppTitle">Meal Monkey</string>
+    <string name="landingFoodDelivery">FOOD DELIVERY</string>
+    <string name="your_email">Your email</string>
+    <string name="password">Password</string>
+    <string name="add_your_details_to_login">Add your details to login</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="dontHaveAnAccount">Don\'t have an account?</string>
+    <string name="signUp">Sign up</string>
 </resources>

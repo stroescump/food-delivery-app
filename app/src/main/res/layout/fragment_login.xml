@@ -1,13 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".shared.login.ui.LoginFragment">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/email"
+        style="@style/EditText.Form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="LOGIN" />
+        android:layout_height="wrap_content"
+        android:hint="@string/your_email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/guidelineFormFields" />
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/password"
+        style="@style/EditText.Form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/email"
+        tools:ignore="RtlSymmetry" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineFormFields"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.39" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/loginTitle"
+        style="@style/TextView.BigPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_50dp"
+        android:gravity="center"
+        android:text="@string/login_text"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen_40sp"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/loginSubtitle"
+        style="@style/TextView.SmallPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_50dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:gravity="center"
+        android:text="@string/add_your_details_to_login"
+        app:layout_constraintTop_toBottomOf="@id/loginTitle" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login"
+        style="@style/Button.FoodDelivery.Full"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:text="@string/login_text"
+        app:layout_constraintTop_toBottomOf="@id/password" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/forgotYourPassword"
+        style="@style/TextView.SmallPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_50dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:gravity="center"
+        android:text="@string/forgot_your_password"
+        app:layout_constraintTop_toBottomOf="@id/login" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/register"
+        style="@style/TextView.SmallPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/dontHaveAnAccount"
+        android:textSize="@dimen/dimen_16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineBottom" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

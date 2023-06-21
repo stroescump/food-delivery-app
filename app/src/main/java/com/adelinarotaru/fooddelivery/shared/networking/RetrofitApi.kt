@@ -12,7 +12,7 @@ private val retrofit: Retrofit = Retrofit.Builder()
     .addConverterFactory(GsonConverterFactory.create())
     .build()
 
-private val restaurantApi: RestaurantApi = retrofit.create(RestaurantApi::class.java)
+fun provideRestaurantApi(): RestaurantApi = retrofit.create(RestaurantApi::class.java)
 
 interface RestaurantApi {
     @GET("restaurants")

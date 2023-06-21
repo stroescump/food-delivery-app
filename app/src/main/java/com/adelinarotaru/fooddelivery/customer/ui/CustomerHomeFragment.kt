@@ -1,4 +1,4 @@
-package com.adelinarotaru.fooddelivery.customer
+package com.adelinarotaru.fooddelivery.customer.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

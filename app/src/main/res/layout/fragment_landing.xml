@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".shared.login.ui.LoginFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.28" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLogo"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.22" />
+
+    <View
+        android:id="@+id/designCard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/landing_background_card"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineTop" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/landingLogo"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:src="@color/crazy_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineLogo"
+        tools:src="@tools:sample/avatars" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/landingAppTitle"
+        style="@style/TextView.BigPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_50dp"
+
+        android:gravity="center"
+        android:text="@string/foodDeliveryAppTitle"
+        android:textColor="@color/crazy_green"
+        app:layout_constraintBottom_toTopOf="@id/landingAppSubtitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/landingAppSubtitle"
+        style="@style/TextView.SmallPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_50dp"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:gravity="center"
+        android:letterSpacing="0.4"
+        android:text="@string/landingFoodDelivery"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/landingMotto" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/landingMotto"
+        style="@style/TextView.SmallPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_50dp"
+        android:layout_marginBottom="@dimen/dimen_50dp"
+        android:gravity="center"
+        android:text="@string/landingMotto"
+        app:layout_constraintBottom_toTopOf="@id/login" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login"
+        style="@style/Button.FoodDelivery.Full"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:text="@string/login_text"
+        app:layout_constraintBottom_toTopOf="@id/register" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/register"
+        style="@style/Button.FoodDelivery.Outline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/createAnAccount"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineBottom" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

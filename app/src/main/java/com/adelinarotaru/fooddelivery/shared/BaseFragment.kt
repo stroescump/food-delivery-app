@@ -17,7 +17,7 @@ abstract class BaseFragment<T : ViewBinding>(val lambdaInflater: (LayoutInflater
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = lambdaInflater(layoutInflater).root
+    ): View? = lambdaInflater(layoutInflater).also { binding = it }.root
 
     override fun onDestroy() {
         super.onDestroy()

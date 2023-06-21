@@ -1,13 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".shared.register.ui.RegisterFragment">
 
-    <TextView
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="REGISTER" />
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/signUpTitle"
+        style="@style/TextView.BigPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_50dp"
+        android:gravity="center"
+        android:text="@string/signUp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dimen_40sp"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/signUpSubtitle"
+        style="@style/TextView.SmallPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_50dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:gravity="center"
+        android:text="@string/add_your_details_to_sign_up"
+        app:layout_constraintTop_toBottomOf="@id/signUpTitle" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/name"
+        style="@style/EditText.Form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:hint="@string/your_name"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@id/signUpSubtitle" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/email"
+        style="@style/EditText.Form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:hint="@string/your_email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/name" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/phone"
+        style="@style/EditText.Form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:hint="@string/phone"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/email" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/address"
+        style="@style/EditText.Form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:hint="@string/address"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/phone" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/password"
+        style="@style/EditText.Form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:hint="@string/password"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/address" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/confirmPassword"
+        style="@style/EditText.Form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:hint="@string/confirm_password"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/password" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signUp"
+        style="@style/Button.FoodDelivery.Full"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:text="@string/signUp"
+        app:layout_constraintTop_toBottomOf="@id/confirmPassword" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/login"
+        style="@style/TextView.SmallPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/alreadyHaveAnAccount"
+        android:textSize="@dimen/dimen_16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineBottom" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

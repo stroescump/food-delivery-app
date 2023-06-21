@@ -18,13 +18,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun signUpStringCustomization() {
-        val signUp = getString(R.string.signUp)
+        val signUpText = getString(R.string.signUp)
         val dontHaveAnAccount = getString(R.string.dontHaveAnAccount)
         val result = SpannableStringBuilder().append(dontHaveAnAccount).append(STRING_SPACE)
-            .color(resources.getColor(R.color.crazy_green, context?.theme)) { append(signUp) }
-        binding?.register?.apply {
-            text = result
-            setOnClickListener { navigateToSignUp() }
+            .color(resources.getColor(R.color.crazy_green, context?.theme)) { append(signUpText) }
+        binding?.apply {
+            register.text = result
+            register.setOnClickListener { navigateToSignUp() }
         }
     }
 

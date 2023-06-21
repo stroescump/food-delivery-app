@@ -2,21 +2,15 @@ package com.adelinarotaru.fooddelivery.shared.login.ui
 
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.text.color
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.FragmentLoginBinding
+import com.adelinarotaru.fooddelivery.shared.BaseFragment
 
-class LoginFragment : Fragment() {
-    private var binding: FragmentLoginBinding? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View = FragmentLoginBinding.inflate(layoutInflater).also { binding = it }.root
+class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
+    override var binding: FragmentLoginBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,11 +26,6 @@ class LoginFragment : Fragment() {
             text = result
             setOnClickListener { navigateToSignUp() }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
     }
 
     private fun navigateToSignUp() =

@@ -51,7 +51,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/landingAppSubtitle"
-        style="@style/TextView.SmallPrint"
+        style="@style/TextView.SmallPrint.Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_50dp"
@@ -61,11 +61,11 @@
         android:text="@string/landingFoodDelivery"
         android:textAllCaps="true"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/landingMotto" />
+        app:layout_constraintBottom_toTopOf="@id/askingQuestion" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/landingMotto"
-        style="@style/TextView.SmallPrint"
+        android:id="@+id/askingQuestion"
+        style="@style/TextView.SmallPrint.Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_50dp"

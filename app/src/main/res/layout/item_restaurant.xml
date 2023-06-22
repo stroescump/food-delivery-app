@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dimen_30dp"
+    android:layout_marginTop="@dimen/dimen_10dp"
+    android:background="@drawable/item_restaurant_bg"
+    android:paddingBottom="@dimen/dimen_20dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/restaurantImage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/CurvedImageView"
+        tools:src="@tools:sample/avatars" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_10dp"
+        android:background="@drawable/item_restaurant_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/dimen_10dp"
+        android:paddingVertical="@dimen/dimen_5dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/dimen_25dp"
+            android:layout_height="@dimen/dimen_25dp"
+            android:layout_marginEnd="@dimen/dimen_5dp"
+            android:src="@drawable/ic_delivery"
+            app:tint="@color/yellow" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/freeDelivery"
+            style="@style/TextView.SmallPrint.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/dirty_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/restaurantImage"
+            tools:text="Free Delivery" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/restaurantName"
+        style="@style/TextView.MediumPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:textSize="@dimen/dimen_25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/restaurantImage"
+        tools:text="Restaurant Dunarea" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/rating"
+        style="@style/TextView.SmallPrint.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:textColor="@color/dirty_white"
+        android:textSize="@dimen/dimen_16sp"
+        app:layout_constraintBottom_toBottomOf="@id/restaurantName"
+        app:layout_constraintStart_toEndOf="@id/restaurantName"
+        app:layout_constraintTop_toTopOf="@id/restaurantName"
+        tools:text="4.5" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ratingIcon"
+        android:layout_width="@dimen/dimen_18dp"
+        android:layout_height="@dimen/dimen_18dp"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:src="@drawable/ic_star"
+        app:layout_constraintBottom_toBottomOf="@id/rating"
+        app:layout_constraintStart_toEndOf="@id/rating"
+        app:layout_constraintTop_toTopOf="@id/rating"
+        app:tint="@color/yellow" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/estimatedTimeIcon"
+        android:layout_width="@dimen/dimen_20dp"
+        android:layout_height="@dimen/dimen_20dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:src="@drawable/ic_clock"
+        app:layout_constraintStart_toStartOf="@id/restaurantName"
+        app:layout_constraintTop_toBottomOf="@id/restaurantName"
+        app:tint="@color/yellow" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/estimatedTime"
+        style="@style/TextView.SmallPrint.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:textColor="@color/dirty_white"
+        app:layout_constraintBottom_toBottomOf="@id/estimatedTimeIcon"
+        app:layout_constraintStart_toEndOf="@id/estimatedTimeIcon"
+        app:layout_constraintTop_toTopOf="@id/estimatedTimeIcon"
+        tools:text="40-50 min" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,11 +9,16 @@ import android.text.Editable
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewOutlineProvider
+import android.widget.EditText
+import androidx.appcompat.R
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.viewbinding.ViewBinding
+import com.adelinarotaru.fooddelivery.R.font
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -103,4 +108,11 @@ fun showPermanentMessage(view: View, message: String): Snackbar {
         show()
         this
     }
+}
+
+fun SearchView.changeColorTo(color: Int) {
+    val editText = this.findViewById<EditText>(R.id.search_src_text)
+    editText.setTextColor(ContextCompat.getColor(context, color))
+    editText.setHintTextColor(ContextCompat.getColor(context, color))
+    editText.typeface = ResourcesCompat.getFont(editText.context, font.creato_display_regular)
 }

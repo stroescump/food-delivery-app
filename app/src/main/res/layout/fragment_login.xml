@@ -54,7 +54,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/loginSubtitle"
-        style="@style/TextView.SmallPrint"
+        style="@style/TextView.SmallPrint.Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_50dp"
@@ -75,7 +75,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/forgotYourPassword"
-        style="@style/TextView.SmallPrint"
+        style="@style/TextView.SmallPrint.Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_50dp"
@@ -88,7 +88,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/register"
-        style="@style/TextView.SmallPrint"
+        style="@style/TextView.SmallPrint.Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

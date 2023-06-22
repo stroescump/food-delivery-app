@@ -15,7 +15,7 @@ data class Restaurant(
     val name: String,
     val address: String,
     val phoneNumber: String,
-    val rating: Int,
+    val rating: Float,
     val menuItems: List<MenuItem>? = null,
     val reviews: List<UserReview>? = null
 )

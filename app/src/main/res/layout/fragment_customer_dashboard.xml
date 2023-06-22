@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".customer.ui.CustomerDashboardFragment">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profilePicture"
+        android:layout_width="@dimen/dimen_50dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginStart="@dimen/dimen_30dp"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:src="@color/dirty_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundImageView"
+        tools:src="@tools:sample/avatars" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/greetingUser"
+        style="@style/TextView.BigPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:text="@string/greeting_user"
+        android:textColor="@color/dirty_white"
+        app:layout_constraintBottom_toBottomOf="@id/profilePicture"
+        app:layout_constraintStart_toEndOf="@id/profilePicture"
+        app:layout_constraintTop_toTopOf="@id/profilePicture"
+        tools:text="Hi, Susan!" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/askingQuestion"
+        style="@style/TextView.MediumPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:layout_marginBottom="@dimen/dimen_50dp"
+        android:text="@string/what_do_you_feel_like_eating"
+        app:layout_constraintStart_toStartOf="@id/profilePicture"
+        app:layout_constraintTop_toBottomOf="@id/profilePicture" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_30dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:background="@drawable/edit_text_background"
+        app:closeIcon="@drawable/ic_close"
+        app:defaultQueryHint="@string/hint_search_by_restaurant_or_dish"
+        app:iconifiedByDefault="false"
+        app:layout_constraintTop_toBottomOf="@id/askingQuestion"
+        app:queryBackground="@android:color/transparent"
+        app:searchHintIcon="@drawable/ic_search"
+        app:searchIcon="@drawable/ic_search" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/foodItemRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_20dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        tools:listitem="@layout/item_food_type_vh" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/restaurantsRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:orientation="vertical"
+
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/foodItemRv"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_restaurant" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

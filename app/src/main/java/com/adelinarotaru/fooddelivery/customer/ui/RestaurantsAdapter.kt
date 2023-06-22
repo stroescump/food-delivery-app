@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.ItemRestaurantBinding
 import com.adelinarotaru.fooddelivery.shared.models.Restaurant
+import com.adelinarotaru.fooddelivery.utils.show
 
 class RestaurantsAdapter(
     val onItemClicked: (Restaurant) -> Unit
@@ -36,6 +37,8 @@ class RestaurantsAdapter(
                 val ctx = binding.root.context
                 restaurantName.text = restaurant.name
                 restaurantImage.setImageResource(R.drawable.ic_image_placeholder)
+                rating.text = restaurant.rating.toString()
+                if (restaurant.freeDelivery) freeDelivery.show()
             }
         }
     }

@@ -1,5 +1,7 @@
 package com.adelinarotaru.fooddelivery.shared.models
 
+import com.google.gson.annotations.SerializedName
+
 data class User(
     val id: Int,
     val name: String,
@@ -14,11 +16,20 @@ data class Restaurant(
     val id: Int,
     val name: String,
     val address: String,
+    @SerializedName("phone_number")
     val phoneNumber: String,
-    val rating: Float,
+    val rating: Int?,
+    @SerializedName("free_delivery")
+    val freeDelivery: Boolean = false,
+    @SerializedName("opening_hours")
+    val openingHours: String?,
+    @SerializedName("closing_hours")
+    val closingHours: String?,
+    @SerializedName("menu_items")
     val menuItems: List<MenuItem>? = null,
     val reviews: List<UserReview>? = null
 )
+
 
 data class MenuItem(
     val id: Int, val name: String, val price: Int, val restaurantId: Int, val restaurant: Restaurant

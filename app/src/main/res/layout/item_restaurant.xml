@@ -16,6 +16,7 @@
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/CurvedImageView"
+        app:strokeColor="@null"
         tools:src="@tools:sample/avatars" />
 
     <androidx.appcompat.widget.LinearLayoutCompat

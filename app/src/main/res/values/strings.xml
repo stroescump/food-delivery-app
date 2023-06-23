@@ -22,14 +22,15 @@
     <string name="confirm_password">Confirm password</string>
     <string name="what_do_you_feel_like_eating">What do you feel like eating?</string>
     <string name="hint_search_by_restaurant_or_dish">Search by restaurant or dish</string>
-    <string name="food_type_burger">Burger</string>
+    <string name="burger">Burger</string>
     <string name="pizza">Pizza</string>
     <string name="sushi">Sushi</string>
     <string name="taco">Taco</string>
     <string name="donuts">Donuts</string>
     <string name="kebab">Kebab</string>
-    <string name="ramen">Asian</string>
+    <string name="asian">Asian</string>
     <string name="greeting_user">Hi, %s!</string>
     <string name="generic_error">Oops, something happend. Please try again.</string>
     <string name="free_delivery">Free Delivery</string>
+    <string name="estimated_time_30_50_min">30-50 min</string>
 </resources>

@@ -37,6 +37,7 @@ class RestaurantsAdapter(
                 val ctx = binding.root.context
                 restaurantName.text = restaurant.name
                 restaurantImage.setImageResource(R.drawable.ic_image_placeholder)
+                estimatedTime.text = ctx.getString(R.string.estimated_time_30_50_min)
                 rating.text = restaurant.rating.toString()
                 if (restaurant.freeDelivery) freeDelivery.show()
             }
@@ -51,7 +52,6 @@ class RestaurantsAdapter(
         override fun areContentsTheSame(oldItem: Restaurant, newItem: Restaurant): Boolean {
             return oldItem == newItem
         }
-
     }
 
     val differ = AsyncListDiffer(this, differCallback)

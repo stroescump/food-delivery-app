@@ -1,14 +1,23 @@
 package com.adelinarotaru.fooddelivery.shared.landing.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.adelinarotaru.fooddelivery.databinding.FragmentLandingBinding
-import com.adelinarotaru.fooddelivery.shared.BaseFragment
 
-class LandingFragment : BaseFragment<FragmentLandingBinding>(FragmentLandingBinding::inflate) {
+class LandingFragment : Fragment() {
 
-    override var binding: FragmentLandingBinding? = null
+    private var binding: FragmentLandingBinding? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        return FragmentLandingBinding.inflate(layoutInflater).also { binding = it }.root
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

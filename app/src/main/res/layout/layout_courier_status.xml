@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_30dp"
+    android:background="@drawable/card_crazy_green_bg"
+    android:paddingVertical="@dimen/dimen_20dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dayOfWeekTitle"
+        style="@style/TextView.MediumPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/greeting_user"
+        android:textColor="@color/dirty_white"
+        app:layout_constraintStart_toStartOf="@id/profilePicture"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Monday" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dayOfWeekSubtitle"
+        style="@style/TextView.SmallPrint.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/greeting_user"
+        android:textColor="@color/dirty_white"
+        app:layout_constraintStart_toStartOf="@id/dayOfWeekTitle"
+        app:layout_constraintTop_toBottomOf="@id/dayOfWeekTitle"
+        tools:text="Jan 14, 2024" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/notifications"
+        android:layout_width="@dimen/dimen_40dp"
+        android:layout_height="@dimen/dimen_40dp"
+        android:src="@drawable/ic_notification"
+        app:layout_constraintEnd_toEndOf="@id/courierStatusBubble"
+        app:layout_constraintTop_toTopOf="@id/dayOfWeekTitle"
+        app:shapeAppearanceOverlay="@style/RoundImageView"
+        app:tint="@color/dirty_white" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profilePicture"
+        android:layout_width="@dimen/dimen_50dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:src="@drawable/user_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dayOfWeekSubtitle"
+        app:shapeAppearanceOverlay="@style/RoundImageView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/courierName"
+        style="@style/TextView.SmallPrint.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:text="@string/greeting_user"
+        android:textColor="@color/dirty_white"
+        app:layout_constraintBottom_toTopOf="@id/courierId"
+        app:layout_constraintStart_toEndOf="@id/profilePicture"
+        app:layout_constraintTop_toTopOf="@id/profilePicture"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Peter Russell" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/courierId"
+        style="@style/TextView.SmallPrint.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dirty_white"
+        app:layout_constraintBottom_toBottomOf="@id/profilePicture"
+        app:layout_constraintStart_toStartOf="@id/courierName"
+        app:layout_constraintTop_toBottomOf="@id/courierName"
+        tools:text="PX 12456" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/courierStatusBubble"
+        style="@style/TextView.SmallPrint.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_20dp"
+        android:background="@drawable/status_bubble_dirty_white"
+        android:letterSpacing="0.05"
+        android:paddingHorizontal="@dimen/dimen_10dp"
+        android:paddingVertical="@dimen/dimen_5dp"
+        android:textColor="@color/crazy_green"
+        app:layout_constraintBottom_toBottomOf="@id/profilePicture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/profilePicture"
+        app:textAllCaps="true"
+        tools:text="ONLINE" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

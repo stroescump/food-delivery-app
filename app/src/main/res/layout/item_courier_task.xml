@@ -1,0 +1,147 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen_20dp"
+    android:background="@drawable/card_faded_green_bg"
+    android:paddingBottom="@dimen/dimen_20dp"
+    app:layout_constraintTop_toBottomOf="@id/tasksFilter">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/customerName"
+        style="@style/TextView.MediumPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Marcus Aurelius" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/orderId"
+        style="@style/TextView.SmallPrint.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/customerName"
+        app:layout_constraintTop_toBottomOf="@id/customerName"
+        tools:text="#ORD456789" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/courierStatusBubble"
+        style="@style/TextView.SmallPrint.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_20dp"
+        android:background="@drawable/card_crazy_green_bg"
+        android:letterSpacing="0.05"
+        android:paddingHorizontal="@dimen/dimen_10dp"
+        android:paddingVertical="@dimen/dimen_5dp"
+        android:textColor="@color/dirty_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/customerName"
+        app:textAllCaps="true"
+        tools:text="PICK IT" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginHorizontal="@dimen/dimen_20dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        app:dividerColor="@color/dark_gray_2"
+        app:layout_constraintTop_toBottomOf="@id/orderId" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/restaurantIcon"
+        android:layout_width="@dimen/dimen_50dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@color/dirty_white"
+        android:src="@drawable/ic_store"
+        app:contentPadding="@dimen/dimen_10dp"
+        app:layout_constraintStart_toStartOf="@id/customerName"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:shapeAppearanceOverlay="@style/RoundImageView"
+        app:tint="@color/crazy_green" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/restaurant_name"
+        style="@style/TextView.MediumPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/restaurant_address"
+        app:layout_constraintStart_toEndOf="@id/restaurantIcon"
+        app:layout_constraintTop_toTopOf="@id/restaurantIcon"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="KFC Downtown" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/restaurant_address"
+        style="@style/TextView.SmallPrint.Regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/restaurantIcon"
+        app:layout_constraintStart_toStartOf="@id/restaurant_name"
+        app:layout_constraintTop_toBottomOf="@id/restaurant_name"
+        tools:text="Str. Callaway 44B, Entrance 1F" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        app:dividerColor="@color/crazy_green"
+        android:layout_marginVertical="@dimen/dimen_5dp"
+        app:layout_constraintBottom_toTopOf="@id/destinationIcon"
+        app:layout_constraintEnd_toEndOf="@id/destinationIcon"
+        app:layout_constraintStart_toStartOf="@id/destinationIcon"
+        app:layout_constraintTop_toBottomOf="@id/restaurantIcon" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/destinationIcon"
+        android:layout_width="@dimen/dimen_50dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginTop="@dimen/dimen_50dp"
+        android:background="@color/dirty_white"
+        android:src="@drawable/ic_destination"
+        app:contentPadding="@dimen/dimen_10dp"
+        app:layout_constraintStart_toStartOf="@id/restaurantIcon"
+        app:layout_constraintTop_toBottomOf="@id/restaurantIcon"
+        app:shapeAppearanceOverlay="@style/RoundImageView"
+        app:tint="@color/crazy_green" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/customerPhone"
+        style="@style/TextView.MediumPrint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:layout_marginEnd="@dimen/dimen_20dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/customerAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/destinationIcon"
+        app:layout_constraintTop_toTopOf="@id/destinationIcon"
+        tools:text="Call Marcus               +41 782 342 526" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/customerAddress"
+        style="@style/TextView.SmallPrint.Regular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_20dp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/customerPhone"
+        app:layout_constraintTop_toBottomOf="@id/customerPhone"
+
+        tools:text="Str. High Mountain 200, Entrance 41C" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

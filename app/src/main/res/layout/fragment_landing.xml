@@ -27,15 +27,15 @@
         android:background="@drawable/landing_background_card"
         app:layout_constraintBottom_toBottomOf="@id/guidelineTop" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/landingLogo"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:src="@color/crazy_green"
+        android:layout_width="@dimen/dimen_150dp"
+        android:layout_height="@dimen/dimen_150dp"
+        android:src="@drawable/app_logo_jpg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineLogo"
-        tools:src="@tools:sample/avatars" />
+        app:shapeAppearanceOverlay="@style/RoundImageView" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/landingAppTitle"
@@ -43,7 +43,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_50dp"
-
         android:gravity="center"
         android:text="@string/foodDeliveryAppTitle"
         android:textColor="@color/crazy_green"

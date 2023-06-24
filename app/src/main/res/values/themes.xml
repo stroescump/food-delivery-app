@@ -18,7 +18,7 @@
     <style name="Button.FoodDelivery.Full" parent="">
         <item name="android:background">@drawable/button_bg_full</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/dirty_white</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:letterSpacing">0.02</item>
         <item name="android:paddingVertical">@dimen/dimen_15dp</item>
         <item name="android:layout_marginHorizontal">@dimen/dimen_30dp</item>

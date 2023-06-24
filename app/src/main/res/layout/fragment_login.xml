@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".shared.login.ui.LoginFragment">
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:src="@drawable/app_logo_jpg"
+        app:layout_constraintBottom_toTopOf="@id/loginTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundImageView" />
+
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/email"
         style="@style/EditText.Form"
@@ -48,7 +58,7 @@
         android:layout_marginHorizontal="@dimen/dimen_50dp"
         android:gravity="center"
         android:text="@string/login_text"
-        android:textColor="@color/black"
+        android:textColor="@color/dirty_white"
         android:textSize="@dimen/dimen_40sp"
         app:layout_constraintTop_toTopOf="@id/guidelineTop" />
 
@@ -61,6 +71,7 @@
         android:layout_marginTop="@dimen/dimen_10dp"
         android:gravity="center"
         android:text="@string/add_your_details_to_login"
+        android:textColor="@color/dirty_white"
         app:layout_constraintTop_toBottomOf="@id/loginTitle" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -83,6 +94,7 @@
         android:layout_marginBottom="@dimen/dimen_20dp"
         android:gravity="center"
         android:text="@string/forgot_your_password"
+        android:textColor="@color/dirty_white"
         app:layout_constraintTop_toBottomOf="@id/login" />
 
 
@@ -93,6 +105,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/dontHaveAnAccount"
+        android:textColor="@color/dirty_white"
         android:textSize="@dimen/dimen_16sp"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineBottom" />
 

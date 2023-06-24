@@ -16,4 +16,5 @@
     <color name="light_gray">#CCCCCC</color>
     <color name="yellow">#FFC107</color>
     <color name="dark_blue_bg">#1A1A26</color>
+    <color name="dark_blue_card_bg">#242433</color>
 </resources>

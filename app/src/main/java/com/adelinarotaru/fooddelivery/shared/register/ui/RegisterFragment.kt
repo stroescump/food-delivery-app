@@ -7,11 +7,13 @@ import androidx.core.text.color
 import androidx.navigation.fragment.findNavController
 import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.FragmentRegisterBinding
-import com.adelinarotaru.fooddelivery.shared.BaseFragment
+import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 
-class RegisterFragment : BaseFragment<FragmentRegisterBinding>(FragmentRegisterBinding::inflate) {
+class RegisterFragment :
+    BaseFragment<FragmentRegisterBinding, RegisterViewModel>(FragmentRegisterBinding::inflate) {
 
     override var binding: FragmentRegisterBinding? = null
+    override val viewModel = RegisterViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -3,11 +3,11 @@ package com.adelinarotaru.fooddelivery.customer.ui
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import com.adelinarotaru.fooddelivery.DependencyProvider
 import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.customer.data.RestaurantRepositoryImpl
 import com.adelinarotaru.fooddelivery.databinding.FragmentCustomerDashboardBinding
-import com.adelinarotaru.fooddelivery.shared.BaseFragment
+import com.adelinarotaru.fooddelivery.shared.DependencyProvider
+import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 import com.adelinarotaru.fooddelivery.shared.models.CuisineType.Asian
 import com.adelinarotaru.fooddelivery.shared.models.CuisineType.Burger
 import com.adelinarotaru.fooddelivery.shared.models.CuisineType.Donut
@@ -17,16 +17,17 @@ import com.adelinarotaru.fooddelivery.shared.models.CuisineType.Sushi
 import com.adelinarotaru.fooddelivery.shared.models.CuisineType.Taco
 import com.adelinarotaru.fooddelivery.shared.models.Restaurant
 import com.adelinarotaru.fooddelivery.utils.changeColorTo
-import com.adelinarotaru.fooddelivery.utils.showMessage
 import kotlinx.coroutines.launch
 
 class CustomerDashboardFragment :
-    BaseFragment<FragmentCustomerDashboardBinding>(FragmentCustomerDashboardBinding::inflate) {
+    BaseFragment<FragmentCustomerDashboardBinding, CustomerDashboardViewModel>(
+        FragmentCustomerDashboardBinding::inflate
+    ) {
     override var binding: FragmentCustomerDashboardBinding? = null
     private lateinit var foodTypeAdapter: FoodTypeAdapter
     private lateinit var restaurantsAdapter: RestaurantsAdapter
 
-    private val viewModel =
+    override val viewModel =
         CustomerDashboardViewModel(RestaurantRepositoryImpl(DependencyProvider.provideRestaurantApi()))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,13 +44,6 @@ class CustomerDashboardFragment :
                 viewModel.restaurants.collect { restaurantList ->
                     if (restaurantList.isEmpty().not()) {
                         updateRestaurantsAdaptor(restaurantList)
-                    }
-                }
-            }
-            launch {
-                viewModel.error.collect { error ->
-                    error?.apply {
-                        showMessage(requireContext(), message ?: getString(R.string.generic_error))
                     }
                 }
             }

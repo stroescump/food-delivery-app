@@ -1,5 +1,6 @@
-package com.adelinarotaru.fooddelivery
+package com.adelinarotaru.fooddelivery.shared
 
+import com.adelinarotaru.fooddelivery.shared.networking.CourierApi
 import com.adelinarotaru.fooddelivery.shared.networking.LoginApi
 import com.adelinarotaru.fooddelivery.shared.networking.RestaurantApi
 import okhttp3.OkHttpClient
@@ -14,20 +15,16 @@ class DependencyProvider {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
-        private val client = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
+        private val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
 
         private const val BASE_URL = "http://10.0.2.2:5000"
 
         private val retrofit: Retrofit =
-            Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build()
+            Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
+                .client(client).build()
 
         fun provideRestaurantApi(): RestaurantApi = retrofit.create(RestaurantApi::class.java)
         fun provideLoginApi(): LoginApi = retrofit.create(LoginApi::class.java)
+        fun provideCourierApi(): CourierApi = retrofit.create(CourierApi::class.java)
     }
 }

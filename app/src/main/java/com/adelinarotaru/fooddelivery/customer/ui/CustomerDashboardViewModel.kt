@@ -1,26 +1,20 @@
 package com.adelinarotaru.fooddelivery.customer.ui
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adelinarotaru.fooddelivery.customer.domain.RestaurantRepository
+import com.adelinarotaru.fooddelivery.shared.base.BaseViewModel
 import com.adelinarotaru.fooddelivery.shared.models.Restaurant
 import com.adelinarotaru.fooddelivery.utils.coRunCatching
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CustomerDashboardViewModel(private val restaurantRepository: RestaurantRepository) :
-    ViewModel() {
+    BaseViewModel() {
 
     private val _restaurants: MutableSharedFlow<List<Restaurant>> = MutableSharedFlow(replay = 1)
     val restaurants = _restaurants.asSharedFlow()
-
-    private val _error: MutableStateFlow<Throwable?> = MutableStateFlow(null)
-    val error = _error.asStateFlow()
 
     init {
         _restaurants.tryEmit(emptyList())
@@ -32,7 +26,7 @@ class CustomerDashboardViewModel(private val restaurantRepository: RestaurantRep
         } else coRunCatching { restaurantRepository.getRestaurants() }.onSuccess { refreshedRestaurants ->
             _restaurants.tryEmit(refreshedRestaurants)
         }.onFailure { err ->
-            _error.update { err }
+            sendError(err)
         }
     }
 

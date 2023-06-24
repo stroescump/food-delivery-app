@@ -38,6 +38,11 @@
         <item name="android:fontFamily">@font/creato_display_extra_bold</item>
     </style>
 
+    <style name="TextView.SmallPrint.ExtraBold" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/creato_display_extra_bold</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
     <style name="TextView.SmallPrint.Bold" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/creato_display_bold</item>
         <item name="android:textColor">@color/gray</item>

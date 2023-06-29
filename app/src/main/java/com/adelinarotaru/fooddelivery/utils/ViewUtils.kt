@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Outline
 import android.graphics.Paint
-import android.graphics.Rect
 import android.text.Editable
 import android.util.TypedValue
 import android.view.View
@@ -18,7 +17,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.adelinarotaru.fooddelivery.R.dimen
 import com.adelinarotaru.fooddelivery.R.font
@@ -39,13 +37,42 @@ fun View.setBottomCorners() {
                 val right = view.width
                 val bottom = view.height
                 outline?.setRoundRect(
-                    left,
-                    top - cornerRadius,
-                    right,
-                    bottom,
-                    cornerRadius.toFloat()
+                    left, top - cornerRadius, right, bottom, cornerRadius.toFloat()
                 )
-                clipToOutline = true
+            }
+        }
+    }
+}
+
+fun View.setTopCorners() {
+    clipToOutline = true
+    outlineProvider = object : ViewOutlineProvider() {
+        override fun getOutline(view: View?, outline: Outline?) {
+            val cornerRadius = resources.getDimensionPixelSize(dimen.rounded_corner_radius)
+                .toFloat() // Replace with your desired corner radius in pixels
+            view?.apply {
+                val left = 0
+                val top = 0
+                val right = view.width
+                val bottom = view.height
+                outline?.setRoundRect(left, top, right, bottom + cornerRadius.toInt(), cornerRadius)
+            }
+        }
+    }
+}
+
+fun View.setAllCorners() {
+    clipToOutline = true
+    outlineProvider = object : ViewOutlineProvider() {
+        override fun getOutline(view: View?, outline: Outline?) {
+            val cornerRadius = resources.getDimensionPixelSize(dimen.rounded_corner_radius)
+                .toFloat() // Replace with your desired corner radius in pixels
+            view?.apply {
+                val left = 0
+                val top = 0
+                val right = view.width
+                val bottom = view.height
+                outline?.setRoundRect(left, top, right, bottom, cornerRadius)
             }
         }
     }
@@ -55,16 +82,14 @@ fun View.setHorizontalCorners() {
     clipToOutline = true
     outlineProvider = object : ViewOutlineProvider() {
         override fun getOutline(view: View?, outline: Outline?) {
-            val cornerRadius =
-                resources.getDimensionPixelSize(dimen.rounded_corner_radius)
-                    .toFloat() // Replace with your desired corner radius in pixels
+            val cornerRadius = resources.getDimensionPixelSize(dimen.rounded_corner_radius)
+                .toFloat() // Replace with your desired corner radius in pixels
             view?.apply {
                 val left = 0
                 val top = 0
                 val right = view.width
                 val bottom = view.height
                 outline?.setRoundRect(left, top, right, bottom, cornerRadius)
-                clipToOutline = true
             }
         }
     }
@@ -101,18 +126,14 @@ fun AppCompatTextView.setFontSizeTo(fontSize: Float) {
 fun AppCompatTextView.setFontFamily(resFont: Int, textStyle: Int) {
     setTypeface(
         ResourcesCompat.getFont(
-            this.context,
-            resFont
+            this.context, resFont
         ), textStyle
     )
 }
 
 fun getBitmapFromDrawable(
-    resources: Resources,
-    resInt: Int,
-    theme: Resources.Theme
-) =
-    ResourcesCompat.getDrawable(resources, resInt, theme)?.toBitmap()
+    resources: Resources, resInt: Int, theme: Resources.Theme
+) = ResourcesCompat.getDrawable(resources, resInt, theme)?.toBitmap()
 
 fun AppCompatEditText.value() = text?.let {
     if (it.trim().toString()
@@ -144,7 +165,6 @@ fun SearchView.changeColorTo(color: Int) {
     editText.setTextColor(ContextCompat.getColor(context, color))
     editText.setHintTextColor(ContextCompat.getColor(context, color))
     editText.typeface = ResourcesCompat.getFont(
-        editText.context,
-        font.creato_display_regular
+        editText.context, font.creato_display_regular
     )
 }

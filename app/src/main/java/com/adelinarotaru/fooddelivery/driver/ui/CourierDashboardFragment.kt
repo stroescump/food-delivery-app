@@ -16,7 +16,6 @@ class CourierDashboardFragment :
     BaseFragment<FragmentCourierDashboardBinding, CourierDashboardViewModel>(
         FragmentCourierDashboardBinding::inflate
     ) {
-    override var binding: FragmentCourierDashboardBinding? = null
     private lateinit var courierTasksAdapter: CourierItemTaskAdapter
     private lateinit var courierTaskFilterAdapter: CourierTaskFilterAdapter
 
@@ -85,7 +84,7 @@ class CourierDashboardFragment :
 
     private fun fallbackToDefaultIfNoneSelected(updatedList: List<ItemTaskFilter>) {
         if (updatedList.none { it.isSelected }) updatedList.toMutableList().map {
-            it.copy(isSelected = it.id == "0")
+            it.copy(isSelected = it.id == 0)
         }
     }
 
@@ -104,10 +103,10 @@ class CourierDashboardFragment :
     private fun initTasksAdapter(it: CourierTaskFilterAdapter) {
         it.differ.submitList(
             mutableListOf(
-                ItemTaskFilter(TaskStatus.ALL, "0", isSelected = true),
-                ItemTaskFilter(TaskStatus.PENDING, "1"),
-                ItemTaskFilter(TaskStatus.ACCEPTED, "2"),
-                ItemTaskFilter(TaskStatus.REJECTED, "3"),
+                ItemTaskFilter(TaskStatus.ALL, 0, isSelected = true),
+                ItemTaskFilter(TaskStatus.PENDING, 1),
+                ItemTaskFilter(TaskStatus.ACCEPTED, 2),
+                ItemTaskFilter(TaskStatus.REJECTED, 3),
             )
         )
     }

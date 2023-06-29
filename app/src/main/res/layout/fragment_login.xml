@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".shared.login.ui.LoginFragment">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="@dimen/dimen_10dp"
-        android:src="@drawable/app_logo_jpg"
-        app:layout_constraintBottom_toTopOf="@id/loginTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:shapeAppearanceOverlay="@style/RoundImageView" />
-
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/email"
         style="@style/EditText.Form"

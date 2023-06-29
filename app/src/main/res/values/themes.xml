@@ -40,22 +40,22 @@
 
     <style name="TextView.SmallPrint.ExtraBold" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/creato_display_extra_bold</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/dirty_white</item>
     </style>
 
     <style name="TextView.SmallPrint.Bold" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/creato_display_bold</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/dirty_white</item>
     </style>
 
     <style name="TextView.SmallPrint.Regular" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/creato_display_regular</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/dirty_white</item>
     </style>
 
     <style name="TextView.SmallPrint.Light" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/creato_display_light</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/dirty_white</item>
     </style>
 
     <style name="TextView.MediumPrint" parent="Widget.AppCompat.TextView">
@@ -67,7 +67,7 @@
     <style name="TextView.BigPrint" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/creato_display_extra_bold</item>
         <item name="android:textSize">@dimen/dimen_30sp</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/dirty_white</item>
     </style>
 
     <style name="EditText.Form" parent="Widget.AppCompat.EditText">

@@ -5,7 +5,7 @@
     <string name="error_no_internet">No internet! Check your settings.</string>
     <string name="login_text">Login</string>
     <string name="createAnAccount">Create an Account</string>
-    <string name="landingMotto">Discover the best foods from over 1.000 restaurants and fast delivery to your doorstep</string>
+    <string name="landingMotto">Discover the best foods from restaurants nearby and fast delivery to your doorstep</string>
     <string name="foodDeliveryAppTitle">One click Eats</string>
     <string name="landingFoodDelivery">FOOD DELIVERY</string>
     <string name="your_email">Your email</string>
@@ -34,4 +34,11 @@
     <string name="free_delivery">Free Delivery</string>
     <string name="estimated_time_30_50_min">30-50 min</string>
     <string name="my_tasks">My tasks</string>
+    <string name="total_orders">Total Orders</string>
+    <string name="total_clients">Total Clients</string>
+    <string name="total_restaurants">Restaurants</string>
+    <string name="revenue">Revenue</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="order_list">Order List</string>
+    <string name="new_order">New Order</string>
 </resources>

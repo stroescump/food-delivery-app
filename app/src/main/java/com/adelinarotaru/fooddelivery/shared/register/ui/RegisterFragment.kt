@@ -11,8 +11,6 @@ import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 
 class RegisterFragment :
     BaseFragment<FragmentRegisterBinding, RegisterViewModel>(FragmentRegisterBinding::inflate) {
-
-    override var binding: FragmentRegisterBinding? = null
     override val viewModel = RegisterViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -21,7 +21,6 @@
         android:layout_marginHorizontal="@dimen/dimen_50dp"
         android:gravity="center"
         android:text="@string/signUp"
-        android:textColor="@color/black"
         android:textSize="@dimen/dimen_40sp"
         app:layout_constraintTop_toTopOf="@id/guidelineTop" />
 
@@ -31,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dimen_50dp"
+        android:textColor="@color/dark_gray_2"
         android:layout_marginTop="@dimen/dimen_10dp"
         android:gravity="center"
         android:text="@string/add_your_details_to_sign_up"

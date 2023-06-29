@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.viewbinding.ViewBinding
 
 interface ItemAdapter {
-    val id: String
+    val id: Int
 }
 
 abstract class BaseRVAdapter<T : ViewBinding, R : ItemAdapter>() :

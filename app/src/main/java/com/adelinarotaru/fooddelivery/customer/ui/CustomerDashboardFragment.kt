@@ -23,7 +23,6 @@ class CustomerDashboardFragment :
     BaseFragment<FragmentCustomerDashboardBinding, CustomerDashboardViewModel>(
         FragmentCustomerDashboardBinding::inflate
     ) {
-    override var binding: FragmentCustomerDashboardBinding? = null
     private lateinit var foodTypeAdapter: FoodTypeAdapter
     private lateinit var restaurantsAdapter: RestaurantsAdapter
 

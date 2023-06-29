@@ -14,19 +14,21 @@ class LandingFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-        return FragmentLandingBinding.inflate(layoutInflater).also { binding = it }.root
-    }
+    ): View = FragmentLandingBinding.inflate(layoutInflater).also { binding = it }.root
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
             login.setOnClickListener { navigateToLogin() }
+            register.setOnClickListener { navigateToRegister() }
         }
     }
 
     private fun navigateToLogin() =
         findNavController().navigate(LandingFragmentDirections.goToLogin())
+
+    private fun navigateToRegister() =
+        findNavController().navigate(LandingFragmentDirections.fromLandingToRegister())
 
 }

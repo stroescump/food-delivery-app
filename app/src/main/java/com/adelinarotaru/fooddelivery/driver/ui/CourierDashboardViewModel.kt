@@ -126,7 +126,7 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
                 emptyList(),
                 emptyList(),
                 listOf("PIZZA", "BURGER", "KEBAB")
-            ), null
+            ), "22-04-2023",220.23f
         ), Order(
             id = 234523, userId = 2, restaurantId = 4, status = 1, user = User(
                 id = 2,
@@ -148,7 +148,7 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
                 menuItems = emptyList(),
                 reviews = emptyList(),
                 cuisineTypes = listOf("INDIAN", "CURRY")
-            ), review = null
+            ), "22-04-2023",220.23f
         ), Order(
             id = 345634, userId = 3, restaurantId = 2, status = 3, user = User(
                 id = 3,
@@ -170,7 +170,7 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
                 menuItems = emptyList(),
                 reviews = emptyList(),
                 cuisineTypes = listOf("BURGER", "FAST FOOD")
-            ), review = null
+            ), "22-04-2023",220.23f
         ), Order(
             id = 456745, userId = 4, restaurantId = 1, status = 2, user = User(
                 id = 4,
@@ -192,7 +192,7 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
                 menuItems = emptyList(),
                 reviews = emptyList(),
                 cuisineTypes = listOf("PIZZA", "ITALIAN")
-            ), review = null
+            ), "22-04-2023",220.23f
         ), Order(
             id = 567856, userId = 5, restaurantId = 6, status = 1, user = User(
                 id = 5,
@@ -214,7 +214,7 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
                 menuItems = emptyList(),
                 reviews = emptyList(),
                 cuisineTypes = listOf("SUSHI", "JAPANESE")
-            ), review = null
+            ), "22-04-2023",220.23f
         )
     )
 }

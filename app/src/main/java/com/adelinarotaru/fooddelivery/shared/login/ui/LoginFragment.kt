@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 
 class LoginFragment :
     BaseFragment<FragmentLoginBinding, LoginViewModel>(FragmentLoginBinding::inflate) {
-    override var binding: FragmentLoginBinding? = null
     override val viewModel by lazy { LoginViewModel(LoginRepositoryImpl(DependencyProvider.provideLoginApi())) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

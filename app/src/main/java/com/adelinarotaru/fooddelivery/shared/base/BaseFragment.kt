@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 abstract class BaseFragment<T : ViewBinding, R : BaseViewModel>(val lambdaInflater: (LayoutInflater) -> T) :
     Fragment() {
 
-    abstract var binding: T?
+    var binding: T? = null
     abstract val viewModel: R
 
     override fun onCreateView(

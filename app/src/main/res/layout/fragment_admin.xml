@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dirty_white"
+    tools:context=".admin.ui.AdminFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dashboardTitle"
+        style="@style/TextView.MediumPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:text="@string/dashboard"
+        android:textColor="@color/dark_blue_bg"
+        android:textSize="@dimen/dimen_25sp"
+        app:layout_constraintStart_toStartOf="@id/statisticsContainer"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/dimen_20dp"
+        app:dividerColor="@color/dark_blue_bg"
+        app:layout_constraintBottom_toBottomOf="@id/dashboardTitle"
+        app:layout_constraintEnd_toStartOf="@id/close"
+        app:layout_constraintStart_toEndOf="@id/dashboardTitle"
+        app:layout_constraintTop_toTopOf="@id/dashboardTitle" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/close"
+        android:layout_width="@dimen/dimen_25dp"
+        android:layout_height="@dimen/dimen_25dp"
+        android:layout_marginEnd="@dimen/dimen_20dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@id/dashboardTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dashboardTitle"
+        app:tint="@color/dark_blue_bg" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/statisticsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:background="@drawable/card_crazy_green_bg_20dp"
+        android:padding="@dimen/dimen_20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dashboardTitle"
+        app:layout_goneMarginTop="@dimen/dimen_30dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ordersCard"
+            android:layout_width="@dimen/dimen_150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:backgroundTint="@color/dark_blue_card_bg"
+            app:cardCornerRadius="@dimen/dimen_10dp"
+            app:layout_constraintEnd_toStartOf="@id/customersCard"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/totalOrdersNumber"
+                    style="@style/TextView.SmallPrint.Bold"
+                    android:layout_width="@dimen/dimen_150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:text="@string/total_orders"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="189" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/totalOrdersTitle"
+                    style="@style/TextView.SmallPrint.Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:paddingEnd="@dimen/dimen_50dp"
+                    android:paddingBottom="@dimen/dimen_10dp"
+                    android:text="@string/total_orders"
+                    app:layout_constraintStart_toStartOf="@id/totalOrdersNumber"
+                    app:layout_constraintTop_toBottomOf="@id/totalOrdersNumber"
+                    tools:ignore="RtlSymmetry" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/customersCard"
+            android:layout_width="@dimen/dimen_150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_blue_card_bg"
+            app:cardCornerRadius="@dimen/dimen_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ordersCard"
+            app:layout_constraintTop_toTopOf="@id/ordersCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/totalCustomersNumber"
+                    style="@style/TextView.SmallPrint.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:text="@string/total_orders"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="250" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/totalCustomersTitle"
+                    style="@style/TextView.SmallPrint.Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:paddingEnd="@dimen/dimen_50dp"
+                    android:paddingBottom="@dimen/dimen_10dp"
+                    android:text="@string/total_clients"
+                    app:layout_constraintStart_toStartOf="@id/totalCustomersNumber"
+                    app:layout_constraintTop_toBottomOf="@id/totalCustomersNumber"
+                    tools:ignore="RtlSymmetry" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/revenueCard"
+            android:layout_width="@dimen/dimen_150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:backgroundTint="@color/dark_blue_card_bg"
+            app:cardCornerRadius="@dimen/dimen_10dp"
+            app:layout_constraintEnd_toStartOf="@id/resturantsCard"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ordersCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/totalRevenueNumber"
+                    style="@style/TextView.SmallPrint.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:text="@string/total_orders"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="250" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/totalRevenueTitle"
+                    style="@style/TextView.SmallPrint.Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:paddingEnd="@dimen/dimen_50dp"
+                    android:paddingBottom="@dimen/dimen_10dp"
+                    android:text="@string/revenue"
+                    app:layout_constraintStart_toStartOf="@id/totalRevenueNumber"
+                    app:layout_constraintTop_toBottomOf="@id/totalRevenueNumber"
+                    tools:ignore="RtlSymmetry" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/resturantsCard"
+            android:layout_width="@dimen/dimen_150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_blue_card_bg"
+            app:cardCornerRadius="@dimen/dimen_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/revenueCard"
+            app:layout_constraintTop_toTopOf="@id/revenueCard">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/totalRestaurantsNumber"
+                    style="@style/TextView.SmallPrint.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_10dp"
+                    android:layout_marginTop="@dimen/dimen_10dp"
+                    android:text="@string/total_orders"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="250" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/totalRestaurantsTitle"
+                    style="@style/TextView.SmallPrint.Regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:paddingEnd="@dimen/dimen_50dp"
+                    android:paddingBottom="@dimen/dimen_10dp"
+                    android:text="@string/total_restaurants"
+                    app:layout_constraintStart_toStartOf="@id/totalRestaurantsNumber"
+                    app:layout_constraintTop_toBottomOf="@id/totalRestaurantsNumber"
+                    tools:ignore="RtlSymmetry" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/dotsIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        app:dotsColor="@color/dark_blue_bg"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="@dimen/dimen_10dp"
+        app:dotsSpacing="4dp"
+        app:dotsWidthFactor="2.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statisticsContainer"
+        app:progressMode="true"
+        app:selectedDotColor="@color/dark_blue_bg" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dotsIndicator" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.28" />
+        app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLogo"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.22" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <View
         android:id="@+id/designCard"
@@ -29,9 +29,9 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/landingLogo"
-        android:layout_width="@dimen/dimen_150dp"
-        android:layout_height="@dimen/dimen_150dp"
-        android:src="@drawable/app_logo_jpg"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/app_logo_png"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineLogo"

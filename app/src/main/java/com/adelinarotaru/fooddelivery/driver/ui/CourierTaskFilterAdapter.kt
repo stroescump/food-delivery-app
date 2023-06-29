@@ -14,7 +14,7 @@ enum class TaskStatus {
 
 data class ItemTaskFilter(
     val taskStatus: TaskStatus = TaskStatus.PENDING,
-    override val id: String,
+    override val id: Int,
     val isSelected: Boolean = false
 ) : ItemAdapter
 

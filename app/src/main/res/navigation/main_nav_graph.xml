@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/courierDashboardFragment">
+    app:startDestination="@id/adminFragment">
 
 
     <fragment
@@ -53,6 +53,9 @@
         <action
             android:id="@+id/goToLogin"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/fromLandingToRegister"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/customerDashboardFragment"
@@ -64,5 +67,10 @@
         android:name="com.adelinarotaru.fooddelivery.driver.ui.CourierDashboardFragment"
         android:label="fragment_courier_dashboard"
         tools:layout="@layout/fragment_courier_dashboard" />
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.adelinarotaru.fooddelivery.admin.ui.AdminFragment"
+        android:label="fragment_admin"
+        tools:layout="@layout/fragment_admin" />
 
 </navigation>

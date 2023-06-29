@@ -3,6 +3,9 @@ package com.adelinarotaru.fooddelivery.shared
 import com.adelinarotaru.fooddelivery.shared.networking.CourierApi
 import com.adelinarotaru.fooddelivery.shared.networking.LoginApi
 import com.adelinarotaru.fooddelivery.shared.networking.RestaurantApi
+import com.adelinarotaru.fooddelivery.shared.networking.StatisticsApi
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,5 +29,9 @@ class DependencyProvider {
         fun provideRestaurantApi(): RestaurantApi = retrofit.create(RestaurantApi::class.java)
         fun provideLoginApi(): LoginApi = retrofit.create(LoginApi::class.java)
         fun provideCourierApi(): CourierApi = retrofit.create(CourierApi::class.java)
+        fun provideStatisticsApi(): StatisticsApi =
+            retrofit.create(StatisticsApi::class.java)
+
+        fun provideDispatcher(): CoroutineDispatcher = Dispatchers.IO
     }
 }

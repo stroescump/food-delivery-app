@@ -7,7 +7,7 @@
     tools:context=".admin.ui.statistics.revenue.RevenueStatisticsFragment">
 
     <com.patrykandpatrick.vico.views.chart.ChartView
-
+        android:layout_marginTop="@dimen/dimen_20dp"
         android:id="@+id/chartView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

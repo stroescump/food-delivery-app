@@ -3,6 +3,7 @@ package com.adelinarotaru.fooddelivery.admin.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.adelinarotaru.fooddelivery.admin.AdminViewModel
@@ -26,10 +27,13 @@ class AdminFragment :
             viewPager.setAllCorners()
             viewPager.adapter = AdminFragmentAdapter(this@AdminFragment)
             dotsIndicator.attachTo(viewPager)
+
             totalCustomersNumber.text = "1039"
             totalRevenueNumber.text = "+ $5899"
             totalOrdersNumber.text = "294"
             totalRestaurantsNumber.text = "12"
+
+            close.setOnClickListener { findNavController().popBackStack() }
         }
     }
 

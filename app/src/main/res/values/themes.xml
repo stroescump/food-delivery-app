@@ -115,11 +115,17 @@
         <item name="axisTickStyle">@style/Line1AxisLineStyle</item>
         <item name="axisTickLength">@dimen/dimen_10dp</item>
         <item name="showGuideline">true</item>
-        <item name="showTick">true</item>
+        <item name="showTick">false</item>
+        <item name="axisLabelStyle">@style/VerticalAxisLabelStyle</item>
     </style>
 
     <style name="Line1AxisLineStyle">
-        <item name="color">@android:color/darker_gray</item>
+        <item name="color">@color/dark_gray_3</item>
+    </style>
+
+    <style name="VerticalAxisLabelStyle">
+        <item name="labelColor">@color/dark_gray</item>
+        <item name="android:fontFamily">@font/creato_display_regular</item>
     </style>
 
     <style name="LineChartStyleRevenue">

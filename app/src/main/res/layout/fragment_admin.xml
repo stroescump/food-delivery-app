@@ -34,6 +34,8 @@
         android:layout_width="@dimen/dimen_25dp"
         android:layout_height="@dimen/dimen_25dp"
         android:layout_marginEnd="@dimen/dimen_20dp"
+        android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="@id/dashboardTitle"
         app:layout_constraintEnd_toEndOf="parent"

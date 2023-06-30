@@ -20,7 +20,16 @@ class RevenueStatisticsViewModel(
 
     fun fetchStatistics() = viewModelScope.launch(dispatcher) {
         coRunCatching {
-            statisticsRepository.fetchRevenueStatistics()
+            listOf(
+                RevenueStatistics(200f, 0),
+                RevenueStatistics(520f, 1),
+                RevenueStatistics(840f, 2),
+                RevenueStatistics(124f, 3),
+                RevenueStatistics(1002f, 4),
+                RevenueStatistics(1241f, 5),
+                RevenueStatistics(1923f, 6),
+            )
+//            statisticsRepository.fetchRevenueStatistics()
         }.onSuccess {
             _statistics.value = it
         }.onFailure { sendError(it) }

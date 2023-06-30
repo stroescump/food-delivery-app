@@ -80,15 +80,54 @@
         <item name="android:background">@drawable/edit_text_background</item>
     </style>
 
-    <style name="RoundImageView" parent="">
+    <style name="RoundImageView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="CurvedImageView" parent="">
+    <style name="CurvedImageView">
         <item name="cornerFamilyBottomLeft">rounded</item>
         <item name="cornerFamilyBottomRight">rounded</item>
         <item name="cornerSize">10%</item>
     </style>
+
+    <style name="Chart3AxisStyle">
+        <item name="showTitle">true</item>
+    </style>
+
+    <style name="Chart3AxisTitleStyle">
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="typeface">sans</item>
+    </style>
+
+    <style name="Chart.Revenue" parent="">
+        <item name="showGuideline">false</item>
+        <item name="line1Spec">@style/LineChartStyleRevenue</item>
+        <item name="chartZoomEnabled">true</item>
+    </style>
+
+    <style name="AxisStyle">
+        <item name="axisLineStyle">@style/Line1AxisLineStyle</item>
+        <item name="axisGuidelineStyle">@style/Line1AxisLineStyle</item>
+        <item name="axisTickStyle">@style/Line1AxisLineStyle</item>
+        <item name="axisTickLength">@dimen/dimen_10dp</item>
+        <item name="showGuideline">true</item>
+        <item name="showTick">true</item>
+    </style>
+
+    <style name="Line1AxisLineStyle">
+        <item name="color">@android:color/darker_gray</item>
+    </style>
+
+    <style name="LineChartStyleRevenue">
+        <item name="color">@color/crazy_green</item>
+        <item name="cubicStrength">30%</item>
+        <item name="gradientTopColor">@color/crazy_green</item>
+        <item name="gradientBottomColor">@android:color/transparent</item>
+    </style>
+
 
 </resources>

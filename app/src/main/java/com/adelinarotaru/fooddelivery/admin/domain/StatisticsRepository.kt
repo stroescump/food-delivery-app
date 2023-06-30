@@ -5,7 +5,7 @@ import com.adelinarotaru.fooddelivery.admin.models.RevenueStatistics
 import com.adelinarotaru.fooddelivery.admin.models.TrendingStatistics
 
 interface StatisticsRepository {
-    fun fetchOrderStatistics(): OrderStatistic
-    fun fetchRevenueStatistics(): RevenueStatistics
-    fun fetchTrendingStatistics(): TrendingStatistics
+    fun fetchOrderStatistics(): List<OrderStatistic>
+    fun fetchRevenueStatistics(): List<RevenueStatistics>
+    fun fetchTrendingStatistics(): List<TrendingStatistics>
 }

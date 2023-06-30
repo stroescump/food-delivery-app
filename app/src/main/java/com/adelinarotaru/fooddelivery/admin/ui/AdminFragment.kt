@@ -8,14 +8,12 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.adelinarotaru.fooddelivery.admin.AdminViewModel
 import com.adelinarotaru.fooddelivery.admin.ui.statistics.orders.OrdersStatisticsFragment
 import com.adelinarotaru.fooddelivery.admin.ui.statistics.revenue.RevenueStatisticsFragment
-import com.adelinarotaru.fooddelivery.admin.ui.statistics.trending_items.TrendingStatisticsFragment
+import com.adelinarotaru.fooddelivery.admin.ui.statistics.trendingitems.TrendingStatisticsFragment
 import com.adelinarotaru.fooddelivery.databinding.FragmentAdminBinding
 import com.adelinarotaru.fooddelivery.shared.DependencyProvider
 import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 import com.adelinarotaru.fooddelivery.shared.base.BaseViewModel
 import com.adelinarotaru.fooddelivery.utils.setAllCorners
-import com.adelinarotaru.fooddelivery.utils.setBottomCorners
-import com.adelinarotaru.fooddelivery.utils.setTopCorners
 
 class AdminFragment :
     BaseFragment<FragmentAdminBinding, AdminViewModel>(FragmentAdminBinding::inflate) {

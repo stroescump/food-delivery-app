@@ -7,15 +7,15 @@ import com.adelinarotaru.fooddelivery.admin.models.TrendingStatistics
 import com.adelinarotaru.fooddelivery.shared.networking.StatisticsApi
 
 class StatisticsRepositoryImpl(private val statisticsApi: StatisticsApi) : StatisticsRepository {
-    override fun fetchOrderStatistics(): OrderStatistic =
+    override fun fetchOrderStatistics(): List<OrderStatistic> =
         statisticsApi.fetchOrderStatistics()
 
 
-    override fun fetchRevenueStatistics(): RevenueStatistics =
+    override fun fetchRevenueStatistics(): List<RevenueStatistics> =
         statisticsApi.fetchRevenueStatistics()
 
 
-    override fun fetchTrendingStatistics(): TrendingStatistics =
+    override fun fetchTrendingStatistics(): List<TrendingStatistics> =
         statisticsApi.fetchTrendingStatistics()
 
 }

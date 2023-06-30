@@ -8,11 +8,11 @@ import retrofit2.http.GET
 interface StatisticsApi {
 
     @GET("/statistics/orders ")
-    fun fetchOrderStatistics(): OrderStatistic
+    fun fetchOrderStatistics(): List<OrderStatistic>
 
     @GET("/statistics/revenue")
-    fun fetchRevenueStatistics(): RevenueStatistics
+    fun fetchRevenueStatistics(): List<RevenueStatistics>
 
     @GET("/statistics/trending")
-    fun fetchTrendingStatistics(): TrendingStatistics
+    fun fetchTrendingStatistics(): List<TrendingStatistics>
 }

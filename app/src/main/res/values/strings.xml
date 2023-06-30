@@ -41,4 +41,6 @@
     <string name="dashboard">Dashboard</string>
     <string name="order_list">Order List</string>
     <string name="new_order">New Order</string>
+    <string name="amount_times_ordered">times ordered</string>
+    <string name="trending_items">Trending Items</string>
 </resources>

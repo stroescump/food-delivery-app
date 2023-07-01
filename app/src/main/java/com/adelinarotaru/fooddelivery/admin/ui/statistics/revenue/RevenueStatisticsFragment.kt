@@ -1,10 +1,9 @@
 package com.adelinarotaru.fooddelivery.admin.ui.statistics.revenue
 
 import android.os.Bundle
-import android.text.Spannable
-import android.text.style.ForegroundColorSpan
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.text.color
 import androidx.lifecycle.lifecycleScope
 import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.admin.data.StatisticsRepositoryImpl
@@ -28,7 +27,6 @@ import com.patrykandpatrick.vico.core.context.MeasureContext
 import com.patrykandpatrick.vico.core.dimensions.MutableDimensions
 import com.patrykandpatrick.vico.core.entry.entriesOf
 import com.patrykandpatrick.vico.core.entry.entryModelOf
-import com.patrykandpatrick.vico.core.extension.appendCompat
 import com.patrykandpatrick.vico.core.extension.copyColor
 import com.patrykandpatrick.vico.core.extension.sumOf
 import com.patrykandpatrick.vico.core.extension.transformToSpannable
@@ -84,7 +82,12 @@ class RevenueStatisticsFragment :
                 }
             }
             (chartView.startAxis as Axis).guideline = null
-            (chartView.startAxis as VerticalAxis).maxLabelCount = 3
+            (chartView.startAxis as VerticalAxis).apply {
+                maxLabelCount = 3
+                valueFormatter = AxisValueFormatter { value, chartValues ->
+                    "$ ${value.toInt()}"
+                }
+            }
             (chartView.bottomAxis as HorizontalAxis).valueFormatter =
                 AxisValueFormatter { value: Float, _ ->
                     DAYS_OF_WEEK_HASHMAP[value.toInt()]
@@ -142,11 +145,11 @@ class RevenueStatisticsFragment :
             postfix = if (markedEntries.size > 1) ")" else "",
             separator = "; ",
         ) { model ->
-            appendCompat(
-                PATTERN.format(model.entry.y),
-                ForegroundColorSpan(model.color),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
-            )
+            color(requireContext().getColor(R.color.dark_gray_3)) {
+                append(
+                    PATTERN.format(model.entry.y)
+                )
+            }
         }
 
     }

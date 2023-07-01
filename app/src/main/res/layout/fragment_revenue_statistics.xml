@@ -4,17 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".admin.ui.statistics.revenue.RevenueStatisticsFragment">
 
-    <com.patrykandpatrick.vico.views.chart.ChartView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_marginTop="@dimen/dimen_20dp"
+        style="@style/TextView.MediumPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/dark_blue_bg"
+        android:text="@string/weekly_revenue_evolution" />
+
+    <com.patrykandpatrick.vico.views.chart.ChartView
+        android:background="@drawable/card_dark_blue_bg_20dp"
+        android:padding="@dimen/dimen_20dp"
         android:id="@+id/chartView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:chart="line"
-        app:lineChartStyle="@style/Chart.Revenue"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dimen_10dp"
         app:axisStyle="@style/AxisStyle"
+        app:chart="line"
         app:fadingEdgeWidth="@dimen/dimen_20dp"
+        app:lineChartStyle="@style/Chart.Revenue"
         app:showBottomAxis="true"
         app:showStartAxis="true" />
 

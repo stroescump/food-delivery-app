@@ -43,4 +43,5 @@
     <string name="new_order">New Order</string>
     <string name="amount_times_ordered">times ordered</string>
     <string name="trending_items">Trending Items</string>
+    <string name="weekly_revenue_evolution">Weekly revenue evolution</string>
 </resources>

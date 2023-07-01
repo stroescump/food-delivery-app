@@ -2,6 +2,7 @@ package com.adelinarotaru.fooddelivery.shared.models
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import com.adelinarotaru.fooddelivery.R
 
 sealed class CuisineType(
     open val id: Int,
@@ -21,7 +22,11 @@ sealed class CuisineType(
         override val nameRes: Int,
         override val iconRes: Int,
         override val enum: String = "PIZZA"
-    ) : CuisineType(id, nameRes, iconRes, enum)
+    ) : CuisineType(id, nameRes, iconRes, enum) {
+        companion object {
+            val default = Pizza(0, R.string.pizza, R.drawable.ic_pizza)
+        }
+    }
 
     data class Taco(
         override val id: Int,

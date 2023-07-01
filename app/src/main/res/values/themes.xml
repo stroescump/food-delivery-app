@@ -124,7 +124,7 @@
     </style>
 
     <style name="VerticalAxisLabelStyle">
-        <item name="labelColor">@color/dark_gray</item>
+        <item name="labelColor">@color/dark_gray_3</item>
         <item name="android:fontFamily">@font/creato_display_regular</item>
     </style>
 

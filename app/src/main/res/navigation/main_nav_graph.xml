@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/productDetailsFragment">
+    app:startDestination="@id/checkoutFragment">
 
 
     <fragment
@@ -65,5 +65,10 @@
         android:name="com.adelinarotaru.fooddelivery.customer.ui.productdetails.ProductDetailsFragment"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_product_details" />
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.adelinarotaru.fooddelivery.customer.ui.checkout.CheckoutFragment"
+        android:label="fragment_checkout"
+        tools:layout="@layout/fragment_checkout" />
 
 </navigation>

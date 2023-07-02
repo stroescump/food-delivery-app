@@ -45,8 +45,7 @@
     <string name="trending_items">Trending Items</string>
     <string name="weekly_revenue_evolution">Weekly revenue evolution</string>
     <string name="card_number">Card number</string>
-    <string name="expiry_day">Expiry day</string>
-    <string name="expiry_month">Expiry month</string>
+    <string name="expiry_month">MM/YYYY</string>
     <string name="cvv">CVV</string>
     <string name="cart">Cart</string>
     <string name="subtotal">Subtotal</string>
@@ -61,4 +60,10 @@
     <string name="product_added_to_cart">Product added to cart.</string>
     <string name="update">Update</string>
     <string name="quantity_updated_successfully">Quantity updated successfully</string>
+    <string name="street">Street</string>
+    <string name="city">City</string>
+    <string name="delivery_address">Delivery address</string>
+    <string name="zip_code">Zip code</string>
+    <string name="payment">Payment</string>
+    <string name="pay">Pay</string>
 </resources>

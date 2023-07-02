@@ -11,10 +11,11 @@
         android:layout_width="@dimen/dimen_30dp"
         android:layout_height="@dimen/dimen_30dp"
         android:layout_marginStart="@dimen/dimen_20dp"
-        android:src="@drawable/ic_close"
+        android:src="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="@id/screenTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/screenTitle" />
+        app:layout_constraintTop_toTopOf="@id/screenTitle"
+        app:tint="@color/dark_gray_3" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/screenTitle"

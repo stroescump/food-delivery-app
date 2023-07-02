@@ -44,8 +44,7 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding, Produ
             addQuantity.setOnClickListener { modifiyQuantity(ADD) }
             close.setOnClickListener { findNavController().popBackStack() }
             addToCart.setOnClickListener {
-                val currentCart =
-                    sharedViewModel.sessionState.value.cartState.orderItems.toMutableList()
+                val currentCart = sharedViewModel.getCurrentCart().toMutableList()
                 val currentProduct = viewModel.productDetails.value ?: return@setOnClickListener
                 val currentQuantity = getCurrentQuantity()
 

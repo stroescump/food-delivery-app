@@ -10,50 +10,45 @@
         style="@style/EditText.Form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_10dp"
         android:hint="@string/card_number"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/cvv"
+        style="@style/EditText.Form"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_10dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:hint="@string/cvv"
+        android:singleLine="true"
+        app:layout_constraintEnd_toStartOf="@id/expiryMonth"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/cardNumber"
+        app:layout_constraintTop_toBottomOf="@id/cardNumber" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/expiryMonth"
         style="@style/EditText.Form"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="@dimen/dimen_10dp"
-        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:layout_marginHorizontal="@dimen/dimen_10dp"
+        android:layout_marginStart="@dimen/dimen_10dp"
         android:hint="@string/expiry_month"
         android:singleLine="true"
-        app:layout_constraintEnd_toStartOf="@id/expiryDay"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@id/cardNumber"
-        app:layout_constraintTop_toBottomOf="@+id/cardNumber" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/expiryDay"
-        style="@style/EditText.Form"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_10dp"
-        android:hint="@string/expiry_day"
-        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="@id/cardNumber"
-        app:layout_constraintStart_toEndOf="@id/expiryMonth"
-        app:layout_constraintTop_toTopOf="@id/expiryMonth" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/cvv"
-        style="@style/EditText.Form"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_10dp"
-        android:hint="@string/cvv"
-        app:layout_constraintTop_toBottomOf="@id/expiryMonth" />
+        app:layout_constraintStart_toEndOf="@id/cvv"
+        app:layout_constraintTop_toTopOf="@id/cvv" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/firstName"
         style="@style/EditText.Form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dimen_10dp"
         android:layout_marginTop="@dimen/dimen_10dp"
         android:hint="@string/your_name"
         app:layout_constraintTop_toBottomOf="@id/cvv" />

@@ -1,14 +1,16 @@
 package com.adelinarotaru.fooddelivery
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.adelinarotaru.fooddelivery.customer.SharedViewModel
 import com.adelinarotaru.fooddelivery.databinding.ActivityMainBinding
 import com.adelinarotaru.fooddelivery.utils.NetworkMonitor
-import com.adelinarotaru.fooddelivery.utils.showPermanentMessage
 import com.adelinarotaru.fooddelivery.utils.viewBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -16,6 +18,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityMainBinding::inflate)
     private val networkMonitor: NetworkMonitor by lazy { NetworkMonitor(applicationContext) }
+    private val sharedViewModel by viewModels<SharedViewModel>()
 
     private lateinit var navController: NavController
     private lateinit var snackbar: Snackbar
@@ -52,5 +55,12 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         networkMonitor.stopMonitoring()
+    }
+
+    private fun showPermanentMessage(view: View, message: String): Snackbar {
+        return Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE).run {
+            show()
+            this
+        }
     }
 }

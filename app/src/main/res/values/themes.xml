@@ -27,8 +27,31 @@
         <item name="android:fontFamily">@font/creato_display_extra_bold</item>
     </style>
 
+    <style name="Button.FoodDelivery.Full.DarkBlue" parent="">
+        <item name="android:background">@drawable/dark_blue_full_rectangle</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/dirty_white</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:paddingVertical">@dimen/dimen_15dp</item>
+        <item name="android:layout_marginHorizontal">@dimen/dimen_30dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/creato_display_medium</item>
+    </style>
+
     <style name="Button.FoodDelivery.Outline" parent="">
         <item name="android:background">@drawable/button_bg_outline</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/crazy_green</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:paddingVertical">@dimen/dimen_15dp</item>
+        <item name="android:layout_marginHorizontal">@dimen/dimen_30dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/creato_display_extra_bold</item>
+    </style>
+
+    <style name="Button.FoodDelivery.Outline.DarkBlue" parent="">
+        <item name="android:background">@drawable/dark_blue_outline_rectangle</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/crazy_green</item>
         <item name="android:letterSpacing">0.02</item>

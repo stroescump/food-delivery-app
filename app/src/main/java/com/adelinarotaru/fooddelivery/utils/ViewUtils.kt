@@ -143,7 +143,7 @@ fun AppCompatEditText.value() = text?.let {
 
 fun String.toEditable() = Editable.Factory.getInstance().newEditable(this)
 
-fun showMessage(context: Context, message: String) {
+fun showMessageWindow(context: Context, message: String) {
     val alertDialogBuilder = AlertDialog.Builder(context)
     alertDialogBuilder.setMessage(message)
     alertDialogBuilder.setPositiveButton("OK") { dialog, _ ->
@@ -153,12 +153,8 @@ fun showMessage(context: Context, message: String) {
     alertDialog.show()
 }
 
-fun showPermanentMessage(view: View, message: String): Snackbar {
-    return Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE).run {
-        show()
-        this
-    }
-}
+fun View.showJustMessage(message: String) =
+    Snackbar.make(this, message, Snackbar.LENGTH_INDEFINITE).show()
 
 fun SearchView.changeColorTo(color: Int) {
     val editText = this.findViewById<EditText>(R.id.search_src_text)

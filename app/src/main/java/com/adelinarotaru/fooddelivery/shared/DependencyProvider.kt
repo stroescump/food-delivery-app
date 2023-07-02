@@ -3,6 +3,7 @@ package com.adelinarotaru.fooddelivery.shared
 import com.adelinarotaru.fooddelivery.shared.networking.CartApi
 import com.adelinarotaru.fooddelivery.shared.networking.CourierApi
 import com.adelinarotaru.fooddelivery.shared.networking.LoginApi
+import com.adelinarotaru.fooddelivery.shared.networking.ProductDetailsApi
 import com.adelinarotaru.fooddelivery.shared.networking.RestaurantApi
 import com.adelinarotaru.fooddelivery.shared.networking.StatisticsApi
 import kotlinx.coroutines.CoroutineDispatcher
@@ -34,5 +35,7 @@ class DependencyProvider {
         fun provideCartApi(): CartApi = retrofit.create(CartApi::class.java)
         fun provideDispatcher(): CoroutineDispatcher = Dispatchers.IO
         fun provideTestDispatcher(): CoroutineDispatcher = Dispatchers.Unconfined
+        fun provideProductDetailsApi(): ProductDetailsApi =
+            retrofit.create(ProductDetailsApi::class.java)
     }
 }

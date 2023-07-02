@@ -29,7 +29,9 @@ sealed class Ingredient {
 class IngredientsAdapter : BaseRVAdapter<ItemIngredietnsBinding, IngredientItem>() {
     override val refreshUi: (ItemIngredietnsBinding, IngredientItem) -> Unit =
         { binding, ingredientItem ->
-            binding.ingredientImage.setImageResource(ingredientItem.ingredient.imgRes)
+            binding.ingredientImage.apply {
+                setImageDrawable(context.getDrawable(ingredientItem.ingredient.imgRes))
+            }
         }
 
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> ItemIngredietnsBinding =
@@ -43,10 +45,10 @@ fun String.toIngredient() = when (this) {
     "Onions" -> Ingredient.Onions()
     "Herbs" -> Ingredient.Herbs()
     "Eggs" -> Ingredient.Eggs()
-    "Tomato" -> Ingredient.Tomato()
+    "Tomatoes" -> Ingredient.Tomato()
     "Olives" -> Ingredient.Olives()
     "Chicken" -> Ingredient.Chicken()
     "Beef" -> Ingredient.Beef()
     "Burrata" -> Ingredient.Burrata()
-    else -> throw IllegalStateException("Ingredient is not mapped")
+    else -> throw IllegalStateException("$this ingredient is not mapped")
 }

@@ -154,7 +154,7 @@ fun showMessageWindow(context: Context, message: String) {
 }
 
 fun View.showJustMessage(message: String) =
-    Snackbar.make(this, message, Snackbar.LENGTH_INDEFINITE).show()
+    Snackbar.make(this, message, Snackbar.LENGTH_SHORT).show()
 
 fun SearchView.changeColorTo(color: Int) {
     val editText = this.findViewById<EditText>(R.id.search_src_text)

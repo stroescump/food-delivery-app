@@ -58,4 +58,7 @@
     <string name="details">Details</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="you_need_to_update_the_quantity">You need to update the quantity</string>
+    <string name="product_added_to_cart">Product added to cart.</string>
+    <string name="update">Update</string>
+    <string name="quantity_updated_successfully">Quantity updated successfully</string>
 </resources>

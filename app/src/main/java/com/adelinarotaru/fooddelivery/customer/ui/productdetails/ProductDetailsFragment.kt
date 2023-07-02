@@ -39,21 +39,35 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding, Produ
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
+            ingredients.adapter = ingredientsAdapter
             subtractQuantity.setOnClickListener { modifiyQuantity(SUBTRACT) }
             addQuantity.setOnClickListener { modifiyQuantity(ADD) }
             close.setOnClickListener { findNavController().popBackStack() }
             addToCart.setOnClickListener {
                 val currentCart =
-                    sharedViewModel.sessionState.value?.cartState?.orderItems?.toMutableList()
-                        ?: return@setOnClickListener
+                    sharedViewModel.sessionState.value.cartState.orderItems.toMutableList()
                 val currentProduct = viewModel.productDetails.value ?: return@setOnClickListener
                 val currentQuantity = getCurrentQuantity()
+
                 if (currentQuantity != null && currentQuantity > 0) {
                     val updatedCart = currentCart.run {
-                        add(CartMenuItem(lastIndex.inc(), currentProduct, currentQuantity))
+                        val indexToUpdate = indexOfFirst { it.menuItem.id == currentProduct.id }
+                        if (indexToUpdate != NOT_FOUND) {
+                            this[indexToUpdate] =
+                                CartMenuItem(indexToUpdate, currentProduct, currentQuantity)
+                        } else {
+                            add(CartMenuItem(indexToUpdate.inc(), currentProduct, currentQuantity))
+                        }
                         Cart(this)
                     }
                     sharedViewModel.updateCart(newCart = updatedCart)
+
+                    root.showJustMessage(
+                        if (addToCart.text == getString(R.string.update)) getString(R.string.quantity_updated_successfully)
+                        else getString(R.string.product_added_to_cart)
+                    )
+                    addToCart.text = getString(R.string.update)
+
                 } else root.showJustMessage(getString(R.string.you_need_to_update_the_quantity))
 
             }
@@ -100,7 +114,7 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding, Produ
     }
 
     companion object {
-
+        private const val NOT_FOUND = -1
         private const val ADD = "ADD"
         private const val SUBTRACT = "SUBTRACT"
         fun newInstance(productId: String) = ProductDetailsFragment().apply {

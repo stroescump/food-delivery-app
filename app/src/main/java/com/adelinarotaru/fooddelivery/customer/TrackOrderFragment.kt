@@ -8,6 +8,7 @@ import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.FragmentTrackOrderBinding
 import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
+import com.adelinarotaru.fooddelivery.utils.show
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
@@ -49,6 +50,17 @@ class TrackOrderFragment :
     }
 
     private fun FragmentTrackOrderBinding.updateOrderStatus(orderStatus: OrderStatus) {
+        if (orderStatus.orderStep > 0) {
+            courierContainer.apply {
+                deliveryAddress.text = "Canal St. 44W"
+                estimatedDeliveryTime.text = "5:30 PM"
+                courierName.text = "Mark Manson"
+                show()
+            }
+        } else {
+            // TODO Handle logic for Order Rejected
+        }
+
         orderStatusTitle.text = orderStatus.formattedName
         orderStatusColor.setImageDrawable(
             AppCompatResources.getDrawable(

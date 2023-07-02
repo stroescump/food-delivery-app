@@ -18,6 +18,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_10dp"
+        android:alpha="0.85"
         android:background="@drawable/card_dark_gray_shadow_20dp"
         android:padding="@dimen/dimen_10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +48,146 @@
             app:layout_constraintStart_toEndOf="@id/orderStatusColor"
             app:layout_constraintTop_toTopOf="@id/orderStatusColor"
             tools:text="Order Received" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/courierContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:alpha="0.85"
+        android:background="@drawable/card_dark_gray_shadow_20dp"
+        android:padding="@dimen/dimen_15dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.7"
+        tools:visibility="visible">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/estimatedTimeIcon"
+            android:layout_width="@dimen/dimen_20dp"
+            android:layout_height="@dimen/dimen_20dp"
+            android:layout_marginEnd="@dimen/dimen_2dp"
+            android:src="@drawable/ic_location"
+            app:layout_constraintBottom_toBottomOf="@id/estimatedDeliveryTime"
+            app:layout_constraintEnd_toStartOf="@id/estimatedDeliveryTime"
+            app:layout_constraintStart_toStartOf="@id/courierPhoto"
+            app:layout_constraintTop_toTopOf="@id/estimatedDeliveryTime"
+            app:shapeAppearanceOverlay="@style/RoundImageView"
+            app:tint="@color/crazy_green" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/estimatedDeliveryTime"
+            style="@style/TextView.SmallPrint.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_2dp"
+            app:layout_constraintStart_toEndOf="@id/estimatedTimeIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="4:35 PM" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/estimatedDeliveryTimeTitle"
+            style="@style/TextView.SmallPrint.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="@string/delivery_time"
+            app:layout_constraintStart_toStartOf="@id/estimatedDeliveryTime"
+            app:layout_constraintTop_toBottomOf="@id/estimatedDeliveryTime" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/deliveryIcon"
+            android:layout_width="@dimen/dimen_20dp"
+            android:layout_height="@dimen/dimen_20dp"
+            android:layout_marginEnd="@dimen/dimen_2dp"
+            android:src="@drawable/ic_location"
+            app:layout_constraintBottom_toBottomOf="@id/deliveryAddress"
+            app:layout_constraintEnd_toStartOf="@id/deliveryAddress"
+            app:layout_constraintTop_toTopOf="@id/deliveryAddress"
+            app:shapeAppearanceOverlay="@style/RoundImageView"
+            app:tint="@color/crazy_green" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/deliveryAddress"
+            style="@style/TextView.SmallPrint.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="22dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/estimatedDeliveryTime"
+            tools:text="Capp St. 65" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/deliveryAddressTitle"
+            style="@style/TextView.SmallPrint.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="@string/delivery_place"
+            app:layout_constraintStart_toStartOf="@+id/deliveryAddress"
+            app:layout_constraintTop_toBottomOf="@id/deliveryAddress" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginHorizontal="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:alpha="0.2"
+            app:dividerColor="@color/dark_gray_3"
+            app:layout_constraintTop_toBottomOf="@id/estimatedDeliveryTimeTitle" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/courierPhoto"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+
+            android:scaleType="centerCrop"
+            android:src="@drawable/user_placeholder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            app:shapeAppearanceOverlay="@style/RoundImageView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/courierName"
+            style="@style/TextView.SmallPrint.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            app:layout_constraintBottom_toTopOf="@id/courierTitle"
+            app:layout_constraintStart_toEndOf="@id/courierPhoto"
+            app:layout_constraintTop_toTopOf="@id/courierPhoto"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Ngua Raan" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/courierTitle"
+            style="@style/TextView.SmallPrint.Light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="@string/courier"
+            app:layout_constraintBottom_toBottomOf="@id/courierPhoto"
+            app:layout_constraintStart_toStartOf="@id/courierName"
+            app:layout_constraintTop_toBottomOf="@id/courierName" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/callCourier"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@drawable/card_crazy_green_bg"
+            android:src="@drawable/ic_phone"
+            app:contentPadding="@dimen/dimen_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            app:shapeAppearanceOverlay="@style/RoundImageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

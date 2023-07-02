@@ -66,4 +66,7 @@
     <string name="zip_code">Zip code</string>
     <string name="payment">Payment</string>
     <string name="pay">Pay</string>
+    <string name="delivery_place">Delivery place</string>
+    <string name="delivery_time">Delivery time</string>
+    <string name="courier">Courier</string>
 </resources>

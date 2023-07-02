@@ -1,4 +1,4 @@
-package com.adelinarotaru.fooddelivery.customer.ui
+package com.adelinarotaru.fooddelivery.customer.ui.dashboard
 
 import androidx.lifecycle.viewModelScope
 import com.adelinarotaru.fooddelivery.customer.domain.RestaurantRepository

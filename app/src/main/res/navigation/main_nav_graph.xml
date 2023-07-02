@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/customerDashboardFragment"
-        android:name="com.adelinarotaru.fooddelivery.customer.ui.CustomerDashboardFragment"
+        android:name="com.adelinarotaru.fooddelivery.customer.ui.dashboard.CustomerDashboardFragment"
         android:label="fragment_customer_dashboard"
         tools:layout="@layout/fragment_customer_dashboard" />
     <fragment

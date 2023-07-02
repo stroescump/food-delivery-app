@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".customer.ui.cart.CartFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/close"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:layout_marginStart="@dimen/dimen_20dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@id/screenTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/screenTitle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/screenTitle"
+        style="@style/TextView.BigPrint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:gravity="center"
+        android:text="@string/cart"
+        android:textColor="@color/dark_gray_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/close"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartItems"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/dimen_20dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/orderSummaryLayout"
+        app:layout_constraintTop_toBottomOf="@id/screenTitle"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_cart" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/orderSummaryLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_20dp"
+        android:background="@drawable/card_dark_gray_shadow_20dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cartItems">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subtotalTitle"
+            style="@style/TextView.MediumPrint.Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:text="@string/subtotal"
+            android:textColor="@color/dark_gray_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/subtotalAmount"
+            style="@style/TextView.MediumPrint.Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:textColor="@color/dark_gray_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/subtotalTitle"
+            tools:text="$113.30" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/deliveryTitle"
+            style="@style/TextView.MediumPrint.Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:text="@string/delivery"
+            android:textColor="@color/dark_gray_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subtotalTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/deliveryAmount"
+            style="@style/TextView.MediumPrint.Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:textColor="@color/dark_gray_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/deliveryTitle"
+            tools:text="$3.00" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/totalTitle"
+            style="@style/TextView.MediumPrint.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:text="@string/total"
+            android:textColor="@color/dark_gray_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/deliveryTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/totalAmount"
+            style="@style/TextView.MediumPrint.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:textColor="@color/dark_gray_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/totalTitle"
+            tools:text="$116.30" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/goToCheckout"
+            style="@style/Button.FoodDelivery.Full"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:background="@drawable/card_crazy_green_bg"
+            android:text="@string/checkout"
+            android:textSize="@dimen/dimen_20sp"
+            app:layout_constraintTop_toBottomOf="@id/totalTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@
     tools:context=".admin.ui.statistics.orders.OrdersStatisticsFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
-        style="@style/TextView.MediumPrint"
+        style="@style/TextView.MediumPrint.Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_20dp"

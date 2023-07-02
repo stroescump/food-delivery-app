@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customer.ui.CustomerDashboardFragment">
+    tools:context=".customer.ui.dashboard.CustomerDashboardFragment">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profilePicture"
@@ -33,7 +33,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/askingQuestion"
-        style="@style/TextView.MediumPrint"
+        style="@style/TextView.MediumPrint.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_30dp"

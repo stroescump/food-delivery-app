@@ -4,6 +4,6 @@ import com.adelinarotaru.fooddelivery.shared.models.Order
 import retrofit2.http.GET
 
 interface CourierApi {
-    @GET
+    @GET("/courier/nearbyorders")
     fun fetchNearbyOrder(): List<Order>
 }

@@ -1,4 +1,4 @@
-package com.adelinarotaru.fooddelivery.customer.ui
+package com.adelinarotaru.fooddelivery.customer.ui.dashboard
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

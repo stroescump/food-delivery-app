@@ -8,10 +8,10 @@ import androidx.lifecycle.lifecycleScope
 import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.FragmentTrackOrderBinding
 import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
+import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -19,15 +19,14 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class TrackOrderFragment :
-    BaseFragment<FragmentTrackOrderBinding, TrackOrderViewModel>(FragmentTrackOrderBinding::inflate),
-    OnMapReadyCallback {
+    BaseFragment<FragmentTrackOrderBinding, TrackOrderViewModel>(FragmentTrackOrderBinding::inflate) {
 
     companion object {
         fun newInstance() = TrackOrderFragment()
     }
 
     override val viewModel by lazy { TrackOrderViewModel() }
-    private lateinit var map: GoogleMap
+    private lateinit var _map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,31 +46,34 @@ class TrackOrderFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.orderStatus.collectLatest { orderStatus ->
+            viewModel.orderStatus.collectLatest { newOrderStatus ->
                 binding?.apply {
-                    orderStatusTitle.text = orderStatus.formattedName
-                    orderStatusColor.setImageDrawable(
-                        AppCompatResources.getDrawable(
-                            requireContext(), orderStatus.colorInt
-                        )
-                    )
+                    updateOrderStatus(newOrderStatus)
                 }
             }
         }
 
-        (childFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment).getMapAsync(
-            this
-        )
+        (childFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment).getMapAsync {
+            _map = it
+            val sydney = LatLng(-34.0, 151.0)
+            it.addMarker(
+                MarkerOptions().position(sydney).title("Marker in Sydney")
+            )
+            it.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        }
 
         viewModel.trackOrder(orderId = "")
     }
 
-    override fun onMapReady(map: GoogleMap) {
-        val sydney = LatLng(-34.0, 151.0)
-        map.addMarker(
-            MarkerOptions().position(sydney).title("Marker in Sydney")
+    private fun FragmentTrackOrderBinding.updateOrderStatus(
+        orderStatus: OrderStatus
+    ) {
+        orderStatusTitle.text = orderStatus.formattedName
+        orderStatusColor.setImageDrawable(
+            AppCompatResources.getDrawable(
+                requireContext(), orderStatus.colorInt
+            )
         )
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 
 }

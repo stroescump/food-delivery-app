@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -78,4 +79,12 @@ dependencies {
 
     implementation "com.patrykandpatrick.vico:core:1.6.5"
     implementation "com.patrykandpatrick.vico:views:1.6.5"
+
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
+    // KTX for the Maps SDK for Android
+    implementation 'com.google.maps.android:maps-ktx:3.2.1'
+
+    // (Optional) KTX for the Maps SDK for Android Utility Library
+    implementation 'com.google.maps.android:maps-utils-ktx:3.2.1'
 }

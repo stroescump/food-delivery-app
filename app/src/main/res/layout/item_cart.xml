@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_marginTop="@dimen/dimen_10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dimen_10dp">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
@@ -114,13 +114,16 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.imageview.ShapeableImageView
+        app:strokeColor="@color/dirty_white"
+        app:strokeWidth="1dp"
         android:id="@+id/foodPicture"
         android:layout_width="@dimen/dimen_100dp"
         android:layout_height="@dimen/dimen_100dp"
         android:layout_marginTop="@dimen/dimen_20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/food_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/RoundImageView"
-        tools:src="@tools:sample/avatars" />
+        app:shapeAppearanceOverlay="@style/RoundImageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

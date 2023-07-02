@@ -8,13 +8,13 @@ data class Restaurant(
     val address: String,
     @SerializedName("phone_number")
     val phoneNumber: String,
-    val rating: Float?,
+    val rating: Float? = null,
     @SerializedName("free_delivery")
     val freeDelivery: Boolean = false,
     @SerializedName("opening_hours")
-    val openingHours: String?,
+    val openingHours: String? = null,
     @SerializedName("closing_hours")
-    val closingHours: String?,
+    val closingHours: String? = null,
     @SerializedName("menu_items")
     val menuItems: List<MenuItem>? = null,
     val reviews: List<UserReview>? = null,

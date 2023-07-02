@@ -6,5 +6,5 @@ data class MenuItem(
     val price: Float,
     val restaurantId: Int,
     val restaurant: Restaurant,
-    val foodCategory: String
+    val foodCategory: String? = "Other"
 )

@@ -1,7 +1,6 @@
 package com.adelinarotaru.fooddelivery.customer
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.lifecycleScope
@@ -11,7 +10,6 @@ import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -27,21 +25,6 @@ class TrackOrderFragment :
 
     override val viewModel by lazy { TrackOrderViewModel() }
     private lateinit var _map: GoogleMap
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        MapsInitializer.initialize(requireContext(), MapsInitializer.Renderer.LATEST) {
-            when (it) {
-                MapsInitializer.Renderer.LATEST -> Log.d(
-                    "MapsDemo", "The latest version of the renderer is used."
-                )
-
-                MapsInitializer.Renderer.LEGACY -> Log.d(
-                    "MapsDemo", "The legacy version of the renderer is used."
-                )
-            }
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,9 +48,7 @@ class TrackOrderFragment :
         viewModel.trackOrder(orderId = "")
     }
 
-    private fun FragmentTrackOrderBinding.updateOrderStatus(
-        orderStatus: OrderStatus
-    ) {
+    private fun FragmentTrackOrderBinding.updateOrderStatus(orderStatus: OrderStatus) {
         orderStatusTitle.text = orderStatus.formattedName
         orderStatusColor.setImageDrawable(
             AppCompatResources.getDrawable(

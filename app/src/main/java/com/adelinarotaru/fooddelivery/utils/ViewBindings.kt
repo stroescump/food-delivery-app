@@ -10,7 +10,7 @@ import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-public inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
+inline fun <T : ViewBinding> AppCompatActivity.viewBinding(
     crossinline bindingInflater: (LayoutInflater) -> T,
 ): Lazy<T> =
     lazy(LazyThreadSafetyMode.NONE) {

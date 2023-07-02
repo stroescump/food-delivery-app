@@ -117,7 +117,8 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
             ), Restaurant(
                 3,
                 "XO by Samir",
-                "Str. Hallmark 221A, Entrance 2B",
+                lat = "654 Cedar St",
+                long = "",
                 "+41745263546",
                 4.8f,
                 true,
@@ -126,7 +127,7 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
                 emptyList(),
                 emptyList(),
                 listOf("PIZZA", "BURGER", "KEBAB")
-            ), "22-04-2023",220.23f
+            ), "22-04-2023", 220.23f
         ), Order(
             id = 234523, userId = 2, restaurantId = 4, status = 1, user = User(
                 id = 2,
@@ -139,7 +140,8 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
             ), restaurant = Restaurant(
                 id = 4,
                 name = "Taste of India",
-                address = "Str. Spice 12",
+                lat = "654 Cedar St",
+                long = "",
                 phoneNumber = "+41789012345",
                 rating = 4.5f,
                 freeDelivery = false,
@@ -148,7 +150,7 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
                 menuItems = emptyList(),
                 reviews = emptyList(),
                 cuisineTypes = listOf("INDIAN", "CURRY")
-            ), "22-04-2023",220.23f
+            ), "22-04-2023", 220.23f
         ), Order(
             id = 345634, userId = 3, restaurantId = 2, status = 3, user = User(
                 id = 3,
@@ -161,7 +163,8 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
             ), restaurant = Restaurant(
                 id = 2,
                 name = "Burger Joint",
-                address = "Str. Burger 5",
+                lat = "654 Cedar St",
+                long = "",
                 phoneNumber = "+41781234567",
                 rating = 4.2f,
                 freeDelivery = true,
@@ -170,7 +173,7 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
                 menuItems = emptyList(),
                 reviews = emptyList(),
                 cuisineTypes = listOf("BURGER", "FAST FOOD")
-            ), "22-04-2023",220.23f
+            ), "22-04-2023", 220.23f
         ), Order(
             id = 456745, userId = 4, restaurantId = 1, status = 2, user = User(
                 id = 4,
@@ -183,7 +186,8 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
             ), restaurant = Restaurant(
                 id = 1,
                 name = "La Pizzeria",
-                address = "Str. Italia 10",
+                lat = "654 Cedar St",
+                long = "",
                 phoneNumber = "+41761234567",
                 rating = 4.7f,
                 freeDelivery = true,
@@ -192,7 +196,7 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
                 menuItems = emptyList(),
                 reviews = emptyList(),
                 cuisineTypes = listOf("PIZZA", "ITALIAN")
-            ), "22-04-2023",220.23f
+            ), "22-04-2023", 220.23f
         ), Order(
             id = 567856, userId = 5, restaurantId = 6, status = 1, user = User(
                 id = 5,
@@ -205,7 +209,8 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
             ), restaurant = Restaurant(
                 id = 6,
                 name = "Sushi Delight",
-                address = "Str. Sakura 30",
+                lat = "654 Cedar St",
+                long = "",
                 phoneNumber = "+41782345678",
                 rating = 4.9f,
                 freeDelivery = true,
@@ -214,7 +219,7 @@ class CourierDashboardViewModel(private val courierRepository: CourierRepository
                 menuItems = emptyList(),
                 reviews = emptyList(),
                 cuisineTypes = listOf("SUSHI", "JAPANESE")
-            ), "22-04-2023",220.23f
+            ), "22-04-2023", 220.23f
         )
     )
 }

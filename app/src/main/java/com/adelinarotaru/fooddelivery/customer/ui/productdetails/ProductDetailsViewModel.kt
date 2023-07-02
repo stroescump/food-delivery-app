@@ -28,7 +28,8 @@ class ProductDetailsViewModel(
                 restaurant = Restaurant(
                     id = 2001,
                     name = "Burger Paradise",
-                    address = "123 Main St",
+                    lat = "654 Cedar St",
+                    long = "",
                     phoneNumber = "555-1234",
                     rating = 4.5f,
                     freeDelivery = true,

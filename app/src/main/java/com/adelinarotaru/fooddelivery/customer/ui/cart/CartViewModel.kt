@@ -34,7 +34,8 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                         restaurant = Restaurant(
                             id = 2001,
                             name = "Burger Paradise",
-                            address = "123 Main St",
+                            lat = "654 Cedar St",
+                            long = "",
                             rating = 4.5f,
                             phoneNumber = ""
                         ),
@@ -52,7 +53,8 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                         restaurant = Restaurant(
                             id = 2002,
                             name = "Pizza Haven",
-                            address = "456 Elm St",
+                            lat = "654 Cedar St",
+                            long = "",
                             rating = 4.2f,
                             phoneNumber = ""
                         ),
@@ -70,7 +72,8 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                         restaurant = Restaurant(
                             id = 2003,
                             name = "Asian Delight",
-                            address = "789 Oak St",
+                            lat = "654 Cedar St",
+                            long = "",
                             rating = 4.7f,
                             phoneNumber = ""
                         ),
@@ -88,7 +91,8 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                         restaurant = Restaurant(
                             id = 2004,
                             name = "Italian Eats",
-                            address = "987 Pine St",
+                            lat = "654 Cedar St",
+                            long = "",
                             rating = 4.4f,
                             phoneNumber = ""
                         ),
@@ -106,7 +110,8 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                         restaurant = Restaurant(
                             id = 2005,
                             name = "Sushi Express",
-                            address = "654 Cedar St",
+                            lat = "654 Cedar St",
+                            long = "",
                             rating = 4.8f,
                             phoneNumber = ""
                         ),

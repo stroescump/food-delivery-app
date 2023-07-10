@@ -3,11 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customer_nav_graph"
-    app:startDestination="@id/customerDashboardFragment2">
+    app:startDestination="@id/trackOrderFragment">
 
     <fragment
-        android:id="@+id/customerDashboardFragment2"
+        android:id="@+id/customerDashboardFragment"
         android:name="com.adelinarotaru.fooddelivery.customer.ui.dashboard.CustomerDashboardFragment"
         android:label="fragment_customer_dashboard"
         tools:layout="@layout/fragment_customer_dashboard" />
+
+    <fragment
+        android:id="@+id/trackOrderFragment"
+        android:name="com.adelinarotaru.fooddelivery.customer.TrackOrderFragment"
+        android:label="fragment_track_order"
+        tools:layout="@layout/fragment_track_order">
+        <action
+            android:id="@+id/moveToSuccess"
+            app:destination="@id/successFragment"
+            app:popUpTo="@id/customer_nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="com.adelinarotaru.fooddelivery.shared.success.ui.SuccessFragment"
+        android:label="fragment_success"
+        tools:layout="@layout/fragment_success">
+        <argument
+            android:name="userType"
+            app:argType="integer" />
+    </fragment>
+
 </navigation>

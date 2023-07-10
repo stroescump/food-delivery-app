@@ -2,8 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_nav_graph"
-    app:startDestination="@id/trackOrderFragment">
+    android:id="@+id/main_nav_graph">
 
 
     <fragment
@@ -60,10 +59,5 @@
             android:id="@+id/fromLandingToRegister"
             app:destination="@id/registerFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/trackOrderFragment"
-        android:name="com.adelinarotaru.fooddelivery.customer.TrackOrderFragment"
-        android:label="fragment_track_order"
-        tools:layout="@layout/fragment_track_order" />
 
 </navigation>

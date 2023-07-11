@@ -70,4 +70,7 @@
     <string name="delivery_time">Delivery time</string>
     <string name="courier">Courier</string>
     <string name="eta_35_min">35 min</string>
+    <string name="thanks">Thanks</string>
+    <string name="enjoy_your_food">Enjoy your food!</string>
+    <string name="well_done_courier">Well done!</string>
 </resources>

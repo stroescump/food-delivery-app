@@ -18,7 +18,7 @@ abstract class BaseFragment<T : ViewBinding, R : BaseViewModel>(val lambdaInflat
     Fragment() {
 
     var binding: T? = null
-    abstract val viewModel: R
+    abstract val viewModel: R?
     val sharedViewModel by activityViewModels<SharedViewModel>()
 
     override fun onCreateView(
@@ -28,7 +28,7 @@ abstract class BaseFragment<T : ViewBinding, R : BaseViewModel>(val lambdaInflat
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.error.collectLatest { error -> error?.let { showError(it) } }
+            viewModel?.error?.collectLatest { error -> error?.let { showError(it) } }
         }
     }
 

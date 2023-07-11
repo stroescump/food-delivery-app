@@ -69,4 +69,5 @@
     <string name="delivery_place">Delivery place</string>
     <string name="delivery_time">Delivery time</string>
     <string name="courier">Courier</string>
+    <string name="eta_35_min">35 min</string>
 </resources>

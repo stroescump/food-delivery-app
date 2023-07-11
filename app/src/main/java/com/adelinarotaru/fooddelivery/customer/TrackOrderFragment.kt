@@ -14,21 +14,24 @@ import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
 import com.adelinarotaru.fooddelivery.utils.Constants
 import com.adelinarotaru.fooddelivery.utils.show
-import com.google.android.gms.maps.CameraUpdateFactory.newCameraPosition
+import com.adelinarotaru.fooddelivery.utils.zoomCameraTo
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.ktx.addMarker
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 private const val RESTAURANT_DETAILS = "RESTAURANT_DETAILS"
+private const val ORDER_ID = "ORDER_ID"
+private const val DELIVERY_ADDRESS = "DELIVERY_ADDRESS"
 
 class TrackOrderFragment :
     BaseFragment<FragmentTrackOrderBinding, TrackOrderViewModel>(FragmentTrackOrderBinding::inflate) {
-    private var restaurantCoordinates: Pair<Double, Double>? = null
+    private lateinit var restaurantCoordinates: LatLng
+    private lateinit var orderId: String
+    private var deliveryAddress: String? = null
 
     override val viewModel by lazy {
         TrackOrderViewModel(
@@ -41,42 +44,25 @@ class TrackOrderFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewLifecycleOwner.lifecycleScope.launch {
-
             launch {
-                viewModel.orderStatus.collectLatest { newOrderStatus ->
-                    binding?.apply { updateOrderStatus(newOrderStatus) }
-                    if (newOrderStatus == OrderStatus.PICKED_UP) viewModel.startLiveTracking()
-                }
-            }
-
-            launch {
-                viewModel.liveTracking.collectLatest { courierCoordinates ->
-                    if (courierCoordinates == null) return@collectLatest
-                    map.apply {
-                        clear()
-                        addMarker {
-                            icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_delivery_scooter))
-                            position(courierCoordinates)
-                        }
-                        newCameraPosition(
-                            CameraPosition(
-                                courierCoordinates, 18f, 0f, 0f
-                            )
-                        ).also { moveCamera(it) }
+                viewModel.orderStatus.collectLatest { orderUpdates ->
+                    binding?.apply { updateOrderStatus(orderUpdates) }
+                    if (orderUpdates.orderStatus == OrderStatus.PICKED_UP) {
+                        viewModel.startLiveTracking(orderId)
                     }
                 }
             }
 
             launch {
-                viewModel.navigateToSuccess.collectLatest { isSuccess -> if (isSuccess) navigateToOrderDelivered() }
+                viewModel.navigateToSuccess.collectLatest { isOrderDelivered -> if (isOrderDelivered) navigateToOrderDelivered() }
             }
-
         }
 
         findMapFragment().getMapAsync { map = it }
 
-        viewModel.trackOrder(orderId = "")
+        viewModel.trackOrder(orderId)
     }
 
     private fun navigateToOrderDelivered() =
@@ -85,48 +71,85 @@ class TrackOrderFragment :
     private fun findMapFragment() =
         (childFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment)
 
-    private fun FragmentTrackOrderBinding.updateOrderStatus(orderStatus: OrderStatus) {
-        if (orderStatus == OrderStatus.PREPARING) {
-            val restaurantLatLng = restaurantCoordinates?.run { LatLng(first, second) } ?: return
-            map.apply {
-                addMarker {
-                    icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant_tracking))
-                    position(restaurantLatLng)
-                }
-                newCameraPosition(
-                    CameraPosition(
-                        restaurantLatLng, 18f, 0f, 0f
-                    )
-                ).also { moveCamera(it) }
-            }
-            courierContainer.apply {
-                deliveryAddress.text = "Canal St. 44W"
-                estimatedDeliveryTime.text = "5:30 PM"
-                courierName.text = "Mark Manson"
-                show()
-            }
-        } else {
-            // TODO Handle logic for Order Rejected
+    private fun FragmentTrackOrderBinding.updateOrderStatus(orderUpdates: TrackingUiModel) =
+        with(orderUpdates) {
+            updateOrderStatusBubble(this)
+
+            livePosition?.let { map.updateCourierLocation(it) }
+            handleOrderPreparing(this)
         }
 
-        orderStatusTitle.text = orderStatus.formattedName
+    private fun FragmentTrackOrderBinding.handleOrderPreparing(
+        trackingUiModel: TrackingUiModel
+    ) {
+        if (trackingUiModel.orderStatus == OrderStatus.PREPARING) {
+            map.apply {
+                addRestaurantMarker(restaurantCoordinates)
+                zoomCameraTo(restaurantCoordinates)
+            }
+            updateDeliverySpecificInfo()
+        }
+    }
+
+    private fun FragmentTrackOrderBinding.updateOrderStatusBubble(
+        orderUpdates: TrackingUiModel
+    ) {
+        orderStatusTitle.text = orderUpdates.orderStatus.formattedName
         orderStatusColor.setImageDrawable(
             AppCompatResources.getDrawable(
-                requireContext(), orderStatus.colorInt
+                requireContext(), orderUpdates.orderStatus.colorInt
             )
         )
     }
 
-    companion object {
-        fun newInstance(lat: Double, long: Double) = TrackOrderFragment().apply {
-            arguments = bundleOf(RESTAURANT_DETAILS to (lat to long))
+    private fun FragmentTrackOrderBinding.updateDeliverySpecificInfo() = courierContainer.apply {
+        deliveryAddress.text = this@TrackOrderFragment.deliveryAddress
+        estimatedDeliveryTime.text = getString(R.string.eta_35_min)
+        courierName.text = viewModel.courierName
+        show()
+    }
+
+    private fun GoogleMap.addCourierMarker(courierCoordinates: LatLng, extra: () -> Unit) {
+        clear()
+        addMarker {
+            icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_delivery_scooter))
+            position(courierCoordinates)
         }
+        extra()
+        zoomCameraTo(courierCoordinates)
+    }
+
+
+    private fun GoogleMap.updateCourierLocation(courierCoordinates: LatLng) {
+        addCourierMarker(courierCoordinates) {
+            addRestaurantMarker(restaurantCoordinates)
+        }
+    }
+
+    private fun GoogleMap.addRestaurantMarker(restaurantCoordinates: LatLng) {
+        addMarker {
+            icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant_tracking))
+            position(restaurantCoordinates)
+        }
+    }
+
+    companion object {
+        fun newInstance(restaurantCoordinates: LatLng, orderId: String, deliveryAddress: String) =
+            TrackOrderFragment().apply {
+                arguments = bundleOf(
+                    RESTAURANT_DETAILS to restaurantCoordinates,
+                    ORDER_ID to orderId,
+                    DELIVERY_ADDRESS to deliveryAddress
+                )
+            }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        restaurantCoordinates = arguments?.get(RESTAURANT_DETAILS) as Pair<Double, Double>
-        restaurantCoordinates = 47.414562 to 8.561312
+//        restaurantCoordinates = arguments?.get(RESTAURANT_DETAILS) as LatLng
+        restaurantCoordinates = LatLng(47.414562, 8.561312)
+        orderId = ""
+        deliveryAddress = "Canton Street, 34"
     }
 
 }

@@ -1,6 +1,5 @@
 package com.adelinarotaru.fooddelivery.customer
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.adelinarotaru.fooddelivery.driver.domain.CourierRepository
 import com.adelinarotaru.fooddelivery.shared.base.BaseViewModel
@@ -13,34 +12,39 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+
+data class TrackingUiModel(
+    val orderStatus: OrderStatus = OrderStatus.ORDER_RECEIVED,
+    val livePosition: LatLng? = null,
+)
 
 class TrackOrderViewModel(
     private val dispatcher: CoroutineDispatcher, private val repository: CourierRepository
 ) : BaseViewModel() {
+    var courierName: String? = null
 
-    private val _orderStatus = MutableStateFlow(OrderStatus.ORDER_RECEIVED)
+    private val _orderStatus = MutableStateFlow(TrackingUiModel())
     val orderStatus = _orderStatus.asStateFlow()
-
-    private val _liveTracking = MutableStateFlow<LatLng?>(null)
-    val liveTracking = _liveTracking.asStateFlow()
 
     private val _navigateToSuccess = MutableStateFlow(false)
     val navigateToSuccess = _navigateToSuccess.asStateFlow()
 
-    fun startLiveTracking(): Job = viewModelScope.launch(dispatcher) {
+    fun startLiveTracking(orderId: String): Job = viewModelScope.launch(dispatcher) {
         while (isActive) {
             delay(3000L)
-            if (_orderStatus.value.orderStep == OrderStatus.PICKED_UP.orderStep) {
+            if (_orderStatus.value.orderStatus.orderStep == OrderStatus.PICKED_UP.orderStep) {
                 coRunCatching {
-                    Log.d(TrackOrderViewModel::class.java.simpleName, "polling")
-                    repository.fetchCourierCoordinates()
-                }.onSuccess { _liveTracking.value = it }.onFailure {
+                    repository.fetchCourierCoordinates(orderId)
+                }.onSuccess { coordinates ->
+                    _orderStatus.update { it.copy(livePosition = coordinates) }
+                }.onFailure {
                     sendError(it)
                     breakFlow()
                 }
-            } else if (_orderStatus.value == OrderStatus.DELIVERED) {
+            } else if (_orderStatus.value.orderStatus == OrderStatus.DELIVERED) {
                 _navigateToSuccess.value = true
             }
         }
@@ -53,8 +57,9 @@ class TrackOrderViewModel(
             delay(4000L)
             coRunCatching {
                 repository.trackOrder(orderId)
-            }.onSuccess { orderStatus ->
-                _orderStatus.value = orderStatus
+            }.onSuccess { orderUpdates ->
+                courierName = orderUpdates.courierName
+                _orderStatus.update { it.copy(orderStatus = orderUpdates.status) }
             }.onFailure {
                 sendError(it)
                 breakFlow()

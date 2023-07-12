@@ -1,33 +1,57 @@
 package com.adelinarotaru.fooddelivery.driver.ui.orderaccepted
 
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat.startActivity
 import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.ItemCourierOrderAcceptedBinding
 import com.adelinarotaru.fooddelivery.driver.models.CourierMenuItem
 import com.adelinarotaru.fooddelivery.shared.BaseRVAdapter
+import com.adelinarotaru.fooddelivery.utils.hide
+import com.adelinarotaru.fooddelivery.utils.launchGoogleMapsUsingCoordinates
+import com.adelinarotaru.fooddelivery.utils.show
 
 class OrderAcceptedAdapter() : BaseRVAdapter<ItemCourierOrderAcceptedBinding, CourierMenuItem>() {
+    fun areAllProductsPickedUp() = differ.currentList.all { it.isPickedUp }
+
     override val refreshUi: (ItemCourierOrderAcceptedBinding, CourierMenuItem) -> Unit =
         { binding, courierMenuItem ->
             with(binding) {
+                val ctx = root.context
                 if (courierMenuItem.isPickedUp) {
-                    root.isEnabled = false
-                    root.background =
-                        AppCompatResources.getDrawable(root.context, R.drawable.card_dark_gray_bg)
+                    with(root) {
+                        isEnabled = false
+                        markAsComplete.background = AppCompatResources.getDrawable(
+                            ctx, R.drawable.card_dirty_white_bg
+                        )
+                        restaurantName.setTextColor(ctx.getColor(R.color.dirty_white))
+                        restaurantPhone.setTextColor(ctx.getColor(R.color.dirty_white))
+                        orderDetails.setTextColor(ctx.getColor(R.color.dirty_white))
+                        background = AppCompatResources.getDrawable(
+                            ctx, R.drawable.card_crazy_green_bg_20dp
+                        )
+                        navigateToRestaurant.hide()
+                    }
                 } else {
-                    root.isEnabled = true
-                    root.background =
-                        AppCompatResources.getDrawable(root.context, R.drawable.card_dirty_white_bg)
+                    with(root) {
+                        isEnabled = true
+                        markAsComplete.background = AppCompatResources.getDrawable(
+                            ctx, R.drawable.card_crazy_green_bg_20dp
+                        )
+                        background = AppCompatResources.getDrawable(
+                            ctx,
+                            R.drawable.card_dirty_white_bg
+                        )
+                        restaurantName.setTextColor(ctx.getColor(R.color.dark_blue_bg))
+                        restaurantPhone.setTextColor(ctx.getColor(R.color.dark_blue_bg))
+                        orderDetails.setTextColor(ctx.getColor(R.color.dark_blue_bg))
+                        navigateToRestaurant.show()
+                    }
                 }
                 restaurantName.text = courierMenuItem.menuItem.restaurant.name
-                restaurantAddress.text = "Placeholder"
+                restaurantPhone.text = courierMenuItem.menuItem.restaurant.phoneNumber
                 navigateToRestaurant.setOnClickListener {
-                    launchGoogleMapsUsingCoordinates(
+                    it.context.launchGoogleMapsUsingCoordinates(
                         courierMenuItem.menuItem.restaurant.lat,
                         courierMenuItem.menuItem.restaurant.long,
                         courierMenuItem.menuItem.restaurant.name
@@ -43,18 +67,6 @@ class OrderAcceptedAdapter() : BaseRVAdapter<ItemCourierOrderAcceptedBinding, Co
                 orderDetails.text = courierMenuItem.menuItem.name
             }
         }
-
-    private fun ItemCourierOrderAcceptedBinding.launchGoogleMapsUsingCoordinates(
-        lat: String, long: String, restaurantName: String
-    ) {
-        val ctx = root.context
-        val gmmIntentUri = Uri.parse("geo:0,0?q=$lat,$long($restaurantName)")
-        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-        mapIntent.setPackage("com.google.android.apps.maps")
-        mapIntent.resolveActivity(ctx.packageManager)?.let {
-            startActivity(ctx, mapIntent, null)
-        }
-    }
 
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> ItemCourierOrderAcceptedBinding =
         ItemCourierOrderAcceptedBinding::inflate

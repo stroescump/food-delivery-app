@@ -20,11 +20,38 @@
         android:id="@+id/orderProducts"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="@dimen/dimen_10dp"
+        android:layout_marginVertical="@dimen/dimen_20dp"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/headToClientLocation"
         app:layout_constraintTop_toBottomOf="@id/screenTitle"
         tools:listitem="@layout/item_courier_order_accepted" />
+
+    <Button
+        android:id="@+id/headToClientLocation"
+        style="@style/Button.FoodDelivery.Full"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:text="@string/head_to_client"
+        app:layout_constraintBottom_toTopOf="@id/markOrderAsDelivered" />
+
+    <Button
+        android:id="@+id/markOrderAsDelivered"
+        style="@style/Button.FoodDelivery.Full"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:text="@string/mark_order_as_delivered"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <include
+        layout="@layout/layout_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,4 +74,7 @@
     <string name="enjoy_your_food">Enjoy your food!</string>
     <string name="well_done_courier">Well done!</string>
     <string name="mark_product_as_picked_up">Mark product as picked-up</string>
+    <string name="head_to_client">Head to client</string>
+    <string name="please_make_sure_to_pick_up_all_products">Please make sure to pick-up all products.</string>
+    <string name="mark_order_as_delivered">Mark order as delivered</string>
 </resources>

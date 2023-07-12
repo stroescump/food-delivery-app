@@ -19,11 +19,25 @@ class CourierOrderAcceptedViewModel(
     private val _orderDetails = MutableStateFlow<List<CourierMenuItem>?>(null)
     val orderDetails = _orderDetails.asStateFlow()
 
+    private val _navigateToSuccess = MutableStateFlow(false)
+    val navigateToSuccess = _navigateToSuccess.asStateFlow()
+
     fun fetchOrderDetails(orderId: String) = viewModelScope.launch(dispatcher) {
+        setLoading(true)
         coRunCatching {
             courierRepository.fetchOrderDetails(orderId)
         }.onSuccess { orderDetails ->
             _orderDetails.update { orderDetails.toCourierMenuItem() }
-        }.onFailure { sendError(it) }
+            setLoading(false)
+        }.onFailure {
+            sendError(it)
+            setLoading(false)
+        }
+    }
+
+    fun markOrderDelivered(orderId: String) = viewModelScope.launch(dispatcher) {
+        coRunCatching {
+            courierRepository.markOrderDelivered(orderId)
+        }.onSuccess { _navigateToSuccess.value = true }.onFailure { sendError(it) }
     }
 }

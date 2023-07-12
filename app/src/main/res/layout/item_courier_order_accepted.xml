@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/dimen_20dp"
     android:layout_marginVertical="@dimen/dimen_10dp"
     android:background="@drawable/card_dirty_white_bg"
     android:paddingBottom="@dimen/dimen_20dp">
@@ -21,25 +22,32 @@
     <TextView
         android:id="@+id/restaurantName"
         style="@style/TextView.SmallPrint.Bold"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_20dp"
+        android:layout_marginEnd="@dimen/dimen_5dp"
+        android:ellipsize="end"
+        android:lines="1"
         android:textColor="@color/dark_blue_bg"
-        app:layout_constraintBottom_toTopOf="@id/restaurantAddress"
+        app:layout_constraintBottom_toTopOf="@id/restaurantPhone"
+        app:layout_constraintEnd_toStartOf="@id/navigateToRestaurant"
         app:layout_constraintStart_toEndOf="@id/foodImage"
         app:layout_constraintTop_toTopOf="@id/foodImage"
-        tools:text="Papa Joe's Burgers" />
+        tools:text="Papa Joe's Burgersssss" />
 
     <TextView
-        android:id="@+id/restaurantAddress"
+        android:id="@+id/restaurantPhone"
         style="@style/TextView.SmallPrint.Light"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
         android:textColor="@color/dark_blue_bg"
         app:layout_constraintBottom_toBottomOf="@id/foodImage"
+        app:layout_constraintEnd_toEndOf="@id/restaurantName"
         app:layout_constraintStart_toStartOf="@id/restaurantName"
         app:layout_constraintTop_toBottomOf="@id/restaurantName"
-        tools:text="Canal St. 35S" />
+        tools:text="+41 782 445 349" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/navigateToRestaurant"
@@ -62,13 +70,14 @@
         android:id="@+id/markAsComplete"
         android:layout_width="@dimen/dimen_50dp"
         android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
         android:layout_marginEnd="@dimen/dimen_20dp"
         android:background="@color/crazy_green"
         android:contentDescription="@string/mark_product_as_picked_up"
         android:src="@drawable/ic_check"
         app:contentPadding="@dimen/dimen_10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/navigateToRestaurant"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginStart="@dimen/dimen_10dp"
         app:shapeAppearanceOverlay="@style/RoundImageView" />
 
@@ -80,7 +89,7 @@
         android:layout_marginTop="@dimen/dimen_20dp"
         android:fontFamily="@font/creato_display_regular"
         android:justificationMode="inter_word"
-        android:lines="15"
+        android:maxLines="15"
         app:layout_constraintTop_toBottomOf="@id/foodImage"
         tools:text="@tools:sample/lorem/random" />
 

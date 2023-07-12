@@ -10,4 +10,5 @@ interface CourierRepository {
     suspend fun trackOrder(orderId: String): OrderStatusResponse
     suspend fun fetchCourierCoordinates(orderId: String): LatLng
     suspend fun fetchOrderDetails(orderId: String): ICourierOrderAccepted
+    suspend fun markOrderDelivered(orderId: String): Boolean
 }

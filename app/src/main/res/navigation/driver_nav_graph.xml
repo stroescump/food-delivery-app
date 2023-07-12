@@ -18,10 +18,17 @@
         <argument
             android:name="orderId"
             app:argType="string" />
+        <argument
+            android:name="clientDetails"
+            app:argType="com.adelinarotaru.fooddelivery.driver.models.ClientDetails" />
     </fragment>
     <fragment
         android:id="@+id/successFragment"
         android:name="com.adelinarotaru.fooddelivery.shared.success.ui.SuccessFragment"
         android:label="fragment_success"
-        tools:layout="@layout/fragment_success" />
+        tools:layout="@layout/fragment_success" >
+        <argument
+            android:name="userType"
+            app:argType="integer" />
+    </fragment>
 </navigation>

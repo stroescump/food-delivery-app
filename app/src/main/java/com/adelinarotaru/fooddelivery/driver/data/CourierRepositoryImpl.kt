@@ -1,7 +1,7 @@
 package com.adelinarotaru.fooddelivery.driver.data
 
-import com.adelinarotaru.fooddelivery.driver.models.CourierOrderAcceptedResponse
 import com.adelinarotaru.fooddelivery.driver.domain.CourierRepository
+import com.adelinarotaru.fooddelivery.driver.models.CourierOrderAcceptedResponse
 import com.adelinarotaru.fooddelivery.driver.models.ICourierOrderAccepted
 import com.adelinarotaru.fooddelivery.driver.models.OrderStatusResponse
 import com.adelinarotaru.fooddelivery.shared.models.MenuItem
@@ -57,7 +57,7 @@ class CourierRepositoryImpl(private val courierApi: CourierApi) : CourierReposit
                         lat = "47.404187",
                         long = "8.557187",
                         rating = 4.5f,
-                        phoneNumber = ""
+                        phoneNumber = "+41 782 445 349"
                     ),
                     "Burger",
                 ),
@@ -73,7 +73,7 @@ class CourierRepositoryImpl(private val courierApi: CourierApi) : CourierReposit
                         lat = "47.391562",
                         long = "8.506813",
                         rating = 4.5f,
-                        phoneNumber = ""
+                        phoneNumber = "+41 782 445 349"
                     ),
                     foodCategory = "Pizza",
                     ingredients = listOf("Tomato Sauce", "Mozzarella Cheese", "Basil"),
@@ -91,7 +91,7 @@ class CourierRepositoryImpl(private val courierApi: CourierApi) : CourierReposit
                         lat = "47.436187",
                         long = "8.568313",
                         rating = 4.5f,
-                        phoneNumber = ""
+                        phoneNumber = "+41 782 445 349"
                     ),
                     foodCategory = "Pasta",
                     ingredients = listOf("Grilled Chicken", "Alfredo Sauce", "Pasta"),
@@ -106,10 +106,14 @@ class CourierRepositoryImpl(private val courierApi: CourierApi) : CourierReposit
                         lat = "47.408062",
                         long = "8.595562",
                         rating = 4.5f,
-                        phoneNumber = ""
+                        phoneNumber = "+41 782 445 349"
                     ),
                     "Pizza",
                 )
             )
         )
+
+    override suspend fun markOrderDelivered(orderId: String): Boolean {
+        return true
+    }
 }

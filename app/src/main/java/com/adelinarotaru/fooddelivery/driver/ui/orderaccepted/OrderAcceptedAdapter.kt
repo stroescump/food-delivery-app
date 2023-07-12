@@ -48,7 +48,7 @@ class OrderAcceptedAdapter() : BaseRVAdapter<ItemCourierOrderAcceptedBinding, Co
         lat: String, long: String, restaurantName: String
     ) {
         val ctx = root.context
-        val gmmIntentUri = Uri.parse("google.navigation:q=$lat,$long(${restaurantName})")
+        val gmmIntentUri = Uri.parse("geo:0,0?q=$lat,$long($restaurantName)")
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
         mapIntent.setPackage("com.google.android.apps.maps")
         mapIntent.resolveActivity(ctx.packageManager)?.let {

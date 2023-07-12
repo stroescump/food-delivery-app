@@ -1,4 +1,4 @@
-package com.adelinarotaru.fooddelivery.driver.ui
+package com.adelinarotaru.fooddelivery.driver.ui.dashboard
 
 import androidx.lifecycle.viewModelScope
 import com.adelinarotaru.fooddelivery.driver.domain.CourierRepository

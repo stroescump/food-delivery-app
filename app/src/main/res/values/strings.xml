@@ -73,4 +73,5 @@
     <string name="thanks">Thanks</string>
     <string name="enjoy_your_food">Enjoy your food!</string>
     <string name="well_done_courier">Well done!</string>
+    <string name="mark_product_as_picked_up">Mark product as picked-up</string>
 </resources>

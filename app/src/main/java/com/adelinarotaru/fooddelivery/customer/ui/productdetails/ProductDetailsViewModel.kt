@@ -23,7 +23,7 @@ class ProductDetailsViewModel(
             MenuItem(
                 id = 1001,
                 name = "Cheeseburger",
-                price = 9.99f,
+                price = 9.99,
                 restaurantId = 2001,
                 restaurant = Restaurant(
                     id = 2001,

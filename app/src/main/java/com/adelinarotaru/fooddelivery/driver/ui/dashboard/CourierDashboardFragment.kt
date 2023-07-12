@@ -1,4 +1,4 @@
-package com.adelinarotaru.fooddelivery.driver.ui
+package com.adelinarotaru.fooddelivery.driver.ui.dashboard
 
 import android.os.Bundle
 import android.view.View

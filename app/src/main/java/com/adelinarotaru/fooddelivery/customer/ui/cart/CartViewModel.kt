@@ -29,7 +29,7 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                     menuItem = MenuItem(
                         id = 1001,
                         name = "Cheeseburger",
-                        price = 9.99f,
+                        price = 9.99,
                         restaurantId = 2001,
                         restaurant = Restaurant(
                             id = 2001,
@@ -48,7 +48,7 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                     menuItem = MenuItem(
                         id = 1002,
                         name = "Margherita Pizza",
-                        price = 12.99f,
+                        price = 12.99,
                         restaurantId = 2002,
                         restaurant = Restaurant(
                             id = 2002,
@@ -67,7 +67,7 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                     menuItem = MenuItem(
                         id = 1003,
                         name = "Chicken Teriyaki",
-                        price = 8.49f,
+                        price = 8.49,
                         restaurantId = 2003,
                         restaurant = Restaurant(
                             id = 2003,
@@ -86,7 +86,7 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                     menuItem = MenuItem(
                         id = 1004,
                         name = "Spaghetti Bolognese",
-                        price = 10.99f,
+                        price = 10.99,
                         restaurantId = 2004,
                         restaurant = Restaurant(
                             id = 2004,
@@ -105,7 +105,7 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                     menuItem = MenuItem(
                         id = 1005,
                         name = "Sushi Combo",
-                        price = 15.99f,
+                        price = 15.99,
                         restaurantId = 2005,
                         restaurant = Restaurant(
                             id = 2005,

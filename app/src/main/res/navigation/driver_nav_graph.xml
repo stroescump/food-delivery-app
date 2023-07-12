@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/driver_nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/driver_nav_graph"
+    app:startDestination="@id/courierOrderAcceptedFragment">
 
+    <fragment
+        android:id="@+id/courierOrderAcceptedFragment"
+        android:name="com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.CourierOrderAcceptedFragment"
+        android:label="fragment_courier_order_accepted"
+        tools:layout="@layout/fragment_courier_order_accepted">
+        <action
+            android:id="@+id/goToSuccess"
+            app:destination="@id/successFragment"
+            app:popUpTo="@id/driver_nav_graph"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="orderId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="com.adelinarotaru.fooddelivery.shared.success.ui.SuccessFragment"
+        android:label="fragment_success"
+        tools:layout="@layout/fragment_success" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.adelinarotaru.fooddelivery.driver.domain.models
+package com.adelinarotaru.fooddelivery.driver.models
 
 import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
 

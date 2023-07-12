@@ -9,8 +9,8 @@ import com.adelinarotaru.fooddelivery.shared.BaseRVAdapter
 
 class CartAdapter : BaseRVAdapter<ItemCartBinding, CartMenuItem>() {
 
-    fun getTotal(): Float = run {
-        var total = 0f
+    fun getTotal(): Double = run {
+        var total = 0.0
         differ.currentList.forEach { total += it.quantity * it.menuItem.price }
         total
     }

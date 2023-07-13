@@ -1,9 +1,9 @@
 package com.adelinarotaru.fooddelivery.driver.models
 
-import com.adelinarotaru.fooddelivery.shared.models.MenuItem
+import com.adelinarotaru.fooddelivery.driver.domain.IOrderItem
 
 interface ICourierOrderAccepted {
-    val productsOrdered: List<MenuItem>
+    val productsOrdered: List<IOrderItem>
 }
 
 fun ICourierOrderAccepted.toCourierMenuItem() = productsOrdered.mapIndexed { index, menuItem ->

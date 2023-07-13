@@ -7,12 +7,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class SharedViewModel : ViewModel() {
-    private val _sessionState = MutableStateFlow(SessionState(Cart(emptyList())))
+    private val _sessionState = MutableStateFlow(SessionState(null))
     val sessionState = _sessionState.asStateFlow()
 
     fun updateCart(newCart: Cart) = _sessionState.update { it.copy(cartState = newCart) }
 
-    fun getCurrentCart() = _sessionState.value.cartState.orderItems
+    fun getCurrentCart() = _sessionState.value.cartState?.orderItems
 }
 
-data class SessionState(val cartState: Cart)
+data class SessionState(val cartState: Cart? = null)

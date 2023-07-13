@@ -18,8 +18,5 @@ data class UserReview(
     val rating: Int,
     val comment: String,
     val reviewDate: String,
-    val order: Order,
-    val user: User,
-    val restaurant: Restaurant
 )
 

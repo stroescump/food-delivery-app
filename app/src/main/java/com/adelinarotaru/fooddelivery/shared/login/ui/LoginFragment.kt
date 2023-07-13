@@ -11,6 +11,7 @@ import com.adelinarotaru.fooddelivery.databinding.FragmentLoginBinding
 import com.adelinarotaru.fooddelivery.shared.DependencyProvider
 import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 import com.adelinarotaru.fooddelivery.shared.login.data.LoginRepositoryImpl
+import com.adelinarotaru.fooddelivery.utils.Constants
 import com.adelinarotaru.fooddelivery.utils.showError
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -22,9 +23,13 @@ class LoginFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.loginSuccess.collectLatest { isLoginSuccess ->
-                if (isLoginSuccess == null) return@collectLatest
-                if (isLoginSuccess) navigateToCustomerDashboard()
+            viewModel.loginSuccess.collectLatest { loginRes ->
+                if (loginRes == null) return@collectLatest
+                when (loginRes.userType) {
+                    Constants.CUSTOMER -> navigateToCustomerDashboard(loginRes.userId, loginRes.userName)
+                    Constants.COURIER -> navigateToCourierDashboard(loginRes.userId)
+                    Constants.ADMIN -> navigateToAdminDashboard(loginRes.userId)
+                }
             }
         }
         signUpStringCustomization()
@@ -56,8 +61,14 @@ class LoginFragment :
     private fun navigateToSignUp() =
         findNavController().navigate(LoginFragmentDirections.goToRegister())
 
-    private fun navigateToCustomerDashboard() =
-        findNavController().navigate(LoginFragmentDirections.goToCustomerDashboard())
+    private fun navigateToCustomerDashboard(userId: Int, userName: String) =
+        findNavController().navigate(LoginFragmentDirections.goToCustomerDashboard(userId, userName))
+
+    private fun navigateToCourierDashboard(userId: Int) =
+        findNavController().navigate(LoginFragmentDirections.goToDriverDashboard(userId))
+
+    private fun navigateToAdminDashboard(userId: Int) =
+        findNavController().navigate(LoginFragmentDirections.goToAdminDashboard(userId))
 
     companion object {
         private const val STRING_SPACE = " "

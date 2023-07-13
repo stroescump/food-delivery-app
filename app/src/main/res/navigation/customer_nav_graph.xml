@@ -3,13 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customer_nav_graph"
-    app:startDestination="@id/trackOrderFragment">
+    app:startDestination="@id/customerDashboardFragment">
 
     <fragment
         android:id="@+id/customerDashboardFragment"
         android:name="com.adelinarotaru.fooddelivery.customer.ui.dashboard.CustomerDashboardFragment"
         android:label="fragment_customer_dashboard"
-        tools:layout="@layout/fragment_customer_dashboard" />
+        tools:layout="@layout/fragment_customer_dashboard" >
+        <argument
+            android:name="userId"
+            app:argType="integer" />
+
+        <argument
+            android:name="userName"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/trackOrderFragment"

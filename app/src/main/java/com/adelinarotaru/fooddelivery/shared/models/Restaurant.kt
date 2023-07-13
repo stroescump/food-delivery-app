@@ -19,6 +19,5 @@ data class Restaurant(
     @SerializedName("menu_items")
     val menuItems: List<MenuItem>? = null,
     val reviews: List<UserReview>? = null,
-    @SerializedName("cuisine_types")
-    val cuisineTypes: List<String> = emptyList()
+    val cuisineTypes: List<String>
 )

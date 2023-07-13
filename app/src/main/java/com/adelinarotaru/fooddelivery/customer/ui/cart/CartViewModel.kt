@@ -31,14 +31,7 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                         name = "Cheeseburger",
                         price = 9.99,
                         restaurantId = 2001,
-                        restaurant = Restaurant(
-                            id = 2001,
-                            name = "Burger Paradise",
-                            lat = "654 Cedar St",
-                            long = "",
-                            rating = 4.5f,
-                            phoneNumber = ""
-                        ),
+                        restaurantRating = 4.5,
                         foodCategory = "Burgers"
                     ),
                     quantity = 2
@@ -50,14 +43,7 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                         name = "Margherita Pizza",
                         price = 12.99,
                         restaurantId = 2002,
-                        restaurant = Restaurant(
-                            id = 2002,
-                            name = "Pizza Haven",
-                            lat = "654 Cedar St",
-                            long = "",
-                            rating = 4.2f,
-                            phoneNumber = ""
-                        ),
+                        restaurantRating = 4.5,
                         foodCategory = "Pizza"
                     ),
                     quantity = 1
@@ -69,14 +55,7 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                         name = "Chicken Teriyaki",
                         price = 8.49,
                         restaurantId = 2003,
-                        restaurant = Restaurant(
-                            id = 2003,
-                            name = "Asian Delight",
-                            lat = "654 Cedar St",
-                            long = "",
-                            rating = 4.7f,
-                            phoneNumber = ""
-                        ),
+                        restaurantRating = 4.5,
                         foodCategory = "Asian Cuisine"
                     ),
                     quantity = 3
@@ -88,14 +67,7 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                         name = "Spaghetti Bolognese",
                         price = 10.99,
                         restaurantId = 2004,
-                        restaurant = Restaurant(
-                            id = 2004,
-                            name = "Italian Eats",
-                            lat = "654 Cedar St",
-                            long = "",
-                            rating = 4.4f,
-                            phoneNumber = ""
-                        ),
+                        restaurantRating = 4.5,
                         foodCategory = "Italian Cuisine"
                     ),
                     quantity = 1
@@ -107,14 +79,7 @@ class CartViewModel(private val dispatcher: CoroutineDispatcher, private val car
                         name = "Sushi Combo",
                         price = 15.99,
                         restaurantId = 2005,
-                        restaurant = Restaurant(
-                            id = 2005,
-                            name = "Sushi Express",
-                            lat = "654 Cedar St",
-                            long = "",
-                            rating = 4.8f,
-                            phoneNumber = ""
-                        ),
+                        restaurantRating = 4.5,
                         foodCategory = "Japanese Cuisine"
                     ),
                     quantity = 2

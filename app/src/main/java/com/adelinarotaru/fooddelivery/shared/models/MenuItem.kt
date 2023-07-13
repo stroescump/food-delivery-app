@@ -7,7 +7,7 @@ data class MenuItem(
     val name: String,
     val price: Double,
     val restaurantId: Int,
-    val restaurant: Restaurant,
+    val restaurantRating: Double,
     val foodCategory: String? = "Other",
     val ingredients: List<String> = emptyList(),
     val description: String? = null

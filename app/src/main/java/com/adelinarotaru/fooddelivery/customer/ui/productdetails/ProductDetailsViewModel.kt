@@ -25,20 +25,7 @@ class ProductDetailsViewModel(
                 name = "Cheeseburger",
                 price = 9.99,
                 restaurantId = 2001,
-                restaurant = Restaurant(
-                    id = 2001,
-                    name = "Burger Paradise",
-                    lat = "654 Cedar St",
-                    long = "",
-                    phoneNumber = "555-1234",
-                    rating = 4.5f,
-                    freeDelivery = true,
-                    openingHours = "10:00 AM",
-                    closingHours = "10:00 PM",
-                    menuItems = null,
-                    reviews = null,
-                    cuisineTypes = listOf("Burgers", "Fast Food")
-                ),
+                restaurantRating = 4.5,
                 foodCategory = "Burgers",
                 ingredients = listOf("Burrata", "Salad", "Tomatoes", "Onions"),
                 description = "A delicious cheeseburger with fresh ingredients."

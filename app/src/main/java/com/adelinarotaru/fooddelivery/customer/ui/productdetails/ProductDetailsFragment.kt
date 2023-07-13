@@ -44,7 +44,8 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding, Produ
             addQuantity.setOnClickListener { modifiyQuantity(ADD) }
             close.setOnClickListener { findNavController().popBackStack() }
             addToCart.setOnClickListener {
-                val currentCart = sharedViewModel.getCurrentCart().toMutableList()
+                val currentCart =
+                    sharedViewModel.getCurrentCart()?.toMutableList() ?: return@setOnClickListener
                 val currentProduct = viewModel.productDetails.value ?: return@setOnClickListener
                 val currentQuantity = getCurrentQuantity()
 
@@ -104,7 +105,7 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding, Produ
         foodPrice.text = getString(R.string.priceFormatter, productDetails.price)
         foodName.text = productDetails.name
         foodCategory.text = productDetails.foodCategory
-        rating.text = productDetails.restaurant.rating.toString()
+        rating.text = productDetails.restaurantRating.toString()
         ingredientsAdapter.differ.submitList(productDetails.ingredients.mapIndexed { index, stringIngredient ->
             IngredientItem(
                 stringIngredient.toIngredient(), index

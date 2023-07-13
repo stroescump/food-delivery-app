@@ -40,7 +40,7 @@ class CourierOrderAcceptedFragment :
         )
     }
 
-    fun doIfProductsPickedOrError(block: () -> Unit) {
+    private fun doIfProductsPickedOrError(block: () -> Unit) {
         if (productsAdapter.areAllProductsPickedUp()) {
             block()
         } else showMessageWindow(

@@ -2,7 +2,9 @@ package com.adelinarotaru.fooddelivery.customer.ui.dashboard
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.customer.data.RestaurantRepositoryImpl
 import com.adelinarotaru.fooddelivery.databinding.FragmentCustomerDashboardBinding
@@ -26,13 +28,31 @@ class CustomerDashboardFragment :
     private lateinit var foodTypeAdapter: FoodTypeAdapter
     private lateinit var restaurantsAdapter: RestaurantsAdapter
 
+    private val navArgs by navArgs<CustomerDashboardFragmentArgs>()
+    private val userName by lazy { navArgs.userName }
+    private val userId by lazy { navArgs.userId }
+
     override val viewModel =
         CustomerDashboardViewModel(RestaurantRepositoryImpl(DependencyProvider.provideRestaurantApi()))
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
-            searchView.changeColorTo(R.color.dirty_white)
+            greetingUser.text = getString(R.string.greeting_user, userName)
+            searchView.apply {
+                changeColorTo(R.color.dirty_white)
+                setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean = true
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        if (newText == null) return false
+                        val filteredList = filterDishesByQuery(newText)
+                        restaurantsAdapter.differ.submitList(filteredList)
+                        return true
+                    }
+
+                })
+            }
             foodTypeAdapter = createFoodAdaptor().also { foodItemRv.adapter = it }
             restaurantsAdapter = createRestaurantsAdaptor().also { restaurantsRv.adapter = it }
         }
@@ -50,6 +70,13 @@ class CustomerDashboardFragment :
 
         viewModel.getRestaurants()
     }
+
+    private fun filterDishesByQuery(queryText: String) =
+        restaurantsAdapter.differ.currentList.filter {
+            it.menuItems?.any { dishes ->
+                dishes.name.contains(queryText)
+            } ?: false
+        }
 
     private fun createRestaurantsAdaptor(): RestaurantsAdapter =
         RestaurantsAdapter { restaurantSelected ->

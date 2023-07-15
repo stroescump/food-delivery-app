@@ -1,6 +1,6 @@
 package com.adelinarotaru.fooddelivery.shared.transformers
 
-import com.adelinarotaru.fooddelivery.shared.login.domain.models.IRestaurant
+import com.adelinarotaru.fooddelivery.customer.domain.IRestaurant
 import com.adelinarotaru.fooddelivery.shared.models.MenuItem
 import com.adelinarotaru.fooddelivery.shared.models.Restaurant
 

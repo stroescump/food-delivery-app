@@ -1,7 +1,10 @@
 package com.adelinarotaru.fooddelivery.shared.models
 
-import com.adelinarotaru.fooddelivery.shared.ItemAdapter
+import android.os.Parcelable
+import com.adelinarotaru.fooddelivery.shared.base.ItemAdapter
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class MenuItem(
     override val id: Int,
     val name: String,
@@ -11,4 +14,4 @@ data class MenuItem(
     val foodCategory: String? = "Other",
     val ingredients: List<String> = emptyList(),
     val description: String? = null
-) : ItemAdapter
+) : ItemAdapter, Parcelable

@@ -1,6 +1,6 @@
 package com.adelinarotaru.fooddelivery.admin.models
 
-import com.adelinarotaru.fooddelivery.shared.ItemAdapter
+import com.adelinarotaru.fooddelivery.shared.base.ItemAdapter
 import com.adelinarotaru.fooddelivery.shared.models.CuisineType
 
 data class TrendingStatistics(

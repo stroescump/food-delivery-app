@@ -25,12 +25,12 @@
         android:layout_marginHorizontal="@dimen/dimen_20dp"
         app:dividerColor="@color/dark_blue_bg"
         app:layout_constraintBottom_toBottomOf="@id/dashboardTitle"
-        app:layout_constraintEnd_toStartOf="@id/close"
+        app:layout_constraintEnd_toStartOf="@id/goBack"
         app:layout_constraintStart_toEndOf="@id/dashboardTitle"
         app:layout_constraintTop_toTopOf="@id/dashboardTitle" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/close"
+        android:id="@+id/goBack"
         android:layout_width="@dimen/dimen_25dp"
         android:layout_height="@dimen/dimen_25dp"
         android:layout_marginEnd="@dimen/dimen_20dp"

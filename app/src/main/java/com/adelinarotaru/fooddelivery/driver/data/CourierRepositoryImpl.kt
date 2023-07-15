@@ -44,6 +44,10 @@ class CourierRepositoryImpl(private val courierApi: CourierApi) : CourierReposit
 //        return LatLng(47.411062, 8.546062)
     }
 
+    override suspend fun fetchCourierCheckpoints(orderId: String): List<LatLng> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun fetchOrderDetails(orderId: String): ICourierOrderAccepted =
         CourierOrderAcceptedResponse(
             productsOrdered = emptyList()

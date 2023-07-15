@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customer.ui.cart.CartFragment">
+    tools:context=".customer.cart.CartFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/close"
+        android:id="@+id/goBack"
         android:layout_width="@dimen/dimen_30dp"
         android:layout_height="@dimen/dimen_30dp"
         android:layout_marginStart="@dimen/dimen_20dp"
@@ -27,7 +27,7 @@
         android:text="@string/cart"
         android:textColor="@color/dark_gray_3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/close"
+        app:layout_constraintStart_toStartOf="@id/goBack"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView

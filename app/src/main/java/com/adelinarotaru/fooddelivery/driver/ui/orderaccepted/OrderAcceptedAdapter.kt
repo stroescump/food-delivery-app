@@ -6,7 +6,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.ItemCourierOrderAcceptedBinding
 import com.adelinarotaru.fooddelivery.driver.models.CourierMenuItem
-import com.adelinarotaru.fooddelivery.shared.BaseRVAdapter
+import com.adelinarotaru.fooddelivery.shared.base.BaseRVAdapter
 import com.adelinarotaru.fooddelivery.utils.hide
 import com.adelinarotaru.fooddelivery.utils.launchGoogleMapsUsingCoordinates
 import com.adelinarotaru.fooddelivery.utils.show

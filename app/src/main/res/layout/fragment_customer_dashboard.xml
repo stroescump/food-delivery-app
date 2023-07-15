@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".customer.ui.dashboard.CustomerDashboardFragment">
+    tools:context=".customer.dashboard.CustomerDashboardFragment">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profilePicture"
@@ -29,6 +29,18 @@
         app:layout_constraintStart_toEndOf="@id/profilePicture"
         app:layout_constraintTop_toTopOf="@id/profilePicture"
         tools:text="Hi, Susan!" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/goToCart"
+        android:layout_width="@dimen/dimen_40dp"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_marginEnd="@dimen/dimen_30dp"
+        android:background="@drawable/card_crazy_green_bg"
+        android:padding="8dp"
+        android:src="@drawable/ic_cart"
+        app:layout_constraintBottom_toBottomOf="@id/profilePicture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/profilePicture" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/askingQuestion"

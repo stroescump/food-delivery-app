@@ -10,7 +10,7 @@ import com.adelinarotaru.fooddelivery.admin.data.StatisticsRepositoryImpl
 import com.adelinarotaru.fooddelivery.admin.models.OrderStatistic
 import com.adelinarotaru.fooddelivery.databinding.FragmentOrdersStatisticsBinding
 import com.adelinarotaru.fooddelivery.databinding.ItemOrderBinding
-import com.adelinarotaru.fooddelivery.shared.BaseRVAdapter
+import com.adelinarotaru.fooddelivery.shared.base.BaseRVAdapter
 import com.adelinarotaru.fooddelivery.shared.DependencyProvider
 import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 import com.adelinarotaru.fooddelivery.utils.show

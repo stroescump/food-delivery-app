@@ -63,4 +63,9 @@ class MainActivity : AppCompatActivity() {
             this
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+        sharedViewModel.destroyState()
+    }
 }

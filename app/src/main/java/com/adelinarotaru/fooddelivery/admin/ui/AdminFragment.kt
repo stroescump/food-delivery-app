@@ -33,7 +33,7 @@ class AdminFragment :
             totalOrdersNumber.text = "294"
             totalRestaurantsNumber.text = "12"
 
-            close.setOnClickListener { findNavController().popBackStack() }
+            goBack.setOnClickListener { findNavController().popBackStack() }
         }
     }
 

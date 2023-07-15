@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.ItemPillShapeBinding
-import com.adelinarotaru.fooddelivery.shared.BaseRVAdapter
-import com.adelinarotaru.fooddelivery.shared.ItemAdapter
+import com.adelinarotaru.fooddelivery.shared.base.BaseRVAdapter
+import com.adelinarotaru.fooddelivery.shared.base.ItemAdapter
 
 enum class TaskStatus {
     ACCEPTED, REJECTED, PENDING, DONE, ALL

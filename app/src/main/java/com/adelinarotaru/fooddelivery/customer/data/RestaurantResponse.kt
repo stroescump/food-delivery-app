@@ -1,7 +1,7 @@
 package com.adelinarotaru.fooddelivery.customer.data
 
-import com.adelinarotaru.fooddelivery.shared.login.domain.models.IMenuItem
-import com.adelinarotaru.fooddelivery.shared.login.domain.models.IRestaurant
+import com.adelinarotaru.fooddelivery.customer.domain.IMenuItem
+import com.adelinarotaru.fooddelivery.customer.domain.IRestaurant
 import com.adelinarotaru.fooddelivery.shared.models.UserReview
 import com.google.gson.annotations.SerializedName
 

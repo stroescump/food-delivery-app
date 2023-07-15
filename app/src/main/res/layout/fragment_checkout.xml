@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:scrollbars="none"
-    tools:context=".customer.ui.checkout.CheckoutFragment">
+    tools:context=".customer.checkout.CheckoutFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/close"
+            android:id="@+id/goBack"
             android:layout_width="@dimen/dimen_30dp"
             android:layout_height="@dimen/dimen_30dp"
             android:layout_marginStart="@dimen/dimen_20dp"
@@ -185,7 +185,7 @@
                 tools:text="$116.30" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/goToCheckout"
+                android:id="@+id/payOrder"
                 style="@style/Button.FoodDelivery.Full"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -25,8 +25,13 @@ class LoginFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.loginSuccess.collectLatest { loginRes ->
                 if (loginRes == null) return@collectLatest
+                sharedViewModel.updateUserId(loginRes.userId.toString())
                 when (loginRes.userType) {
-                    Constants.CUSTOMER -> navigateToCustomerDashboard(loginRes.userId, loginRes.userName)
+                    Constants.CUSTOMER -> navigateToCustomerDashboard(
+                        loginRes.userId,
+                        loginRes.userName
+                    )
+
                     Constants.COURIER -> navigateToCourierDashboard(loginRes.userId)
                     Constants.ADMIN -> navigateToAdminDashboard(loginRes.userId)
                 }
@@ -62,7 +67,12 @@ class LoginFragment :
         findNavController().navigate(LoginFragmentDirections.goToRegister())
 
     private fun navigateToCustomerDashboard(userId: Int, userName: String) =
-        findNavController().navigate(LoginFragmentDirections.goToCustomerDashboard(userId, userName))
+        findNavController().navigate(
+            LoginFragmentDirections.goToCustomerDashboard(
+                userId,
+                userName
+            )
+        )
 
     private fun navigateToCourierDashboard(userId: Int) =
         findNavController().navigate(LoginFragmentDirections.goToDriverDashboard(userId))

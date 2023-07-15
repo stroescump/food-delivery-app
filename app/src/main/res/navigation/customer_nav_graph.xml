@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/customerDashboardFragment"
-        android:name="com.adelinarotaru.fooddelivery.customer.ui.dashboard.CustomerDashboardFragment"
+        android:name="com.adelinarotaru.fooddelivery.customer.dashboard.CustomerDashboardFragment"
         android:label="fragment_customer_dashboard"
-        tools:layout="@layout/fragment_customer_dashboard" >
+        tools:layout="@layout/fragment_customer_dashboard">
         <argument
             android:name="userId"
             app:argType="integer" />
@@ -17,11 +17,17 @@
         <argument
             android:name="userName"
             app:argType="string" />
+        <action
+            android:id="@+id/goToRestaurantProducts"
+            app:destination="@id/restaurantProductsFragment" />
+        <action
+            android:id="@+id/goToCart"
+            app:destination="@id/cartFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/trackOrderFragment"
-        android:name="com.adelinarotaru.fooddelivery.customer.ui.trackorder.TrackOrderFragment"
+        android:name="com.adelinarotaru.fooddelivery.customer.trackorder.TrackOrderFragment"
         android:label="fragment_track_order"
         tools:layout="@layout/fragment_track_order">
         <action
@@ -29,6 +35,9 @@
             app:destination="@id/successFragment"
             app:popUpTo="@id/customer_nav_graph"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="trackOrderArgs"
+            app:argType="com.adelinarotaru.fooddelivery.customer.trackorder.models.TrackOrderArgs" />
     </fragment>
 
     <fragment
@@ -39,6 +48,49 @@
         <argument
             android:name="userType"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.adelinarotaru.fooddelivery.customer.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/cartToCheckout"
+            app:destination="@id/checkoutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.adelinarotaru.fooddelivery.customer.productdetails.ProductDetailsFragment"
+        android:label="fragment_product_details"
+        tools:layout="@layout/fragment_product_details">
+        <argument
+            android:name="menuItem"
+            app:argType="com.adelinarotaru.fooddelivery.shared.models.MenuItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.adelinarotaru.fooddelivery.customer.checkout.CheckoutFragment"
+        android:label="fragment_checkout"
+        tools:layout="@layout/fragment_checkout">
+        <action
+            android:id="@+id/checkoutToTrackOrder"
+            app:destination="@id/trackOrderFragment"
+            app:popUpTo="@id/customerDashboardFragment" />
+        <argument
+            android:name="checkoutArgs"
+            app:argType="com.adelinarotaru.fooddelivery.customer.checkout.models.CheckoutArgs" />
+    </fragment>
+    <fragment
+        android:id="@+id/restaurantProductsFragment"
+        android:name="com.adelinarotaru.fooddelivery.customer.dashboard.restaurantproducts.RestaurantProductsFragment"
+        android:label="fragment_restaurant_products"
+        tools:layout="@layout/fragment_restaurant_products">
+        <action
+            android:id="@+id/goToProductDetails"
+            app:destination="@id/productDetailsFragment" />
+        <argument
+            android:name="restaurantProductArgs"
+            app:argType="com.adelinarotaru.fooddelivery.customer.dashboard.restaurantproducts.models.RestaurantProductsArgs" />
     </fragment>
 
 </navigation>

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.adelinarotaru.fooddelivery.admin.models.TrendingStatistics
 import com.adelinarotaru.fooddelivery.databinding.ItemTrendingBinding
-import com.adelinarotaru.fooddelivery.shared.BaseRVAdapter
+import com.adelinarotaru.fooddelivery.shared.base.BaseRVAdapter
 
 class TrendingAdapter : BaseRVAdapter<ItemTrendingBinding, TrendingStatistics>() {
     override val refreshUi: (ItemTrendingBinding, TrendingStatistics) -> Unit =

@@ -6,6 +6,6 @@ import com.adelinarotaru.fooddelivery.customer.checkout.models.OrderRequest
 import com.adelinarotaru.fooddelivery.shared.networking.CheckoutApi
 
 class CheckoutRepositoryImpl(private val checkoutApi: CheckoutApi) : CheckoutRepository {
-    override suspend fun placeOrder(orderRequest: OrderRequest): ICheckoutResponse =
-        checkoutApi.placeOrder(orderRequest)
+    override suspend fun placeOrder(orderRequest: OrderRequest, userId: String): ICheckoutResponse =
+        checkoutApi.placeOrder(orderRequest, userId)
 }

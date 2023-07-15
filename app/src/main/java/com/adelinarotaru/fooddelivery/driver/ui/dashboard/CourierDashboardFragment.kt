@@ -3,6 +3,9 @@ package com.adelinarotaru.fooddelivery.driver.ui.dashboard
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.FragmentCourierDashboardBinding
 import com.adelinarotaru.fooddelivery.driver.data.CourierRepositoryImpl
 import com.adelinarotaru.fooddelivery.shared.DependencyProvider
@@ -11,6 +14,9 @@ import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
 import com.adelinarotaru.fooddelivery.utils.setHorizontalCorners
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class CourierDashboardFragment :
     BaseFragment<FragmentCourierDashboardBinding, CourierDashboardViewModel>(
@@ -27,9 +33,20 @@ class CourierDashboardFragment :
         )
     }
 
+    private val args by navArgs<CourierDashboardFragmentArgs>()
+    private val courierId by lazy { args.courierDashboardArgs.id }
+    private val courierName by lazy { args.courierDashboardArgs.name }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        courierTasksAdapter = CourierItemTaskAdapter().also { it.differ.submitList(emptyList()) }
+
+        courierTasksAdapter = CourierItemTaskAdapter { taskClicked ->
+            sharedViewModel.courierItemTask = taskClicked
+            findNavController().navigate(
+                CourierDashboardFragmentDirections.dashboardToOrderAccepted()
+            )
+        }.also { it.differ.submitList(emptyList()) }
+
         courierTaskFilterAdapter = CourierTaskFilterAdapter { filterClicked ->
             val updatedList = updateSelectedState(filterClicked)
 
@@ -43,38 +60,35 @@ class CourierDashboardFragment :
             initTasksAdapter(it)
         }
 
-        binding?.courierTasksLayout?.apply {
-            tasksList.apply {
-                adapter = courierTasksAdapter
+        binding?.apply {
+            val currentDate = LocalDate.now()
+            val dateFormat = DateTimeFormatter.ofPattern("dd-MMM, yyyy", Locale.ENGLISH)
+
+            courierTasksLayout.apply {
+                tasksList.apply {
+                    adapter = courierTasksAdapter
+                }
+                tasksFilter.apply {
+                    setHorizontalCorners()
+                    adapter = courierTaskFilterAdapter
+                }
             }
-            tasksFilter.apply {
-                setHorizontalCorners()
-                adapter = courierTaskFilterAdapter
-            }
+
+            courierStatusLayout.courierName.text = courierName
+            courierStatusLayout.courierId.text = courierId
+            courierStatusLayout.courierStatusBubble.text = getString(R.string.online)
+            courierStatusLayout.dayOfWeekTitle.text = currentDate.dayOfWeek.name
+            courierStatusLayout.dayOfWeekSubtitle.text = currentDate.format(dateFormat)
+
         }
+
         viewLifecycleOwner.lifecycleScope.launch {
-            launch {
-                viewModel.courierOrders.collectLatest {
-                    courierTasksAdapter.differ.submitList(it)
-                }
-            }
-            launch {
-                viewModel.courierProfile.collectLatest { userProfile ->
-                    binding?.apply {
-                        userProfile?.let {
-                            courierStatusLayout.courierName.text = it.name
-                            courierStatusLayout.courierId.text = "PX 23445"
-                            courierStatusLayout.courierStatusBubble.text = "ONLINE"
-                            courierStatusLayout.dayOfWeekTitle.text = "Monday"
-                            courierStatusLayout.dayOfWeekSubtitle.text = "Jun 23, 2023"
-                            
-                        }
-                    }
-                }
+            viewModel.courierOrders.collectLatest {
+                courierTasksAdapter.differ.submitList(it)
             }
         }
 
-        viewModel.fetchNearbyOrders()
+        viewModel.fetchNearbyOrders(OrderStatus.ORDER_RECEIVED)
     }
 
     private fun updateSelectedState(filterClicked: ItemTaskFilter) =
@@ -92,10 +106,10 @@ class CourierDashboardFragment :
         if (filterClicked.taskStatus == TaskStatus.ALL && filterClicked.isSelected.not()) viewModel.courierOrders.value else viewModel.courierOrders.value.toMutableList()
             .filter {
                 when (filterClicked.taskStatus) {
-                    TaskStatus.ACCEPTED -> it.orderStatus == OrderStatus.PREPARING
-                    TaskStatus.REJECTED -> it.orderStatus == OrderStatus.REJECTED
-                    TaskStatus.PENDING -> it.orderStatus == OrderStatus.ORDER_RECEIVED
-                    TaskStatus.DONE -> it.orderStatus == OrderStatus.DELIVERED
+                    TaskStatus.ACCEPTED -> it.orderStatus == OrderStatus.PREPARING.orderStep
+                    TaskStatus.REJECTED -> it.orderStatus == OrderStatus.REJECTED.orderStep
+                    TaskStatus.PENDING -> it.orderStatus == OrderStatus.ORDER_RECEIVED.orderStep
+                    TaskStatus.DONE -> it.orderStatus == OrderStatus.DELIVERED.orderStep
                     else -> false
                 }
             }

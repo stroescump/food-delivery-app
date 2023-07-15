@@ -1,4 +1,4 @@
-package com.adelinarotaru.fooddelivery.driver.domain
+package com.adelinarotaru.fooddelivery.driver.domain.models
 
 import com.adelinarotaru.fooddelivery.shared.models.Restaurant
 

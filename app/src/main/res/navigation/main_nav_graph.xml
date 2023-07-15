@@ -20,8 +20,8 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true">
             <argument
-                android:name="userId"
-                app:argType="integer" />
+                android:name="courierDashboardArgs"
+                app:argType="com.adelinarotaru.fooddelivery.driver.ui.dashboard.models.CourierDashboardArgs" />
         </action>
         <action
             android:id="@+id/goToCustomerDashboard"

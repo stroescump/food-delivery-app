@@ -7,11 +7,8 @@ import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.ItemCourierOrderAcceptedBinding
 import com.adelinarotaru.fooddelivery.driver.models.CourierMenuItem
 import com.adelinarotaru.fooddelivery.shared.base.BaseRVAdapter
-import com.adelinarotaru.fooddelivery.utils.hide
-import com.adelinarotaru.fooddelivery.utils.launchGoogleMapsUsingCoordinates
-import com.adelinarotaru.fooddelivery.utils.show
 
-class OrderAcceptedAdapter() : BaseRVAdapter<ItemCourierOrderAcceptedBinding, CourierMenuItem>() {
+class OrderAcceptedAdapter : BaseRVAdapter<ItemCourierOrderAcceptedBinding, CourierMenuItem>() {
     fun areAllProductsPickedUp() = differ.currentList.all { it.isPickedUp }
 
     override val refreshUi: (ItemCourierOrderAcceptedBinding, CourierMenuItem) -> Unit =
@@ -30,7 +27,6 @@ class OrderAcceptedAdapter() : BaseRVAdapter<ItemCourierOrderAcceptedBinding, Co
                         background = AppCompatResources.getDrawable(
                             ctx, R.drawable.card_crazy_green_bg_20dp
                         )
-                        navigateToRestaurant.hide()
                     }
                 } else {
                     with(root) {
@@ -39,24 +35,15 @@ class OrderAcceptedAdapter() : BaseRVAdapter<ItemCourierOrderAcceptedBinding, Co
                             ctx, R.drawable.card_crazy_green_bg_20dp
                         )
                         background = AppCompatResources.getDrawable(
-                            ctx,
-                            R.drawable.card_dirty_white_bg
+                            ctx, R.drawable.card_dirty_white_bg
                         )
                         restaurantName.setTextColor(ctx.getColor(R.color.dark_blue_bg))
                         restaurantPhone.setTextColor(ctx.getColor(R.color.dark_blue_bg))
                         orderDetails.setTextColor(ctx.getColor(R.color.dark_blue_bg))
-                        navigateToRestaurant.show()
                     }
                 }
-                restaurantName.text = courierMenuItem.menuItem.restaurant.name
-                restaurantPhone.text = courierMenuItem.menuItem.restaurant.phoneNumber
-                navigateToRestaurant.setOnClickListener {
-                    it.context.launchGoogleMapsUsingCoordinates(
-                        courierMenuItem.menuItem.restaurant.lat,
-                        courierMenuItem.menuItem.restaurant.long,
-                        courierMenuItem.menuItem.restaurant.name
-                    )
-                }
+                restaurantName.text = courierMenuItem.restaurantInfo.name
+                restaurantPhone.text = courierMenuItem.restaurantInfo.phoneNumber
                 markAsComplete.setOnClickListener {
                     val indexOfCurrentItem = differ.currentList.indexOf(courierMenuItem)
                     val updatedList = differ.currentList.toMutableList().apply {
@@ -64,7 +51,11 @@ class OrderAcceptedAdapter() : BaseRVAdapter<ItemCourierOrderAcceptedBinding, Co
                     }
                     differ.submitList(updatedList)
                 }
-                orderDetails.text = courierMenuItem.menuItem.name
+                val dishBuilder = StringBuilder()
+                courierMenuItem.restaurantInfo.dishes.onEach {
+                    dishBuilder.appendLine(it)
+                    orderDetails.text = dishBuilder.toString()
+                }
             }
         }
 

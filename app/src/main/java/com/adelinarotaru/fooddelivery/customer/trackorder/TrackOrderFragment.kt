@@ -71,12 +71,6 @@ class TrackOrderFragment :
         viewModel.trackOrder(orderId)
     }
 
-    private fun navigateToOrderDelivered() =
-        findNavController().navigate(TrackOrderFragmentDirections.moveToSuccess(Constants.CUSTOMER))
-
-    private fun findMapFragment() =
-        (childFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment)
-
     private fun FragmentTrackOrderBinding.updateOrderStatus(orderUpdates: TrackingUiModel) =
         with(orderUpdates) {
             updateOrderStatusBubble(this)
@@ -90,9 +84,9 @@ class TrackOrderFragment :
     ) {
         if (trackingUiModel.orderStatus == OrderStatus.PREPARING) {
             map.apply {
-                val firstCheckpoint = viewModel.restaurantCheckpoints.value?.first() ?: return@apply
-                addRestaurantMarker(firstCheckpoint)
-                zoomCameraTo(firstCheckpoint)
+                val restaurantCheckpoints = viewModel.restaurantCheckpoints.value ?: return@apply
+                addRestaurantMarkers(restaurantCheckpoints)
+                zoomCameraTo(restaurantCheckpoints.first())
             }
             updateDeliverySpecificInfo()
         }
@@ -129,17 +123,25 @@ class TrackOrderFragment :
 
     private fun GoogleMap.updateCourierLocation(courierCoordinates: LatLng) {
         addCourierMarker(courierCoordinates) {
-            val firstCheckpoint =
-                viewModel.restaurantCheckpoints.value?.first() ?: return@addCourierMarker
-            addRestaurantMarker(firstCheckpoint)
+            val restaurantCheckpoints =
+                viewModel.restaurantCheckpoints.value ?: return@addCourierMarker
+            addRestaurantMarkers(restaurantCheckpoints)
         }
     }
 
-    private fun GoogleMap.addRestaurantMarker(restaurantCoordinates: LatLng) {
-        addMarker {
-            icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant_tracking))
-            position(restaurantCoordinates)
+    private fun GoogleMap.addRestaurantMarkers(restaurantsCoordinates: List<LatLng>) {
+        restaurantsCoordinates.forEach { restaurant ->
+            addMarker {
+                icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant_tracking))
+                position(restaurant)
+            }
         }
     }
+
+    private fun navigateToOrderDelivered() =
+        findNavController().navigate(TrackOrderFragmentDirections.moveToSuccess(Constants.CUSTOMER))
+
+    private fun findMapFragment() =
+        (childFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment)
 
 }

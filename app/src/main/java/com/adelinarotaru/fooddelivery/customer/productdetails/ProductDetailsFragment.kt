@@ -39,12 +39,12 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding, Produ
             goBack.setOnClickListener { findNavController().popBackStack() }
             addToCart.setOnClickListener {
                 val currentCart =
-                    sharedViewModel.getCartItems()?.toMutableList() ?: mutableListOf()
+                    sharedViewModel.getCartState()?.orderItems?.toMutableList() ?: mutableListOf()
                 val currentProduct = menuItem
                 val currentQuantity = getCurrentQuantity()
 
                 if (currentQuantity != null && currentQuantity > 0) {
-                    val updatedCart = currentCart.run {
+                    val updatedProductList = currentCart.apply {
                         val indexToUpdate = indexOfFirst { it.menuItem.id == currentProduct.id }
                         if (indexToUpdate != NOT_FOUND) {
                             this[indexToUpdate] =
@@ -52,9 +52,11 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding, Produ
                         } else {
                             add(CartMenuItem(indexToUpdate.inc(), currentProduct, currentQuantity))
                         }
-                        Cart(this)
                     }
-                    sharedViewModel.updateCart(newCart = updatedCart)
+                    val updatedCartState =
+                        sharedViewModel.getCartState()?.copy(orderItems = updatedProductList)
+                            ?: Cart(updatedProductList)
+                    sharedViewModel.updateCart(newCart = updatedCartState)
 
                     root.showJustMessage(
                         if (addToCart.text == getString(R.string.update)) getString(R.string.quantity_updated_successfully)

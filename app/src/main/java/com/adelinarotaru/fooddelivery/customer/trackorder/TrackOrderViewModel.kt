@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -35,6 +36,8 @@ class TrackOrderViewModel(
     private val _restaurantCheckpoints = MutableStateFlow<List<LatLng>?>(null)
     val restaurantCheckpoints = _restaurantCheckpoints.asStateFlow()
 
+    private val jobList = mutableListOf<Job>()
+
     fun startLiveTracking(orderId: String): Job = viewModelScope.launch(dispatcher) {
         while (isActive) {
             delay(3000L)
@@ -42,18 +45,22 @@ class TrackOrderViewModel(
                 coRunCatching {
                     repository.fetchCourierCoordinates(orderId)
                 }.onSuccess { coordinates ->
-                    _orderStatus.update { it.copy(livePosition = coordinates) }
+                    _orderStatus.update {
+                        it.copy(
+                            livePosition = LatLng(
+                                coordinates.latitude.toDouble(), coordinates.longitude.toDouble()
+                            )
+                        )
+                    }
                 }.onFailure {
                     sendError(it)
-                    breakFlow()
                 }
             } else if (_orderStatus.value.orderStatus == OrderStatus.DELIVERED) {
+                jobList.onEach { cancel() }
                 _navigateToSuccess.value = true
             }
         }
-    }
-
-    private fun breakFlow(): Nothing = throw CancellationException()
+    }.also { jobList.add(it) }
 
     fun trackOrder(orderId: String) = viewModelScope.launch(dispatcher) {
         while (isActive) {
@@ -62,19 +69,30 @@ class TrackOrderViewModel(
                 repository.trackOrder(orderId)
             }.onSuccess { orderUpdates ->
                 courierName = orderUpdates.courierName
-                _orderStatus.update { it.copy(orderStatus = orderUpdates.status) }
+                _orderStatus.update { stateFlow ->
+                    stateFlow.copy(
+                        orderStatus = OrderStatus.values()
+                            .first { it.orderStep == orderUpdates.status },
+                    )
+                }
             }.onFailure {
                 sendError(it)
-                breakFlow()
             }
         }
-    }
+    }.also { jobList.add(it) }
 
     fun fetchRestaurantCheckpoints(orderId: String) = viewModelScope.launch(dispatcher) {
         coRunCatching {
             repository.fetchCourierCheckpoints(orderId)
         }.onSuccess { checkpoints ->
-            _restaurantCheckpoints.update { checkpoints }
+            _restaurantCheckpoints.update {
+                checkpoints.map {
+                    LatLng(
+                        it.latitude.toDouble(),
+                        it.longitude.toDouble()
+                    )
+                }
+            }
         }.onFailure { sendError(it) }
-    }
+    }.also { jobList.add(it) }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.FragmentLoginBinding
+import com.adelinarotaru.fooddelivery.driver.ui.dashboard.models.CourierDashboardArgs
 import com.adelinarotaru.fooddelivery.shared.DependencyProvider
 import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 import com.adelinarotaru.fooddelivery.shared.login.data.LoginRepositoryImpl
@@ -32,7 +33,11 @@ class LoginFragment :
                         loginRes.userName
                     )
 
-                    Constants.COURIER -> navigateToCourierDashboard(loginRes.userId)
+                    Constants.COURIER -> navigateToCourierDashboard(
+                        loginRes.userId,
+                        loginRes.userName
+                    )
+
                     Constants.ADMIN -> navigateToAdminDashboard(loginRes.userId)
                 }
             }
@@ -74,8 +79,12 @@ class LoginFragment :
             )
         )
 
-    private fun navigateToCourierDashboard(userId: Int) =
-        findNavController().navigate(LoginFragmentDirections.goToDriverDashboard(userId))
+    private fun navigateToCourierDashboard(userId: Int, userName: String) =
+        findNavController().navigate(
+            LoginFragmentDirections.goToDriverDashboard(
+                CourierDashboardArgs(userName, userId.toString())
+            )
+        )
 
     private fun navigateToAdminDashboard(userId: Int) =
         findNavController().navigate(LoginFragmentDirections.goToAdminDashboard(userId))

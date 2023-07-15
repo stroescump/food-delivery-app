@@ -23,9 +23,18 @@
         android:layout_marginVertical="@dimen/dimen_20dp"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/headToClientLocation"
+        app:layout_constraintBottom_toTopOf="@id/planRestaurantsRoute"
         app:layout_constraintTop_toBottomOf="@id/screenTitle"
         tools:listitem="@layout/item_courier_order_accepted" />
+
+    <Button
+        android:id="@+id/planRestaurantsRoute"
+        style="@style/Button.FoodDelivery.Full"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:text="@string/plan_items_pick_up_route"
+        app:layout_constraintBottom_toTopOf="@id/headToClientLocation" />
 
     <Button
         android:id="@+id/headToClientLocation"
@@ -42,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_20dp"
+        android:backgroundTint="@color/crazy_green"
         android:text="@string/mark_order_as_delivered"
         app:layout_constraintBottom_toBottomOf="parent" />
 

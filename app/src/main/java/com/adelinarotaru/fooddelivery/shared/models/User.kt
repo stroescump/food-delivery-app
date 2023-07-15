@@ -7,7 +7,9 @@ data class User(
     val password: String,
     val userType: Int,
     val orders: List<Order>? = null,
-    val reviews: List<UserReview>? = null
+    val reviews: List<UserReview>? = null,
+    val latitude: String? = null,
+    val longitude: String? = null,
 )
 
 data class UserReview(

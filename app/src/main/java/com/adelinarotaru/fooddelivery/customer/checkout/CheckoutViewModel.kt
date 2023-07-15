@@ -18,9 +18,9 @@ class CheckoutViewModel(
     private val _orderPlaced = MutableStateFlow<String?>(null)
     val orderPlaced = _orderPlaced.asStateFlow()
 
-    fun placeOrder(orderRequest: OrderRequest) = viewModelScope.launch(dispatcher) {
+    fun placeOrder(orderRequest: OrderRequest, userId: String) = viewModelScope.launch(dispatcher) {
         coRunCatching {
-            checkoutRepository.placeOrder(orderRequest)
+            checkoutRepository.placeOrder(orderRequest, userId)
         }.onSuccess {
             _orderPlaced.value = it.orderId
         }.onFailure { sendError(it) }

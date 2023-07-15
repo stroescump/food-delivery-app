@@ -77,4 +77,7 @@
     <string name="head_to_client">Head to client</string>
     <string name="please_make_sure_to_pick_up_all_products">Please make sure to pick-up all products.</string>
     <string name="mark_order_as_delivered">Mark order as delivered</string>
+    <string name="online">ONLINE</string>
+    <string name="plan_items_pick_up_route">Plan items pick-up route</string>
+    <string name="you_need_to_allow_location_related_permissions_in_order_to_use_live_tracking">You need to allow location-related permissions in order to use live tracking.</string>
 </resources>

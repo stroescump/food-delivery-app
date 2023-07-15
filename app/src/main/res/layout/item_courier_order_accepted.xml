@@ -30,7 +30,7 @@
         android:lines="1"
         android:textColor="@color/dark_blue_bg"
         app:layout_constraintBottom_toTopOf="@id/restaurantPhone"
-        app:layout_constraintEnd_toStartOf="@id/navigateToRestaurant"
+        app:layout_constraintEnd_toStartOf="@id/markAsComplete"
         app:layout_constraintStart_toEndOf="@id/foodImage"
         app:layout_constraintTop_toTopOf="@id/foodImage"
         tools:text="Papa Joe's Burgersssss" />
@@ -48,23 +48,6 @@
         app:layout_constraintStart_toStartOf="@id/restaurantName"
         app:layout_constraintTop_toBottomOf="@id/restaurantName"
         tools:text="+41 782 445 349" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/navigateToRestaurant"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:layout_marginEnd="@dimen/dimen_10dp"
-        android:contentDescription="@string/mark_product_as_picked_up"
-        android:padding="@dimen/dimen_2dp"
-        android:src="@drawable/ic_map"
-        app:contentPadding="@dimen/dimen_10dp"
-        app:layout_constraintEnd_toStartOf="@id/markAsComplete"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/RoundImageView"
-        app:strokeColor="@color/crazy_green"
-        app:strokeWidth="@dimen/dimen_2dp"
-        app:tint="@color/crazy_green" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/markAsComplete"

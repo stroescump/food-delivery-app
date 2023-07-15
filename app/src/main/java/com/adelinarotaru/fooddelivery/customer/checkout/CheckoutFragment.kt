@@ -42,17 +42,19 @@ class CheckoutFragment :
                 val cartItems = sharedViewModel.getCartItems() ?: return@setOnClickListener
                 viewModel.placeOrder(
                     OrderRequest(
-                        userId = sharedViewModel.getUserId(),
                         status = OrderStatus.ORDER_RECEIVED.orderStep,
-                        cartItems.map {
+                        orderItems = cartItems.map {
                             OrderItem(
-                                it.menuItem.id,
-                                it.menuItem.restaurantId,
-                                it.quantity
+                                menuItemId = it.menuItem.id,
+                                restaurantId = it.menuItem.restaurantId,
+                                quantity = it.quantity
                             )
-                        }
+                        },
+                        address = deliveryAddress
+                    ),
+                    userId = sharedViewModel.getUserId(),
+
                     )
-                )
             }
         }
 

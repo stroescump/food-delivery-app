@@ -1,4 +1,4 @@
-package com.adelinarotaru.fooddelivery.customer
+package com.adelinarotaru.fooddelivery.customer.ui.trackorder
 
 import androidx.lifecycle.viewModelScope
 import com.adelinarotaru.fooddelivery.driver.domain.CourierRepository

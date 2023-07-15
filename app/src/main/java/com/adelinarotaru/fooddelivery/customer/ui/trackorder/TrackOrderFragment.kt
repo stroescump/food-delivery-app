@@ -1,4 +1,4 @@
-package com.adelinarotaru.fooddelivery.customer
+package com.adelinarotaru.fooddelivery.customer.ui.trackorder
 
 import android.os.Bundle
 import android.view.View

@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.adelinarotaru.fooddelivery.customer.domain.RestaurantRepository
 import com.adelinarotaru.fooddelivery.shared.base.BaseViewModel
 import com.adelinarotaru.fooddelivery.shared.models.Restaurant
+import com.adelinarotaru.fooddelivery.shared.transformers.transformToRestaurantDto
 import com.adelinarotaru.fooddelivery.utils.coRunCatching
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -24,7 +25,7 @@ class CustomerDashboardViewModel(private val restaurantRepository: RestaurantRep
         if (areRestaurantsCached()) {
             emitFromCache()
         } else coRunCatching { restaurantRepository.getRestaurants() }.onSuccess { refreshedRestaurants ->
-            _restaurants.tryEmit(refreshedRestaurants)
+            _restaurants.tryEmit(refreshedRestaurants.transformToRestaurantDto())
         }.onFailure { err ->
             sendError(err)
         }

@@ -45,7 +45,6 @@ class CustomerDashboardFragment :
                     override fun onQueryTextSubmit(query: String?): Boolean = true
 
                     override fun onQueryTextChange(newText: String?): Boolean {
-                        if (newText == null) return false
                         val filteredList = filterDishesByQuery(newText)
                         restaurantsAdapter.differ.submitList(filteredList)
                         return true
@@ -71,12 +70,15 @@ class CustomerDashboardFragment :
         viewModel.getRestaurants()
     }
 
-    private fun filterDishesByQuery(queryText: String) =
-        restaurantsAdapter.differ.currentList.filter {
-            it.menuItems?.any { dishes ->
-                dishes.name.contains(queryText)
-            } ?: false
-        }
+    private fun filterDishesByQuery(queryText: String?) =
+        queryText.takeIf { it?.isNotEmpty() == true }?.let {
+            viewModel.restaurants.replayCache.last().filter { restaurant ->
+                restaurant.menuItems?.any { dishes ->
+                    dishes.name.contains(other = it, ignoreCase = true)
+                } ?: false
+            }
+        } ?: viewModel.restaurants.replayCache.last()
+
 
     private fun createRestaurantsAdaptor(): RestaurantsAdapter =
         RestaurantsAdapter { restaurantSelected ->

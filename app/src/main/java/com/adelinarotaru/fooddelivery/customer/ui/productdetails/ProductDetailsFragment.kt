@@ -106,7 +106,7 @@ class ProductDetailsFragment : BaseFragment<FragmentProductDetailsBinding, Produ
         foodName.text = productDetails.name
         foodCategory.text = productDetails.foodCategory
         rating.text = productDetails.restaurantRating.toString()
-        ingredientsAdapter.differ.submitList(productDetails.ingredients.mapIndexed { index, stringIngredient ->
+        ingredientsAdapter.differ.submitList(productDetails.ingredients?.mapIndexed { index, stringIngredient ->
             IngredientItem(
                 stringIngredient.toIngredient(), index
             )

@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/trackOrderFragment"
-        android:name="com.adelinarotaru.fooddelivery.customer.TrackOrderFragment"
+        android:name="com.adelinarotaru.fooddelivery.customer.ui.trackorder.TrackOrderFragment"
         android:label="fragment_track_order"
         tools:layout="@layout/fragment_track_order">
         <action

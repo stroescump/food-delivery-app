@@ -5,5 +5,5 @@ import com.adelinarotaru.fooddelivery.shared.models.Restaurant
 import com.adelinarotaru.fooddelivery.shared.networking.RestaurantApi
 
 class RestaurantRepositoryImpl(private val restaurantApi: RestaurantApi) : RestaurantRepository {
-    override suspend fun getRestaurants(): List<Restaurant> = restaurantApi.getRestaurants()
+    override suspend fun getRestaurants(): List<RestaurantResponse> = restaurantApi.getRestaurants()
 }

@@ -81,4 +81,6 @@
     <string name="plan_items_pick_up_route">Plan items pick-up route</string>
     <string name="you_need_to_allow_location_related_permissions_in_order_to_use_live_tracking">You need to allow location-related permissions in order to use live tracking.</string>
     <string name="press_to_refresh">Press to refresh</string>
+    <string name="accept_order">Accept order</string>
+    <string name="there_was_an_issue_establishing_the_route_please_verify_location_permissions_and_retry">There was an issue establishing the route. Please verify location permissions and retry.</string>
 </resources>

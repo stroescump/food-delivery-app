@@ -12,9 +12,13 @@ import com.adelinarotaru.fooddelivery.driver.models.CourierMenuItem
 import com.adelinarotaru.fooddelivery.driver.ui.dashboard.CourierItemTask
 import com.adelinarotaru.fooddelivery.shared.DependencyProvider
 import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
+import com.adelinarotaru.fooddelivery.shared.login.domain.ILocation
+import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
 import com.adelinarotaru.fooddelivery.utils.Constants
+import com.adelinarotaru.fooddelivery.utils.hide
 import com.adelinarotaru.fooddelivery.utils.launchGoogleMapsNavigation
 import com.adelinarotaru.fooddelivery.utils.launchGoogleMapsNavigationWithAddress
+import com.adelinarotaru.fooddelivery.utils.show
 import com.adelinarotaru.fooddelivery.utils.showError
 import com.adelinarotaru.fooddelivery.utils.showMessageWindow
 import com.google.android.gms.location.LocationServices
@@ -59,17 +63,21 @@ class CourierOrderAcceptedFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
+            if (courierTask.orderStatus == OrderStatus.ORDER_RECEIVED.orderStep) acceptOrder.show()
             screenTitle.text = "Order #${courierTask.orderId}"
             orderProducts.adapter = productsAdapter
+
             headToClientLocation.setOnClickListener {
                 doIfProductsPickedOrError {
                     fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                         val currentLat = location.latitude.toString()
                         val currentLong = location.longitude.toString()
                         requireContext().launchGoogleMapsNavigationWithAddress(
-                            currentLat to currentLong,
-                            courierTask.customerInfo.address
-                        )
+                            currentLat to currentLong, courierTask.customerInfo.address
+                        ) {
+                            viewModel.updateOrderStatus(courierTask.orderId, OrderStatus.PICKED_UP)
+                        }
+                            .onFailure { showError(Throwable(getString(R.string.there_was_an_issue_establishing_the_route_please_verify_location_permissions_and_retry))) }
                     }.addOnFailureListener {
                         showError(it)
                     }
@@ -78,14 +86,25 @@ class CourierOrderAcceptedFragment :
 
             markOrderAsDelivered.setOnClickListener {
                 doIfProductsPickedOrError {
-                    viewModel.markOrderDelivered(
-                        courierTask.orderId
+                    viewModel.updateOrderStatus(
+                        courierTask.orderId, OrderStatus.DELIVERED
                     )
                 }
             }
 
+            acceptOrder.setOnClickListener {
+                runCatching {
+                    viewModel.acceptOrder(
+                        courierTask.orderId, sharedViewModel.getUserId()
+                    )
+                }.onFailure { showError(it) }
+            }
+
             planRestaurantsRoute.setOnClickListener {
-                viewModel.optimizeRoute(courierTask.orderId)
+                if (courierTask.restaurantsInfo.size > 1) viewModel.optimizeRoute(courierTask.orderId) else {
+                    val navCoordinates = listOf(courierTask.restaurantsInfo.first())
+                    openNavigationWithCoordinates(navCoordinates)
+                }
             }
         }
 
@@ -99,31 +118,39 @@ class CourierOrderAcceptedFragment :
             launch {
                 viewModel.optimizedRoute.collectLatest { routes ->
                     routes ?: return@collectLatest
-                    // TODO Investigate potential crash and apply guard
-                    fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                        if(location != null){
-                            val currentLat = location.latitude
-                            val currentLong = location.longitude
-                            requireContext().launchGoogleMapsNavigation(
-                                stops = routes.map { it.latitude to it.longitude },
-                                currentLocation = currentLat.toString() to currentLong.toString(),
-                                clientLocation = courierTask.customerInfo.address
-                            )
-                        }
-                    }.addOnFailureListener {
-                        showError(it)
-                    }
+                    openNavigationWithCoordinates(routes)
+                }
+            }
+
+            launch {
+                viewModel.orderAccepted.collectLatest { accepted ->
+                    accepted ?: return@collectLatest
+                    binding?.acceptOrder?.hide()
                 }
             }
         }
 
         courierTask.restaurantsInfo.mapIndexed { index, item ->
             CourierMenuItem(
-                restaurantInfo = item,
-                false,
-                index
+                restaurantInfo = item, false, index
             )
         }.updateUi()
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun openNavigationWithCoordinates(routes: List<ILocation>) {
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            val currentLat = location.latitude
+            val currentLong = location.longitude
+            requireContext().launchGoogleMapsNavigation(
+                stops = routes.map { it.latitude to it.longitude },
+                currentLocation = currentLat.toString() to currentLong.toString(),
+                clientLocation = courierTask.customerInfo.address
+            )
+                .onFailure { showError(Throwable(getString(R.string.there_was_an_issue_establishing_the_route_please_verify_location_permissions_and_retry))) }
+        }.addOnFailureListener {
+            showError(it)
+        }
     }
 
     private fun navigateToSuccess() =

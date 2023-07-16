@@ -17,10 +17,10 @@ fun GoogleMap.zoomCameraTo(coordinates: LatLng) {
 }
 
 fun Context.launchGoogleMapsNavigation(
-    stops: List<Pair<String, String>>,
+    stops: List<Pair<String?, String?>>,
     currentLocation: Pair<String, String>,
     clientLocation: String
-) {
+) = runCatching {
     val intent = Intent(Intent.ACTION_VIEW)
     val uriBuilder = StringBuilder("https://www.google.com/maps/dir/?api=1")
 
@@ -41,13 +41,13 @@ fun Context.launchGoogleMapsNavigation(
     intent.resolveActivity(packageManager)?.let {
         startActivity(intent)
     }
-
 }
 
 fun Context.launchGoogleMapsNavigationWithAddress(
     currentLocation: Pair<String, String>,
-    clientLocation: String
-) {
+    clientLocation: String,
+    appFoundCallback: () -> Unit = {}
+) = runCatching {
     val intent = Intent(Intent.ACTION_VIEW)
     val uriBuilder =
         StringBuilder("https://www.google.com/maps/dir/?api=1&origin=${currentLocation.first},${currentLocation.second}")
@@ -56,6 +56,7 @@ fun Context.launchGoogleMapsNavigationWithAddress(
     intent.data = uri
     intent.setPackage("com.google.android.apps.maps")
     intent.resolveActivity(packageManager)?.let {
+        appFoundCallback()
         startActivity(intent)
     }
 }

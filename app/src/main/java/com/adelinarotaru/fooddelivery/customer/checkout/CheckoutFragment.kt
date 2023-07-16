@@ -13,6 +13,7 @@ import com.adelinarotaru.fooddelivery.databinding.FragmentCheckoutBinding
 import com.adelinarotaru.fooddelivery.shared.DependencyProvider
 import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
+import com.adelinarotaru.fooddelivery.utils.showError
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -38,22 +39,24 @@ class CheckoutFragment :
             totalAmount.text = navArgs.checkoutArgs.total.toString()
 
             payOrder.setOnClickListener {
-                deliveryAddress = getAddressFromUi()
-                val cartItems = sharedViewModel.getCartItems() ?: return@setOnClickListener
-                viewModel.placeOrder(
-                    OrderRequest(
-                        status = OrderStatus.ORDER_RECEIVED.orderStep,
-                        orderItems = cartItems.map {
-                            OrderItem(
-                                menuItemId = it.menuItem.id,
-                                restaurantId = it.menuItem.restaurantId,
-                                quantity = it.quantity
-                            )
-                        },
-                        address = deliveryAddress
-                    ),
-                    userId = sharedViewModel.getUserId(),
-                )
+                runCatching {
+                    deliveryAddress = getAddressFromUi()
+                    val cartItems = sharedViewModel.getCartItems() ?: return@setOnClickListener
+                    viewModel.placeOrder(
+                        OrderRequest(
+                            status = OrderStatus.ORDER_RECEIVED.orderStep,
+                            orderItems = cartItems.map {
+                                OrderItem(
+                                    menuItemId = it.menuItem.id,
+                                    restaurantId = it.menuItem.restaurantId,
+                                    quantity = it.quantity
+                                )
+                            },
+                            address = deliveryAddress
+                        ),
+                        userId = sharedViewModel.getUserId(),
+                    )
+                }.onFailure { showError(it) }
             }
         }
 

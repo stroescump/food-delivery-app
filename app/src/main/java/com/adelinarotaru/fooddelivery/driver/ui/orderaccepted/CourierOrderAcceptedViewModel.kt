@@ -2,8 +2,10 @@ package com.adelinarotaru.fooddelivery.driver.ui.orderaccepted
 
 import androidx.lifecycle.viewModelScope
 import com.adelinarotaru.fooddelivery.driver.domain.CourierRepository
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.AcceptOrderRequest
 import com.adelinarotaru.fooddelivery.shared.base.BaseViewModel
 import com.adelinarotaru.fooddelivery.shared.login.domain.ILocation
+import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
 import com.adelinarotaru.fooddelivery.utils.coRunCatching
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -26,18 +28,29 @@ class CourierOrderAcceptedViewModel(
     private val _optimizedRoute = MutableSharedFlow<List<ILocation>?>(1)
     val optimizedRoute = _optimizedRoute.asSharedFlow()
 
-    fun markOrderDelivered(orderId: String) = viewModelScope.launch(dispatcher) {
-        coRunCatching {
-            courierRepository.markOrderDelivered(orderId)
-        }.onSuccess { _navigateToSuccess.value = true }.onFailure { sendError(it) }
-    }
+    private val _orderAccepted = MutableStateFlow<Boolean?>(null)
+    val orderAccepted = _orderAccepted.asStateFlow()
+
+    fun updateOrderStatus(orderId: String, orderStatus: OrderStatus) =
+        viewModelScope.launch(dispatcher) {
+            coRunCatching {
+                courierRepository.updateOrderStatus(orderId, orderStatus)
+            }.onSuccess {
+                if (orderStatus == OrderStatus.DELIVERED) _navigateToSuccess.value = true
+            }.onFailure { sendError(it) }
+        }
 
     fun fetchClientCoordinates(address: String) = viewModelScope.launch(dispatcher) {
         coRunCatching {
+            setLoading(true)
             courierRepository.convertAddressToCoordinates(address = address)
         }.onSuccess { coordinates ->
+            setLoading(false)
             _clientCoordinates.update { coordinates }
-        }.onFailure { sendError(it) }
+        }.onFailure {
+            setLoading(false)
+            sendError(it)
+        }
     }
 
     fun optimizeRoute(orderId: String) = viewModelScope.launch(dispatcher) {
@@ -47,6 +60,22 @@ class CourierOrderAcceptedViewModel(
         }.onSuccess { route ->
             setLoading(false)
             _optimizedRoute.tryEmit(route)
+        }.onFailure {
+            setLoading(false)
+            sendError(it)
+        }
+    }
+
+    fun acceptOrder(orderId: String, courierId: String) = viewModelScope.launch(dispatcher) {
+        setLoading(true)
+        coRunCatching {
+            courierRepository.acceptOrder(
+                orderId,
+                AcceptOrderRequest(courierId.toInt(), OrderStatus.PREPARING.orderStep)
+            )
+        }.onSuccess {
+            setLoading(false)
+            _orderAccepted.value = true
         }.onFailure {
             setLoading(false)
             sendError(it)

@@ -144,4 +144,9 @@ class TrackOrderFragment :
     private fun findMapFragment() =
         (childFragmentManager.findFragmentById(R.id.googleMap) as SupportMapFragment)
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.clearJobs()
+    }
+
 }

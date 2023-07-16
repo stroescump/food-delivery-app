@@ -6,6 +6,7 @@ import com.adelinarotaru.fooddelivery.driver.models.OrderStatusResponse
 import com.adelinarotaru.fooddelivery.driver.ui.dashboard.CourierItemTask
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.AddressToCoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.CustomerCoordinates
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.AcceptOrderRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.UpdateOrderStatusRequest
 import com.adelinarotaru.fooddelivery.shared.models.GenericResponse
 import retrofit2.http.Body
@@ -27,6 +28,9 @@ interface CourierApi {
     @GET("/orders/{orderId}/getCheckpoints")
     suspend fun fetchCourierCheckpoints(@Path("orderId") orderId: String): List<RestaurantCheckpoint>
 
+    @GET("/orders/{orderId}/getCustomerCheckpoints")
+    suspend fun fetchCustomerCheckpoints(@Path("orderId") orderId: String): List<RestaurantCheckpoint>
+
     @POST("/addressToCoordinates")
     suspend fun convertAddressToCoordinates(@Body request: AddressToCoordinatesRequest): CustomerCoordinates
 
@@ -41,4 +45,10 @@ interface CourierApi {
 
     @GET("/orders/allOrders/{courierId}")
     suspend fun fetchAllOrders(@Path("courierId") courierId: String): List<CourierItemTask>
+
+    @PUT("/assignCourier/{orderId}")
+    suspend fun acceptOrder(
+        @Path("orderId") orderId: String,
+        @Body acceptOrderRequest: AcceptOrderRequest
+    ): GenericResponse
 }

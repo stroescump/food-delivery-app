@@ -8,7 +8,6 @@ import com.adelinarotaru.fooddelivery.utils.coRunCatching
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -43,10 +42,12 @@ class TrackOrderViewModel(
             coRunCatching {
                 repository.fetchCourierCoordinates(orderId)
             }.onSuccess { coordinates ->
+                val latitude = coordinates.latitude?.toDouble() ?: return@onSuccess
+                val longitude = coordinates.longitude?.toDouble() ?: return@onSuccess
                 _orderStatus.update {
                     it.copy(
                         livePosition = LatLng(
-                            coordinates.latitude.toDouble(), coordinates.longitude.toDouble()
+                            latitude, longitude
                         )
                     )
                 }
@@ -73,7 +74,7 @@ class TrackOrderViewModel(
 
                 if (orderUpdates.status == OrderStatus.DELIVERED.orderStep) {
                     _navigateToSuccess.value = true
-                    jobList.onEach { cancel() }
+                    jobList.onEach { it.cancel() }
                 }
             }.onFailure {
                 sendError(it)
@@ -83,16 +84,20 @@ class TrackOrderViewModel(
 
     fun fetchRestaurantCheckpoints(orderId: String) = viewModelScope.launch(dispatcher) {
         coRunCatching {
-            repository.fetchCourierCheckpoints(orderId)
+            repository.fetchCustomerCheckpoints(orderId)
         }.onSuccess { checkpoints ->
-            _restaurantCheckpoints.update {
-                checkpoints.map {
+            runCatching {
+                checkpoints.takeIf { list -> list.all { it.latitude != null && it.longitude != null } }
+                    ?: return@runCatching
+                val coordinateList = checkpoints.map {
                     LatLng(
-                        it.latitude.toDouble(),
-                        it.longitude.toDouble()
+                        it.latitude!!.toDouble(), it.longitude!!.toDouble()
                     )
                 }
-            }
+                _restaurantCheckpoints.update { coordinateList }
+            }.onFailure { sendError(Throwable("Please try reaching out this restaurant by phone. Location is unclear.")) }
         }.onFailure { sendError(it) }
     }.also { jobList.add(it) }
+
+    fun clearJobs() = jobList.onEach { it.cancel() }
 }

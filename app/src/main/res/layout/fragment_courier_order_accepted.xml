@@ -50,10 +50,24 @@
         style="@style/Button.FoodDelivery.Full"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
         android:backgroundTint="@color/crazy_green"
         android:text="@string/mark_order_as_delivered"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:textColor="@color/dirty_white"
+        app:layout_constraintBottom_toTopOf="@+id/acceptOrder" />
+
+    <Button
+        android:id="@+id/acceptOrder"
+        style="@style/Button.FoodDelivery.Full"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:backgroundTint="@color/order_faded_green"
+        android:text="@string/accept_order"
+        android:textColor="@color/dirty_white"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:visibility="visible" />
 
     <include
         layout="@layout/layout_loading"

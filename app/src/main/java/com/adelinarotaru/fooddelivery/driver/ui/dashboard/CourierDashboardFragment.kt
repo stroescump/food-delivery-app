@@ -53,6 +53,7 @@ class CourierDashboardFragment :
                 updatedList.find { it.isSelected }?.taskStatus?.toOrderStatus()
                     ?: OrderStatus.ALL
             fetchOrdersFrom(orderStatus)
+            courierTaskFilterAdapter.differ.submitList(updatedList)
         }.also {
             initTasksAdapter(it)
         }
@@ -112,8 +113,6 @@ class CourierDashboardFragment :
             if (none { it.isSelected }) {
                 map { it.copy(isSelected = it.id == 0) }
             }
-        }.also {
-            courierTaskFilterAdapter.differ.submitList(it)
         }
 
     private fun filterByStatus(filterClicked: ItemTaskFilter) = viewModel.getOrders().filter {

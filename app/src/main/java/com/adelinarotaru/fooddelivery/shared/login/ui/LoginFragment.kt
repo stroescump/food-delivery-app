@@ -26,19 +26,22 @@ class LoginFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.loginSuccess.collectLatest { loginRes ->
                 if (loginRes == null) return@collectLatest
-                sharedViewModel.updateUserId(loginRes.userId.toString())
-                when (loginRes.userType) {
-                    Constants.CUSTOMER -> navigateToCustomerDashboard(
-                        loginRes.userId,
-                        loginRes.userName
-                    )
+                runCatching { sharedViewModel.updateUserId(loginRes.userId.toString()) }.onSuccess { updateSuccess ->
+                    if (updateSuccess) {
+                        when (loginRes.userType) {
+                            Constants.CUSTOMER -> navigateToCustomerDashboard(
+                                loginRes.userId,
+                                loginRes.userName
+                            )
 
-                    Constants.COURIER -> navigateToCourierDashboard(
-                        loginRes.userId,
-                        loginRes.userName
-                    )
+                            Constants.COURIER -> navigateToCourierDashboard(
+                                loginRes.userId,
+                                loginRes.userName
+                            )
 
-                    Constants.ADMIN -> navigateToAdminDashboard(loginRes.userId)
+                            Constants.ADMIN -> navigateToAdminDashboard(loginRes.userId)
+                        }
+                    }
                 }
             }
         }

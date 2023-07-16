@@ -4,6 +4,7 @@ import com.adelinarotaru.fooddelivery.driver.domain.CourierRepository
 import com.adelinarotaru.fooddelivery.driver.models.OrderStatusResponse
 import com.adelinarotaru.fooddelivery.driver.ui.dashboard.CourierItemTask
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.AddressToCoordinatesRequest
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.AcceptOrderRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.UpdateOrderStatusRequest
 import com.adelinarotaru.fooddelivery.shared.login.domain.ILocation
 import com.adelinarotaru.fooddelivery.shared.models.GenericResponse
@@ -30,12 +31,23 @@ class CourierRepositoryImpl(private val courierApi: CourierApi) : CourierReposit
     override suspend fun fetchCourierCheckpoints(orderId: String) =
         courierApi.fetchCourierCheckpoints(orderId)
 
-    override suspend fun markOrderDelivered(orderId: String): GenericResponse =
+    override suspend fun fetchCustomerCheckpoints(orderId: String): List<ILocation> =
+        courierApi.fetchCustomerCheckpoints(orderId)
+
+    override suspend fun updateOrderStatus(
+        orderId: String,
+        orderStatus: OrderStatus
+    ): GenericResponse =
         courierApi.updateOrderStatus(
-            status = UpdateOrderStatusRequest(OrderStatus.DELIVERED.orderStep),
+            status = UpdateOrderStatusRequest(orderStatus.orderStep),
             orderId = orderId
         )
 
     override suspend fun convertAddressToCoordinates(address: String): ILocation =
         courierApi.convertAddressToCoordinates(AddressToCoordinatesRequest(address))
+
+    override suspend fun acceptOrder(
+        orderId: String,
+        acceptOrderRequest: AcceptOrderRequest
+    ): GenericResponse = courierApi.acceptOrder(orderId, acceptOrderRequest)
 }

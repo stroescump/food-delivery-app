@@ -15,7 +15,10 @@ class SharedViewModel : ViewModel() {
 
     fun updateCart(newCart: Cart) = _sessionState.update { it.copy(cartState = newCart) }
 
-    fun updateUserId(newUserId: String) = _sessionState.update { it.copy(userId = newUserId) }
+    fun updateUserId(newUserId: String): Boolean {
+        _sessionState.update { it.copy(userId = newUserId) }
+        return sessionState.value.userId != null
+    }
 
     fun getCartItems() = _sessionState.value.cartState?.orderItems
 

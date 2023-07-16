@@ -22,15 +22,31 @@
         android:layout_marginTop="@dimen/dimen_20dp"
         app:layout_constraintTop_toBottomOf="@id/spaceTop" />
 
+    <Button
+        android:id="@+id/pressToRefresh"
+        style="@style/Button.FoodDelivery.Full"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="0dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:backgroundTint="@color/crazy_green"
+        android:paddingHorizontal="@dimen/dimen_20dp"
+        android:text="@string/press_to_refresh"
+        android:textColor="@color/dirty_white"
+        app:layout_constraintBottom_toTopOf="@id/courierTasksLayout"
+        app:layout_constraintEnd_toEndOf="@id/courierStatusLayout"
+        app:layout_constraintStart_toStartOf="@+id/courierStatusLayout"
+        app:layout_constraintTop_toBottomOf="@id/courierStatusLayout" />
+
     <include
         android:id="@+id/courierTasksLayout"
         layout="@layout/layout_courier_tasks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dimen_30dp"
         android:layout_marginHorizontal="@dimen/dimen_30dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
         app:layout_constraintBottom_toTopOf="@id/spacerBottom"
-        app:layout_constraintTop_toBottomOf="@id/courierStatusLayout" />
+        app:layout_constraintTop_toBottomOf="@id/pressToRefresh" />
 
     <Space
         android:id="@+id/spacerBottom"

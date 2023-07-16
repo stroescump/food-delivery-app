@@ -7,9 +7,17 @@ import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.databinding.ItemPillShapeBinding
 import com.adelinarotaru.fooddelivery.shared.base.BaseRVAdapter
 import com.adelinarotaru.fooddelivery.shared.base.ItemAdapter
+import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
 
 enum class TaskStatus {
-    ACCEPTED, REJECTED, PENDING, DONE, ALL
+    ACCEPTED, PENDING, DONE, ALL
+}
+
+fun TaskStatus.toOrderStatus() = when (this) {
+    TaskStatus.ACCEPTED -> OrderStatus.PREPARING
+    TaskStatus.PENDING -> OrderStatus.ORDER_RECEIVED
+    TaskStatus.DONE -> OrderStatus.DELIVERED
+    TaskStatus.ALL -> OrderStatus.ALL
 }
 
 data class ItemTaskFilter(
@@ -40,4 +48,6 @@ class CourierTaskFilterAdapter(onFilterClick: (ItemTaskFilter) -> Unit) :
         }
     override val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> ItemPillShapeBinding =
         ItemPillShapeBinding::inflate
+
+    fun getSelectedStatus() = differ.currentList.find { it.isSelected }?.taskStatus?.toOrderStatus() ?: OrderStatus.ALL
 }

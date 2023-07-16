@@ -80,4 +80,5 @@
     <string name="online">ONLINE</string>
     <string name="plan_items_pick_up_route">Plan items pick-up route</string>
     <string name="you_need_to_allow_location_related_permissions_in_order_to_use_live_tracking">You need to allow location-related permissions in order to use live tracking.</string>
+    <string name="press_to_refresh">Press to refresh</string>
 </resources>

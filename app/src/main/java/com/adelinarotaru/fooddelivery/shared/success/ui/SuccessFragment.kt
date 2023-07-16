@@ -30,10 +30,7 @@ class SuccessFragment : Fragment() {
             )
 
             thanksButton.setOnClickListener {
-                findNavController().popBackStack(
-                    destinationId = R.id.customerDashboardFragment,
-                    inclusive = false
-                )
+                findNavController().popBackStack()
             }
         }
     }

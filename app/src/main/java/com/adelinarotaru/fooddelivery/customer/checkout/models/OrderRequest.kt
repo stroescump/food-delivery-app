@@ -6,6 +6,7 @@ data class OrderRequest(
     val status: Int,
     @SerializedName("order_items")
     val orderItems: List<OrderItem>,
+    @SerializedName("deliveryAddress")
     val address: String
 )
 

@@ -99,14 +99,17 @@ class CourierOrderAcceptedFragment :
             launch {
                 viewModel.optimizedRoute.collectLatest { routes ->
                     routes ?: return@collectLatest
+                    // TODO Investigate potential crash and apply guard
                     fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                        val currentLat = location.latitude
-                        val currentLong = location.longitude
-                        requireContext().launchGoogleMapsNavigation(
-                            stops = routes.map { it.latitude to it.longitude },
-                            currentLocation = currentLat.toString() to currentLong.toString(),
-                            clientLocation = courierTask.customerInfo.address
-                        )
+                        if(location != null){
+                            val currentLat = location.latitude
+                            val currentLong = location.longitude
+                            requireContext().launchGoogleMapsNavigation(
+                                stops = routes.map { it.latitude to it.longitude },
+                                currentLocation = currentLat.toString() to currentLong.toString(),
+                                clientLocation = courierTask.customerInfo.address
+                            )
+                        }
                     }.addOnFailureListener {
                         showError(it)
                     }

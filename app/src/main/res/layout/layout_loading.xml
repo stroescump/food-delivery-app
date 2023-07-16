@@ -2,6 +2,6 @@
 <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:indeterminateTint="@color/dirty_white"
-    android:progressBackgroundTint="@color/dirty_white"
-    android:progressTint="@color/dirty_white" />
+    android:indeterminateTint="@color/crazy_green"
+    android:progressBackgroundTint="@color/crazy_green"
+    android:progressTint="@color/crazy_green" />

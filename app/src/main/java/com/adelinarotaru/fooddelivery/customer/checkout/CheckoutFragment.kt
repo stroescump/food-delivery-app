@@ -53,8 +53,7 @@ class CheckoutFragment :
                         address = deliveryAddress
                     ),
                     userId = sharedViewModel.getUserId(),
-
-                    )
+                )
             }
         }
 

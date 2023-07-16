@@ -6,9 +6,12 @@ import com.adelinarotaru.fooddelivery.driver.models.OrderStatusResponse
 import com.adelinarotaru.fooddelivery.driver.ui.dashboard.CourierItemTask
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.AddressToCoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.CustomerCoordinates
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.UpdateOrderStatusRequest
+import com.adelinarotaru.fooddelivery.shared.models.GenericResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface CourierApi {
@@ -26,4 +29,16 @@ interface CourierApi {
 
     @POST("/addressToCoordinates")
     suspend fun convertAddressToCoordinates(@Body request: AddressToCoordinatesRequest): CustomerCoordinates
+
+    @PUT("/orders/{orderId}/updateStatus")
+    suspend fun updateOrderStatus(
+        @Body status: UpdateOrderStatusRequest,
+        @Path("orderId") orderId: String
+    ): GenericResponse
+
+    @GET("/orders/acceptedOrders/{courierId}")
+    suspend fun fetchAcceptedOrders(@Path("courierId") courierId: String): List<CourierItemTask>
+
+    @GET("/orders/allOrders/{courierId}")
+    suspend fun fetchAllOrders(@Path("courierId") courierId: String): List<CourierItemTask>
 }

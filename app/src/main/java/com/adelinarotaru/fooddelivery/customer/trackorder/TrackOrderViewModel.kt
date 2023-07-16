@@ -6,7 +6,6 @@ import com.adelinarotaru.fooddelivery.shared.base.BaseViewModel
 import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
 import com.adelinarotaru.fooddelivery.utils.coRunCatching
 import com.google.android.gms.maps.model.LatLng
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
@@ -41,23 +40,18 @@ class TrackOrderViewModel(
     fun startLiveTracking(orderId: String): Job = viewModelScope.launch(dispatcher) {
         while (isActive) {
             delay(3000L)
-            if (_orderStatus.value.orderStatus.orderStep == OrderStatus.PICKED_UP.orderStep) {
-                coRunCatching {
-                    repository.fetchCourierCoordinates(orderId)
-                }.onSuccess { coordinates ->
-                    _orderStatus.update {
-                        it.copy(
-                            livePosition = LatLng(
-                                coordinates.latitude.toDouble(), coordinates.longitude.toDouble()
-                            )
+            coRunCatching {
+                repository.fetchCourierCoordinates(orderId)
+            }.onSuccess { coordinates ->
+                _orderStatus.update {
+                    it.copy(
+                        livePosition = LatLng(
+                            coordinates.latitude.toDouble(), coordinates.longitude.toDouble()
                         )
-                    }
-                }.onFailure {
-                    sendError(it)
+                    )
                 }
-            } else if (_orderStatus.value.orderStatus == OrderStatus.DELIVERED) {
-                jobList.onEach { cancel() }
-                _navigateToSuccess.value = true
+            }.onFailure {
+                sendError(it)
             }
         }
     }.also { jobList.add(it) }
@@ -69,11 +63,17 @@ class TrackOrderViewModel(
                 repository.trackOrder(orderId)
             }.onSuccess { orderUpdates ->
                 courierName = orderUpdates.courierName
+
                 _orderStatus.update { stateFlow ->
                     stateFlow.copy(
                         orderStatus = OrderStatus.values()
                             .first { it.orderStep == orderUpdates.status },
                     )
+                }
+
+                if (orderUpdates.status == OrderStatus.DELIVERED.orderStep) {
+                    _navigateToSuccess.value = true
+                    jobList.onEach { cancel() }
                 }
             }.onFailure {
                 sendError(it)

@@ -49,13 +49,10 @@ class CourierDashboardFragment :
 
         courierTaskFilterAdapter = CourierTaskFilterAdapter { filterClicked ->
             val updatedList = updateSelectedState(filterClicked)
-
-            fallbackToDefaultIfNoneSelected(updatedList)
-
-            val updatedOrderList = getFilteredOrderListByStatus(filterClicked)
-
-            courierTaskFilterAdapter.differ.submitList(updatedList)
-            courierTasksAdapter.differ.submitList(if (updatedList.none { it.isSelected }) viewModel.courierOrders.value else updatedOrderList)
+            val orderStatus =
+                updatedList.find { it.isSelected }?.taskStatus?.toOrderStatus()
+                    ?: OrderStatus.ALL
+            fetchOrdersFrom(orderStatus)
         }.also {
             initTasksAdapter(it)
         }
@@ -80,6 +77,9 @@ class CourierDashboardFragment :
             courierStatusLayout.dayOfWeekTitle.text = currentDate.dayOfWeek.name
             courierStatusLayout.dayOfWeekSubtitle.text = currentDate.format(dateFormat)
 
+            pressToRefresh.setOnClickListener {
+                fetchOrdersFrom(courierTaskFilterAdapter.getSelectedStatus())
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -88,31 +88,42 @@ class CourierDashboardFragment :
             }
         }
 
-        viewModel.fetchNearbyOrders(OrderStatus.ORDER_RECEIVED)
+        viewModel.fetchAllOrders(courierId)
+    }
+
+    private fun fetchOrdersFrom(orderStatus: OrderStatus) {
+        when (orderStatus) {
+            OrderStatus.ALL -> viewModel.fetchAllOrders(courierId)
+
+            OrderStatus.PREPARING, OrderStatus.PICKED_UP -> {
+                viewModel.fetchAcceptedOrders(courierId)
+            }
+
+            OrderStatus.DELIVERED, OrderStatus.ORDER_RECEIVED -> {
+                viewModel.fetchNearbyOrders(orderStatus)
+            }
+        }
     }
 
     private fun updateSelectedState(filterClicked: ItemTaskFilter) =
         courierTaskFilterAdapter.differ.currentList.toMutableList().map {
             it.copy(isSelected = if (it.id == filterClicked.id) it.isSelected.not() else false)
+        }.apply {
+            if (none { it.isSelected }) {
+                map { it.copy(isSelected = it.id == 0) }
+            }
+        }.also {
+            courierTaskFilterAdapter.differ.submitList(it)
         }
 
-    private fun fallbackToDefaultIfNoneSelected(updatedList: List<ItemTaskFilter>) {
-        if (updatedList.none { it.isSelected }) updatedList.toMutableList().map {
-            it.copy(isSelected = it.id == 0)
+    private fun filterByStatus(filterClicked: ItemTaskFilter) = viewModel.getOrders().filter {
+        when (filterClicked.taskStatus) {
+            TaskStatus.ACCEPTED -> it.orderStatus == OrderStatus.PREPARING.orderStep
+            TaskStatus.PENDING -> it.orderStatus == OrderStatus.ORDER_RECEIVED.orderStep
+            TaskStatus.DONE -> it.orderStatus == OrderStatus.DELIVERED.orderStep
+            TaskStatus.ALL -> true
         }
     }
-
-    private fun getFilteredOrderListByStatus(filterClicked: ItemTaskFilter) =
-        if (filterClicked.taskStatus == TaskStatus.ALL && filterClicked.isSelected.not()) viewModel.courierOrders.value else viewModel.courierOrders.value.toMutableList()
-            .filter {
-                when (filterClicked.taskStatus) {
-                    TaskStatus.ACCEPTED -> it.orderStatus == OrderStatus.PREPARING.orderStep
-                    TaskStatus.REJECTED -> it.orderStatus == OrderStatus.REJECTED.orderStep
-                    TaskStatus.PENDING -> it.orderStatus == OrderStatus.ORDER_RECEIVED.orderStep
-                    TaskStatus.DONE -> it.orderStatus == OrderStatus.DELIVERED.orderStep
-                    else -> false
-                }
-            }
 
     private fun initTasksAdapter(it: CourierTaskFilterAdapter) {
         it.differ.submitList(
@@ -120,9 +131,8 @@ class CourierDashboardFragment :
                 ItemTaskFilter(TaskStatus.ALL, 0, isSelected = true),
                 ItemTaskFilter(TaskStatus.PENDING, 1),
                 ItemTaskFilter(TaskStatus.ACCEPTED, 2),
-                ItemTaskFilter(TaskStatus.REJECTED, 3),
+                ItemTaskFilter(TaskStatus.DONE, 3),
             )
         )
     }
-
 }

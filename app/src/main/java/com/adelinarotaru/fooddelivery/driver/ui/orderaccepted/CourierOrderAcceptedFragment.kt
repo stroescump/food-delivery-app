@@ -11,6 +11,7 @@ import com.adelinarotaru.fooddelivery.databinding.FragmentCourierOrderAcceptedBi
 import com.adelinarotaru.fooddelivery.driver.data.CourierRepositoryImpl
 import com.adelinarotaru.fooddelivery.driver.models.CourierMenuItem
 import com.adelinarotaru.fooddelivery.driver.ui.dashboard.CourierItemTask
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.CoordinatesRequest
 import com.adelinarotaru.fooddelivery.shared.DependencyProvider
 import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 import com.adelinarotaru.fooddelivery.shared.login.domain.ILocation

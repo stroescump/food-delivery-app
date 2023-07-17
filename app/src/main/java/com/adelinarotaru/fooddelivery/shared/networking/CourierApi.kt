@@ -5,6 +5,8 @@ import com.adelinarotaru.fooddelivery.driver.data.models.RestaurantCheckpoint
 import com.adelinarotaru.fooddelivery.driver.models.OrderStatusResponse
 import com.adelinarotaru.fooddelivery.driver.ui.dashboard.CourierItemTask
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.AddressToCoordinatesRequest
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.BatchAddressResponse
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.BatchCoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.CoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.CustomerCoordinates
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.AcceptOrderRequest
@@ -58,4 +60,9 @@ interface CourierApi {
         @Path("userId") userId: String,
         @Body coordinatesRequest: CoordinatesRequest
     ): GenericResponse
+
+    @POST("/coordinates-to-address")
+    suspend fun getAddressFromCoordinates(
+        @Body coordinatesRequest: BatchCoordinatesRequest
+    ): BatchAddressResponse
 }

@@ -49,6 +49,7 @@ class CourierItemTaskAdapter(private val onItemClicked: (CourierItemTask) -> Uni
         fun refreshUi(currentTask: CourierItemTask) {
             with(binding) {
                 root.setOnClickListener { onItemClicked(currentTask) }
+
                 val ctx = binding.root.context
                 orderId.text = currentTask.orderId
                 courierStatusBubble.apply {
@@ -59,11 +60,13 @@ class CourierItemTaskAdapter(private val onItemClicked: (CourierItemTask) -> Uni
                         ctx.resources, orderStatus.colorInt, ctx.theme
                     )
                 }
+
                 customerName.text = currentTask.customerInfo.name
                 customerAddress.text = currentTask.customerInfo.address
                 customerPhone.text = currentTask.customerInfo.customerPhone
                 restaurantAddress.text = ""
-                restaurantName.text = ""
+                restaurantName.text =
+                    "${currentTask.restaurantsInfo.first().name} + ${currentTask.restaurantsInfo.size.dec()} more"
             }
         }
     }

@@ -4,6 +4,8 @@ import com.adelinarotaru.fooddelivery.driver.domain.CourierRepository
 import com.adelinarotaru.fooddelivery.driver.models.OrderStatusResponse
 import com.adelinarotaru.fooddelivery.driver.ui.dashboard.CourierItemTask
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.AddressToCoordinatesRequest
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.BatchAddressResponse
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.BatchCoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.CoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.AcceptOrderRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.UpdateOrderStatusRequest
@@ -56,4 +58,7 @@ class CourierRepositoryImpl(private val courierApi: CourierApi) : CourierReposit
         userId: String,
         coordinatesRequest: CoordinatesRequest
     ): GenericResponse = courierApi.sendLocationUpdates(userId, coordinatesRequest)
+
+    override suspend fun getAddressFromCoordinates(coordinatesRequest: BatchCoordinatesRequest): BatchAddressResponse =
+        courierApi.getAddressFromCoordinates(coordinatesRequest)
 }

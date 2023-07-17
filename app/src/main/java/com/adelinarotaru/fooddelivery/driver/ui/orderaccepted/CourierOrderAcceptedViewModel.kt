@@ -2,6 +2,7 @@ package com.adelinarotaru.fooddelivery.driver.ui.orderaccepted
 
 import androidx.lifecycle.viewModelScope
 import com.adelinarotaru.fooddelivery.driver.domain.CourierRepository
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.BatchCoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.CoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.AcceptOrderRequest
 import com.adelinarotaru.fooddelivery.shared.base.BaseViewModel
@@ -31,6 +32,8 @@ class CourierOrderAcceptedViewModel(
 
     private val _orderAccepted = MutableStateFlow<Boolean?>(null)
     val orderAccepted = _orderAccepted.asStateFlow()
+
+    var batchRestaurantAddresses = emptyList<String>()
 
     fun updateOrderStatus(orderId: String, orderStatus: OrderStatus) =
         viewModelScope.launch(dispatcher) {
@@ -90,7 +93,20 @@ class CourierOrderAcceptedViewModel(
                     userId,
                     CoordinatesRequest(latitude.toString(), longitude.toString())
                 )
-            }.onSuccess {  }.onFailure { sendError(it) }
+            }.onSuccess { }.onFailure { sendError(it) }
+        }
+
+    fun getAddressFromRestaurantCoordinates(coordinatesRequest: List<CoordinatesRequest>) =
+        viewModelScope.launch(dispatcher) {
+            coRunCatching {
+                courierRepository.getAddressFromCoordinates(
+                    BatchCoordinatesRequest(
+                        coordinatesRequest
+                    )
+                )
+            }.onSuccess { res ->
+                batchRestaurantAddresses = res.addresses
+            }.onFailure { sendError(it) }
         }
 
 }

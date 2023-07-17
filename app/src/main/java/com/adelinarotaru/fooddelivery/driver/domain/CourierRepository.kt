@@ -2,6 +2,8 @@ package com.adelinarotaru.fooddelivery.driver.domain
 
 import com.adelinarotaru.fooddelivery.driver.models.OrderStatusResponse
 import com.adelinarotaru.fooddelivery.driver.ui.dashboard.CourierItemTask
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.BatchAddressResponse
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.BatchCoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.CoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.AcceptOrderRequest
 import com.adelinarotaru.fooddelivery.shared.login.domain.ILocation
@@ -27,4 +29,8 @@ interface CourierRepository {
         userId: String,
         coordinatesRequest: CoordinatesRequest
     ): GenericResponse
+
+    suspend fun getAddressFromCoordinates(
+        coordinatesRequest: BatchCoordinatesRequest
+    ): BatchAddressResponse
 }

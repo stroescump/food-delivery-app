@@ -45,30 +45,32 @@ class TrackOrderFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         viewModel.fetchRestaurantCheckpoints(orderId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        findMapFragment().getMapAsync {
+            map = it
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            launch {
-                viewModel.orderStatus.collectLatest { orderUpdates ->
-                    binding?.apply { updateOrderStatus(orderUpdates) }
-                    if (orderUpdates.orderStatus == OrderStatus.PICKED_UP) {
-                        viewModel.startLiveTracking(orderId)
+            viewLifecycleOwner.lifecycleScope.launch {
+                launch {
+                    viewModel.orderStatus.collectLatest { orderUpdates ->
+                        binding?.apply { updateOrderStatus(orderUpdates) }
+                        if (orderUpdates.orderStatus == OrderStatus.PICKED_UP) {
+                            viewModel.startLiveTracking(orderId)
+                        }
                     }
+                }
+
+                launch {
+                    viewModel.navigateToSuccess.collectLatest { isOrderDelivered -> if (isOrderDelivered) navigateToOrderDelivered() }
                 }
             }
 
-            launch {
-                viewModel.navigateToSuccess.collectLatest { isOrderDelivered -> if (isOrderDelivered) navigateToOrderDelivered() }
-            }
+            viewModel.trackOrder(orderId)
         }
-
-        findMapFragment().getMapAsync { map = it }
-
-        viewModel.trackOrder(orderId)
     }
 
     private fun FragmentTrackOrderBinding.updateOrderStatus(orderUpdates: TrackingUiModel) =
@@ -82,13 +84,16 @@ class TrackOrderFragment :
     private fun FragmentTrackOrderBinding.handleOrderPreparing(
         trackingUiModel: TrackingUiModel
     ) {
-        if (trackingUiModel.orderStatus == OrderStatus.PREPARING) {
-            map.apply {
-                val restaurantCheckpoints = viewModel.restaurantCheckpoints.value ?: return@apply
-                addRestaurantMarkers(restaurantCheckpoints)
-                zoomCameraTo(restaurantCheckpoints.first())
+        if (trackingUiModel.orderStatus == OrderStatus.PREPARING || trackingUiModel.orderStatus == OrderStatus.ORDER_RECEIVED) {
+            if (this@TrackOrderFragment::map.isInitialized) {
+                map.apply {
+                    val restaurantCheckpoints =
+                        viewModel.restaurantCheckpoints.value ?: return@apply
+                    addRestaurantMarkers(restaurantCheckpoints)
+                    zoomCameraTo(restaurantCheckpoints.first())
+                }
+                updateDeliverySpecificInfo()
             }
-            updateDeliverySpecificInfo()
         }
     }
 

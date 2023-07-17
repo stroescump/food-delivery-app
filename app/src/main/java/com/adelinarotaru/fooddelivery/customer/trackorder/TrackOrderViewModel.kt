@@ -7,6 +7,7 @@ import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
 import com.adelinarotaru.fooddelivery.utils.Constants
 import com.adelinarotaru.fooddelivery.utils.coRunCatching
 import com.google.android.gms.maps.model.LatLng
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -78,7 +79,8 @@ class TrackOrderViewModel(
                     jobList.onEach { it.cancel() }
                 }
             }.onFailure {
-                sendError(it)
+                if (it !is CancellationException)
+                    sendError(it)
             }
         }
     }.also { jobList.add(it) }
@@ -97,7 +99,10 @@ class TrackOrderViewModel(
                 }
                 _restaurantCheckpoints.update { coordinateList }
             }.onFailure { sendError(Throwable("Please try reaching out this restaurant by phone. Location is unclear.")) }
-        }.onFailure { sendError(it) }
+        }.onFailure {
+            if (it !is CancellationException)
+                sendError(it)
+        }
     }.also { jobList.add(it) }
 
     fun clearJobs() = jobList.onEach { it.cancel() }

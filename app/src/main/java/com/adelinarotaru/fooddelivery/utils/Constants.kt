@@ -10,4 +10,6 @@ object Constants {
     const val CUSTOMER = 1
     const val COURIER = 2
     const val USER_TYPE = "USER_TYPE"
+
+    const val REQUEST_DELAY = 5000L
 }

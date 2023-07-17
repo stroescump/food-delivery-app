@@ -1,5 +1,6 @@
-package com.adelinarotaru.fooddelivery.customer
+package com.adelinarotaru.fooddelivery.shared
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.adelinarotaru.fooddelivery.driver.ui.dashboard.CourierItemTask
 import com.adelinarotaru.fooddelivery.shared.models.Cart
@@ -24,8 +25,11 @@ class SharedViewModel : ViewModel() {
 
     fun getCartState() = _sessionState.value.cartState
     fun destroyState() {
+        Log.d("SessionState", "destroyState: called")
         _sessionState.update { SessionState() }
     }
+
+    fun clearCartState() = _sessionState.update { it.copy(cartState = null) }
 
     fun getUserId(): String =
         _sessionState.value.userId

@@ -62,7 +62,7 @@ class CheckoutFragment :
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.orderPlaced.collectLatest { orderId ->
-                orderId?.let { navigateToTrackingOrder(orderId) }
+                orderId?.let { navigateToTrackingOrder(orderId).also { sharedViewModel.clearCartState() } }
             }
         }
     }

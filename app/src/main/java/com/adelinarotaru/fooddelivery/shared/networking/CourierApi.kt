@@ -5,6 +5,7 @@ import com.adelinarotaru.fooddelivery.driver.data.models.RestaurantCheckpoint
 import com.adelinarotaru.fooddelivery.driver.models.OrderStatusResponse
 import com.adelinarotaru.fooddelivery.driver.ui.dashboard.CourierItemTask
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.AddressToCoordinatesRequest
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.CoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.CustomerCoordinates
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.AcceptOrderRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.UpdateOrderStatusRequest
@@ -50,5 +51,11 @@ interface CourierApi {
     suspend fun acceptOrder(
         @Path("orderId") orderId: String,
         @Body acceptOrderRequest: AcceptOrderRequest
+    ): GenericResponse
+
+    @POST("/users/{userId}/updateLocation")
+    suspend fun sendLocationUpdates(
+        @Path("userId") userId: String,
+        @Body coordinatesRequest: CoordinatesRequest
     ): GenericResponse
 }

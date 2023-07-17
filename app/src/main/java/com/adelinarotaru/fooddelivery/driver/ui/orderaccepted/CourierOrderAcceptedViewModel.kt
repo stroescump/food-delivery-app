@@ -2,6 +2,7 @@ package com.adelinarotaru.fooddelivery.driver.ui.orderaccepted
 
 import androidx.lifecycle.viewModelScope
 import com.adelinarotaru.fooddelivery.driver.domain.CourierRepository
+import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.data.models.CoordinatesRequest
 import com.adelinarotaru.fooddelivery.driver.ui.orderaccepted.domain.AcceptOrderRequest
 import com.adelinarotaru.fooddelivery.shared.base.BaseViewModel
 import com.adelinarotaru.fooddelivery.shared.login.domain.ILocation
@@ -81,5 +82,15 @@ class CourierOrderAcceptedViewModel(
             sendError(it)
         }
     }
+
+    fun sendLocationUpdates(userId: String, latitude: Double, longitude: Double) =
+        viewModelScope.launch(dispatcher) {
+            coRunCatching {
+                courierRepository.sendCourierLocationUpdates(
+                    userId,
+                    CoordinatesRequest(latitude.toString(), longitude.toString())
+                )
+            }.onSuccess {  }.onFailure { sendError(it) }
+        }
 
 }

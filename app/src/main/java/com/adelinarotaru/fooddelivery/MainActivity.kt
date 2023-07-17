@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.adelinarotaru.fooddelivery.customer.SharedViewModel
+import com.adelinarotaru.fooddelivery.shared.SharedViewModel
 import com.adelinarotaru.fooddelivery.databinding.ActivityMainBinding
 import com.adelinarotaru.fooddelivery.utils.NetworkMonitor
 import com.adelinarotaru.fooddelivery.utils.viewBinding
@@ -64,8 +64,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        sharedViewModel.destroyState()
-    }
 }

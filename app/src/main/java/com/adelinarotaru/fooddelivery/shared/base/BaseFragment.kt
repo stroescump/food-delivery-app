@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import com.adelinarotaru.fooddelivery.customer.SharedViewModel
+import com.adelinarotaru.fooddelivery.shared.SharedViewModel
 import com.adelinarotaru.fooddelivery.utils.hide
 import com.adelinarotaru.fooddelivery.utils.show
 import com.adelinarotaru.fooddelivery.utils.showError

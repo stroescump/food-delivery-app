@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.adelinarotaru.fooddelivery.driver.domain.CourierRepository
 import com.adelinarotaru.fooddelivery.shared.base.BaseViewModel
 import com.adelinarotaru.fooddelivery.shared.models.OrderStatus
+import com.adelinarotaru.fooddelivery.utils.Constants
 import com.adelinarotaru.fooddelivery.utils.coRunCatching
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.CoroutineDispatcher
@@ -38,7 +39,7 @@ class TrackOrderViewModel(
 
     fun startLiveTracking(orderId: String): Job = viewModelScope.launch(dispatcher) {
         while (isActive) {
-            delay(3000L)
+            delay(Constants.REQUEST_DELAY)
             coRunCatching {
                 repository.fetchCourierCoordinates(orderId)
             }.onSuccess { coordinates ->
@@ -59,7 +60,7 @@ class TrackOrderViewModel(
 
     fun trackOrder(orderId: String) = viewModelScope.launch(dispatcher) {
         while (isActive) {
-            delay(4000L)
+            delay(Constants.REQUEST_DELAY)
             coRunCatching {
                 repository.trackOrder(orderId)
             }.onSuccess { orderUpdates ->

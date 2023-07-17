@@ -47,7 +47,7 @@ fun Context.launchGoogleMapsNavigationWithAddress(
     currentLocation: Pair<String, String>,
     clientLocation: String,
     appFoundCallback: () -> Unit = {}
-) = runCatching {
+) = run {
     val intent = Intent(Intent.ACTION_VIEW)
     val uriBuilder =
         StringBuilder("https://www.google.com/maps/dir/?api=1&origin=${currentLocation.first},${currentLocation.second}")

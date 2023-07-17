@@ -1,6 +1,7 @@
 package com.adelinarotaru.fooddelivery.driver.ui.orderaccepted
 
 import android.annotation.SuppressLint
+import android.location.Location
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -26,6 +27,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationToken
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.OnTokenCanceledListener
+import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -78,16 +80,19 @@ class CourierOrderAcceptedFragment :
 
             headToClientLocation.setOnClickListener {
                 doIfProductsPickedOrError {
-                    fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                        val currentLat = location.latitude.toString()
-                        val currentLong = location.longitude.toString()
-                        requireContext().launchGoogleMapsNavigationWithAddress(
-                            currentLat to currentLong, courierTask.customerInfo.address
-                        ) {
-                            courierTask = courierTask.copy(orderStatus = 2)
-                            viewModel.updateOrderStatus(courierTask.orderId, OrderStatus.PICKED_UP)
-                        }
-                            .onFailure { showError(Throwable(getString(R.string.there_was_an_issue_establishing_the_route_please_verify_location_permissions_and_retry))) }
+                    getLiveLocation().addOnSuccessListener { location ->
+                        runCatching {
+                            val currentLat = location.latitude.toString()
+                            val currentLong = location.longitude.toString()
+                            requireContext().launchGoogleMapsNavigationWithAddress(
+                                currentLat to currentLong, courierTask.customerInfo.address
+                            ) {
+                                courierTask = courierTask.copy(orderStatus = 2)
+                                viewModel.updateOrderStatus(
+                                    courierTask.orderId, OrderStatus.PICKED_UP
+                                )
+                            }
+                        }.onFailure { showError(Throwable(getString(R.string.there_was_an_issue_establishing_the_route_please_verify_location_permissions_and_retry))) }
                     }.addOnFailureListener {
                         showError(it)
                     }
@@ -143,14 +148,16 @@ class CourierOrderAcceptedFragment :
 
         courierTask.restaurantsInfo.mapIndexed { index, item ->
             CourierMenuItem(
-                restaurantInfo = item, false, index
+                restaurantInfo = item,
+                courierTask.orderStatus == OrderStatus.PICKED_UP.orderStep,
+                index
             )
         }.updateUi()
     }
 
     @SuppressLint("MissingPermission")
     private fun openNavigationWithCoordinates(routes: List<ILocation>) {
-        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+        getLiveLocation().addOnSuccessListener { location ->
             val currentLat = location.latitude
             val currentLong = location.longitude
             requireContext().launchGoogleMapsNavigation(
@@ -171,25 +178,29 @@ class CourierOrderAcceptedFragment :
         super.onResume()
         doIfOrderPickedUp {
             sendLocationUpdatesJob = viewLifecycleOwner.lifecycleScope.launch {
-                while (isActive){
+                while (isActive) {
                     delay(Constants.REQUEST_DELAY)
-                    fusedLocationClient.getCurrentLocation(
-                        LocationRequest.PRIORITY_HIGH_ACCURACY,
-                        object : CancellationToken() {
-                            override fun onCanceledRequested(p0: OnTokenCanceledListener): CancellationToken =
-                                CancellationTokenSource().token
-
-                            override fun isCancellationRequested(): Boolean = false
-                        }).addOnSuccessListener { location ->
+                    getLiveLocation().addOnSuccessListener { location ->
                         val latitude = location.latitude
                         val longitude = location.longitude
 
-                        viewModel.sendLocationUpdates(sharedViewModel.getUserId(), latitude, longitude)
+                        viewModel.sendLocationUpdates(
+                            sharedViewModel.getUserId(), latitude, longitude
+                        )
                     }
                 }
             }
         }
     }
+
+    private fun getLiveLocation(): Task<Location> = fusedLocationClient.getCurrentLocation(
+        LocationRequest.PRIORITY_HIGH_ACCURACY,
+        object : CancellationToken() {
+            override fun onCanceledRequested(p0: OnTokenCanceledListener): CancellationToken =
+                CancellationTokenSource().token
+
+            override fun isCancellationRequested(): Boolean = false
+        })
 
     private fun doIfOrderPickedUp(block: () -> Unit) {
         if (courierTask.orderStatus == OrderStatus.PICKED_UP.orderStep) {

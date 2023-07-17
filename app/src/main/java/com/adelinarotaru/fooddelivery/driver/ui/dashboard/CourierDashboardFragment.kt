@@ -115,15 +115,6 @@ class CourierDashboardFragment :
             }
         }
 
-    private fun filterByStatus(filterClicked: ItemTaskFilter) = viewModel.getOrders().filter {
-        when (filterClicked.taskStatus) {
-            TaskStatus.ACCEPTED -> it.orderStatus == OrderStatus.PREPARING.orderStep
-            TaskStatus.PENDING -> it.orderStatus == OrderStatus.ORDER_RECEIVED.orderStep
-            TaskStatus.DONE -> it.orderStatus == OrderStatus.DELIVERED.orderStep
-            TaskStatus.ALL -> true
-        }
-    }
-
     private fun initTasksAdapter(it: CourierTaskFilterAdapter) {
         it.differ.submitList(
             mutableListOf(

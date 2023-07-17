@@ -85,7 +85,7 @@ class CourierOrderAcceptedFragment :
                             val currentLat = location.latitude.toString()
                             val currentLong = location.longitude.toString()
                             requireContext().launchGoogleMapsNavigationWithAddress(
-                                currentLat to currentLong, courierTask.customerInfo.address
+                                currentLat to currentLong, courierTask.deliveryAddress
                             ) {
                                 courierTask = courierTask.copy(orderStatus = 2)
                                 viewModel.updateOrderStatus(
@@ -193,6 +193,7 @@ class CourierOrderAcceptedFragment :
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun getLiveLocation(): Task<Location> = fusedLocationClient.getCurrentLocation(
         LocationRequest.PRIORITY_HIGH_ACCURACY,
         object : CancellationToken() {

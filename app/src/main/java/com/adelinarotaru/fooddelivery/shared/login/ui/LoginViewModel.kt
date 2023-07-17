@@ -17,7 +17,6 @@ class LoginViewModel(private val loginRepository: LoginRepository) :
     private val _loginSuccess = MutableSharedFlow<ILoginResponse?>(replay = 1)
     val loginSuccess = _loginSuccess.asSharedFlow()
     fun login(email: String, password: String) = viewModelScope.launch(Dispatchers.IO) {
-
         setLoading(true)
         val userCredentials = UserCredentials(email, password)
         coRunCatching {

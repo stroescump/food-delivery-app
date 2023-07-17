@@ -17,6 +17,7 @@ import kotlinx.parcelize.Parcelize
 data class CourierItemTask(
     val orderId: String,
     val orderStatus: Int,
+    val deliveryAddress: String,
     val customerInfo: CustomerInfo,
     val restaurantsInfo: List<RestaurantInfo>
 ) : Parcelable {

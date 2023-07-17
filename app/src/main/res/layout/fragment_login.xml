@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/your_email"
-        android:text="johndoe@example.com"
+        android:text="johndon@example.com"
         android:inputType="textEmailAddress"
         app:layout_constraintTop_toBottomOf="@id/guidelineFormFields" />
 

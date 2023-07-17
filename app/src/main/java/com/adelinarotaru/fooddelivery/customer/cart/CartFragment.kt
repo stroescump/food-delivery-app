@@ -3,13 +3,17 @@ package com.adelinarotaru.fooddelivery.customer.cart
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.adelinarotaru.fooddelivery.R
+import com.adelinarotaru.fooddelivery.customer.cart.models.CartMenuItem
 import com.adelinarotaru.fooddelivery.customer.checkout.models.CheckoutArgs
 import com.adelinarotaru.fooddelivery.databinding.FragmentCartBinding
 import com.adelinarotaru.fooddelivery.shared.DependencyProvider
 import com.adelinarotaru.fooddelivery.shared.base.BaseFragment
 import com.adelinarotaru.fooddelivery.shared.models.Cart
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class CartFragment :
     BaseFragment<FragmentCartBinding, CartViewModel>(FragmentCartBinding::inflate) {
@@ -20,7 +24,13 @@ class CartFragment :
         )
     }
 
-    private val cartAdapter by lazy { CartAdapter() }
+    private val cartAdapter by lazy {
+        CartAdapter { updatedCartItems ->
+            val updatedCart = sharedViewModel.getCartState()?.copy(orderItems = updatedCartItems)
+                ?: return@CartAdapter
+            sharedViewModel.updateCart(updatedCart)
+        }
+    }
     private lateinit var checkoutArgs: CheckoutArgs
 
     @SuppressLint("SetTextI18n")
@@ -32,15 +42,20 @@ class CartFragment :
             goToCheckout.setOnClickListener { goToCheckout() }
         }
 
-        updateCart(sharedViewModel.getCartState())
+        viewLifecycleOwner.lifecycleScope.launch {
+            sharedViewModel.sessionState.collectLatest {
+                updateCart(it.cartState)
+            }
+        }
     }
 
     private fun goToCheckout() =
         findNavController().navigate(CartFragmentDirections.cartToCheckout(checkoutArgs))
 
     private fun updateCart(cartState: Cart?) {
-        cartAdapter.differ.submitList(cartState?.orderItems)
-        val subtotal = cartAdapter.getTotal()
+        val items = cartState?.orderItems ?: return
+        cartAdapter.differ.submitList(items)
+        val subtotal = getTotal(items)
         val deliveryFee = 5.99
         checkoutArgs = CheckoutArgs(
             subtotal = subtotal,
@@ -52,6 +67,12 @@ class CartFragment :
             deliveryAmount.text = getString(R.string.priceFormatter, deliveryFee)
             totalAmount.text = getString(R.string.priceFormatter, subtotal.plus(deliveryFee))
         }
+    }
+
+    private fun getTotal(items: List<CartMenuItem>): Double = run {
+        var total = 0.0
+        items.forEach { total += it.quantity * it.menuItem.price }
+        total
     }
 
 }

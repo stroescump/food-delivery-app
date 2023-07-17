@@ -67,6 +67,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/city"
                 style="@style/EditText.Form"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen_10dp"
@@ -74,6 +75,7 @@
                 android:hint="@string/city" />
 
             <androidx.appcompat.widget.AppCompatEditText
+                android:inputType="number"
                 android:id="@+id/zipCode"
                 style="@style/EditText.Form"
                 android:layout_width="match_parent"

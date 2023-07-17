@@ -10,8 +10,12 @@
         style="@style/EditText.Form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
+        android:maxLength="16"
         android:layout_marginHorizontal="@dimen/dimen_10dp"
         android:hint="@string/card_number"
+        android:maxLines="1"
+        android:singleLine="true"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -24,6 +28,9 @@
         android:layout_marginTop="@dimen/dimen_10dp"
         android:layout_marginEnd="@dimen/dimen_10dp"
         android:hint="@string/cvv"
+        android:inputType="number"
+        android:maxLength="3"
+        android:maxLines="1"
         android:singleLine="true"
         app:layout_constraintEnd_toStartOf="@id/expiryMonth"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -38,6 +45,7 @@
         android:layout_marginHorizontal="@dimen/dimen_10dp"
         android:layout_marginStart="@dimen/dimen_10dp"
         android:hint="@string/expiry_month"
+        android:maxLines="1"
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="@id/cardNumber"
         app:layout_constraintStart_toEndOf="@id/cvv"
@@ -51,6 +59,9 @@
         android:layout_marginHorizontal="@dimen/dimen_10dp"
         android:layout_marginTop="@dimen/dimen_10dp"
         android:hint="@string/your_name"
+        android:inputType="textPersonName"
+        android:maxLines="1"
+        android:singleLine="true"
         app:layout_constraintTop_toBottomOf="@id/cvv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,9 +2,11 @@ package com.adelinarotaru.fooddelivery.customer.checkout
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.adelinarotaru.fooddelivery.R
 import com.adelinarotaru.fooddelivery.customer.checkout.data.CheckoutRepositoryImpl
 import com.adelinarotaru.fooddelivery.customer.checkout.models.OrderItem
 import com.adelinarotaru.fooddelivery.customer.checkout.models.OrderRequest
@@ -34,29 +36,43 @@ class CheckoutFragment :
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
             goBack.setOnClickListener { findNavController().popBackStack() }
-            subtotalAmount.text = navArgs.checkoutArgs.subtotal.toString()
-            deliveryAmount.text = navArgs.checkoutArgs.delivery.toString()
-            totalAmount.text = navArgs.checkoutArgs.total.toString()
+            subtotalAmount.text = getString(R.string.priceFormatter, navArgs.checkoutArgs.subtotal)
+            deliveryAmount.text = getString(R.string.priceFormatter, navArgs.checkoutArgs.delivery)
+            totalAmount.text = getString(R.string.priceFormatter, navArgs.checkoutArgs.total)
 
             payOrder.setOnClickListener {
                 runCatching {
-                    deliveryAddress = getAddressFromUi()
-                    val cartItems = sharedViewModel.getCartItems() ?: return@setOnClickListener
-                    viewModel.placeOrder(
-                        OrderRequest(
-                            status = OrderStatus.ORDER_RECEIVED.orderStep,
-                            orderItems = cartItems.map {
-                                OrderItem(
-                                    menuItemId = it.menuItem.id,
-                                    restaurantId = it.menuItem.restaurantId,
-                                    quantity = it.quantity
-                                )
-                            },
-                            address = deliveryAddress
-                        ),
-                        userId = sharedViewModel.getUserId(),
-                    )
+                    val allDataValid =
+                        provideViewsForValidation().map { it.validateRule(listOf(EmptyTextRule())) }
+                            .all { it }
+                    if (allDataValid) {
+                        deliveryAddress = getAddressFromUi()
+                        val cartItems = sharedViewModel.getCartItems() ?: return@setOnClickListener
+                        viewModel.placeOrder(
+                            OrderRequest(
+                                status = OrderStatus.ORDER_RECEIVED.orderStep,
+                                orderItems = cartItems.map {
+                                    OrderItem(
+                                        menuItemId = it.menuItem.id,
+                                        restaurantId = it.menuItem.restaurantId,
+                                        quantity = it.quantity
+                                    )
+                                },
+                                address = deliveryAddress
+                            ),
+                            userId = sharedViewModel.getUserId(),
+                        )
+                    } else showError(Throwable("Please make sure you entered correct data."))
+
                 }.onFailure { showError(it) }
+            }
+
+            provideViewsForValidation().onEach { view ->
+                view.doAfterTextChanged {
+                    view.validateRule(listOf(EmptyTextRule())) { editTextUIModel ->
+                        showError(Throwable(editTextUIModel.errorMessage))
+                    }
+                }
             }
         }
 
@@ -66,6 +82,17 @@ class CheckoutFragment :
             }
         }
     }
+
+    private fun FragmentCheckoutBinding.provideViewsForValidation() =
+        listOf(
+            street,
+            city,
+            zipCode,
+            layoutCardDetails.cardNumber,
+            layoutCardDetails.cvv,
+            layoutCardDetails.expiryMonth,
+            layoutCardDetails.firstName
+        )
 
     private fun FragmentCheckoutBinding.getAddressFromUi() =
         street.text.toString().plus(", ").plus(city.text.toString()).plus(", ")

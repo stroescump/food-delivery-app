@@ -72,9 +72,10 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/restaurant_name"
         style="@style/TextView.MediumPrint.Bold"
+        android:layout_marginEnd="@dimen/dimen_20dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/dimen_20dp"
+        android:layout_marginStart="@dimen/dimen_10dp"
         android:textColor="@color/black"
         android:lines="1"
         android:ellipsize="end"
@@ -124,14 +125,14 @@
         style="@style/TextView.MediumPrint.Bold"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimen_20dp"
+        android:layout_marginStart="@dimen/dimen_10dp"
         android:layout_marginEnd="@dimen/dimen_20dp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/customerAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/destinationIcon"
         app:layout_constraintTop_toTopOf="@id/destinationIcon"
-        tools:text="Call Marcus               +41 782 342 526" />
+        tools:text="+41 782 342 526" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/customerAddress"

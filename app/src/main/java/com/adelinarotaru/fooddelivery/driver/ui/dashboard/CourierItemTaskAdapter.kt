@@ -66,7 +66,7 @@ class CourierItemTaskAdapter(private val onItemClicked: (CourierItemTask) -> Uni
                 customerPhone.text = currentTask.customerInfo.customerPhone
                 restaurantAddress.text = ""
                 restaurantName.text =
-                    "${currentTask.restaurantsInfo.first().name} + ${currentTask.restaurantsInfo.size.dec()} more"
+                    "${currentTask.restaurantsInfo.first().name} ${if (currentTask.restaurantsInfo.size.dec() > 0) "+ ${currentTask.restaurantsInfo.size.dec()} more" else ""}"
             }
         }
     }
